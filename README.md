@@ -44,8 +44,6 @@ To get the project running on your machine, follow these steps:
 
 ## 🚀 Contribuir / Contributing
 
-Aqui está o trecho final do README com as seções de incentivo à contribuição devidamente separadas por idioma e sinalizadas com ícones:
-
 ---
 
 ## 🇧🇷 Português (Brasil)
