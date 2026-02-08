@@ -44,8 +44,14 @@ To get the project running on your machine, follow these steps:
 
 ## 🚀 Contribuir / Contributing
 
-**Why contribute?**
-Dublin is one of the biggest tech hubs in Europe, but the information is often scattered. By contributing to this project, you are helping thousands of developers, designers, and tech professionals find their footing in Ireland. Whether you are fixing a bug, translating content, or improving the UI, your help is invaluable!
+Aqui está o trecho final do README com as seções de incentivo à contribuição devidamente separadas por idioma e sinalizadas com ícones:
+
+---
+
+## 🇧🇷 Português (Brasil)
+
+**Por que contribuir?**
+Dublin é um dos maiores centros de tecnologia da Europa, mas as informações costumam estar dispersas. Ao contribuir com este projeto, você ajuda milhares de desenvolvedores, designers e profissionais de tecnologia a encontrarem seu caminho na Irlanda. Não importa se você está corrigindo um bug, traduzindo conteúdo ou melhorando a interface; sua ajuda é inestimável!
 
 **Como contribuir?**
 
@@ -55,8 +61,21 @@ Dublin is one of the biggest tech hubs in Europe, but the information is often s
 4. Envie para o **Repo Principal** (`git push origin feature/NovaFuncionalidade`).
 5. Abra um **Pull Request**.
 
-> "If you want to go fast, go alone. If you want to go far, go together." 🇮🇪
+> "Se você quer ir rápido, vá sozinho. Se você quer ir longe, vá acompanhado." 🇮🇪
 
 ---
 
-Would you like me to generate a **CONTRIBUTING.md** file with more detailed coding standards and pull request templates for your project?
+## 🇺🇸 English (US)
+
+**Why contribute?**
+Dublin is one of the biggest tech hubs in Europe, but the information is often scattered. By contributing to this project, you are helping thousands of developers, designers, and tech professionals find their footing in Ireland. Whether you are fixing a bug, translating content, or improving the UI, your help is invaluable!
+
+**How to contribute?**
+
+1. **Fork** the project.
+2. Create a **Branch** for your feature (`git checkout -b feature/NewFeature`).
+3. **Commit** your changes (`git commit -m 'Adding a new feature'`).
+4. Push to the **Main Repo** (`git push origin feature/NewFeature`).
+5. Open a **Pull Request**.
+
+> "If you want to go fast, go alone. If you want to go far, go together." 🇮🇪
