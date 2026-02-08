@@ -1,6 +1,6 @@
-# 🍀 Dublin Tech Hub Portal
+# 🍀 IT in Dublin Portal
 
-Bem-vindo ao repositório oficial do Dublin Tech Hub! Este é um projeto open-source dedicado a conectar a comunidade de TI em Dublin, oferecendo um espaço centralizado para notícias, eventos e networking.
+Bem-vindo ao repositório oficial do IT in Dublin Portal! Este é um projeto open-source dedicado a conectar a comunidade de TI em Dublin, oferecendo um espaço centralizado para notícias, eventos e networking.
 
 ---
 
