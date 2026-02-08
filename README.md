@@ -24,6 +24,17 @@ O objetivo principal deste projeto é criar um portal robusto de eventos, notíc
 * **Automação:** Desenvolver um plugin para automatizar a geração de eventos na home.
 * **QA:** Validar o processo de setup local.
 
+### Configuração Local
+
+Para rodar o projeto em sua máquina, siga estes passos:
+
+1. Inicie uma nova instalação do **WordPress** do zero.
+2. Instale o plugin **All-in-One WP Migration**.
+3. Importe o arquivo `.wpress` da última versão (*release*) deste projeto.
+
+**Por que contribuir?**
+Dublin é um dos maiores centros de tecnologia da Europa, mas as informações costumam estar dispersas. Ao contribuir com este projeto, você ajuda milhares de desenvolvedores, designers e profissionais de tecnologia a encontrarem seu caminho na Irlanda. Não importa se você está corrigindo um bug, traduzindo conteúdo ou melhorando a interface; sua ajuda é inestimável!
+
 ---
 
 ## 🇺🇸 English (US)
