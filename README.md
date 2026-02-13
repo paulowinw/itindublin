@@ -31,6 +31,7 @@ Para rodar o projeto em sua máquina, siga estes passos:
 1. Inicie uma nova instalação do **WordPress** do zero.
 2. Instale o plugin **All-in-One WP Migration**.
 3. Importe o arquivo `.wpress` da última versão (*release*) deste projeto.
+4. Usuario do painel administrativo, usuario: admin, senha: admin
 
 **Por que contribuir?**
 Dublin é um dos maiores centros de tecnologia da Europa, mas as informações costumam estar dispersas. Ao contribuir com este projeto, você ajuda milhares de desenvolvedores, designers e profissionais de tecnologia a encontrarem seu caminho na Irlanda. Não importa se você está corrigindo um bug, traduzindo conteúdo ou melhorando a interface; sua ajuda é inestimável!
@@ -50,6 +51,7 @@ To get the project running on your machine, follow these steps:
 1. Start a fresh **WordPress** installation from scratch.
 2. Install the **All-in-One WP Migration** plugin.
 3. Import the `.wpress` file from the [latest release](https://www.google.com/search?q=link-to-releases) of this project.
+4. User of the admin panel, user: admin, password: admin
 
 ---
 
