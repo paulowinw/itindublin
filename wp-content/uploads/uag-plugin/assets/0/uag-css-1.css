@@ -1,3 +1,0 @@
-.uag-blocks-common-selector{z-index:var(--z-index-desktop) !important}@media (max-width: 976px){.uag-blocks-common-selector{z-index:var(--z-index-tablet) !important}}@media (max-width: 767px){.uag-blocks-common-selector{z-index:var(--z-index-mobile) !important}}
-.uagb-google-map__wrap{display:flex}.uagb-google-map__wrap .uagb-google-map__iframe{width:100%;box-shadow:none;border:none;padding:0;margin:0}
- .uagb-block-2ad3c7eb .uagb-google-map__iframe{height: 600px;}@media only screen and (max-width: 976px) { .uagb-block-2ad3c7eb .uagb-google-map__iframe{height: 300px;}}@media only screen and (max-width: 767px) { .uagb-block-2ad3c7eb .uagb-google-map__iframe{height: 300px;}}
