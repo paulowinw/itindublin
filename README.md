@@ -10,20 +10,6 @@ Bem-vindo ao repositório oficial do IT in Dublin Portal! Este é um projeto ope
 
 O objetivo principal deste projeto é criar um portal robusto de eventos, notícias e postagens de TI em Dublin. Queremos garantir que profissionais e entusiastas encontrem um lugar para se engajar no mercado tecnológico local, participar de meetups e se manterem informados.
 
-### Backlog de Desenvolvimento
-
-* **Internacionalização:** Traduzir o projeto para Inglês e Espanhol utilizando *Loco Translate* e *Polylang*.
-* **Eventos:** Adicionar eventos de TI de Dublin diretamente na página inicial.
-* **Carreira:** Listar vagas de TI da Irlanda na homepage.
-* **Conteúdo:** Criar posts oficiais com os tópicos mais populares da comunidade.
-* **Comunidade:** * Página de créditos para os contribuidores.
-* Galeria de fotos dos últimos eventos.
-* Página sobre a dinâmica e história do evento.
-
-
-* **Automação:** Desenvolver um plugin para automatizar a geração de eventos na home.
-* **QA:** Validar o processo de setup local.
-
 ### Configuração Local
 
 Para rodar o projeto em sua máquina, siga estes passos:
