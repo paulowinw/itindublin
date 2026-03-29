@@ -131,7 +131,7 @@ Dublin is one of the biggest tech hubs in Europe, but the information is often s
 4. Push to the **Main Repo** (`git push origin feature/NewFeature`).
 5. Open a **Pull Request**.
 
-**How to contribute to the WordPress admin panel?
+**How to contribute to the WordPress admin panel?**
 
 1. When modifying any information in the admin panel, create a **Branch** for your changes (`git checkout -b adminPanel/NewChange`).
 2. Commit your changes with a clear description of what was done (`git commit -m 'Adding new feature'`).
