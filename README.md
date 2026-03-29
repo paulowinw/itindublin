@@ -111,7 +111,7 @@ Dublin é um dos maiores centros de tecnologia da Europa, mas as informações c
 5. Clicar em "**Backup Now**".
 6. Esse ato gerará uma nova linha em "**Existing Backups**".
 7. Clique em todos os itens do backup.
-8. Ao baixar, faça um arquivo .zip de todos os arquivos baixados.
+8. Ao baixar, faça um arquivo .zip com o nome contendo *data, hora, minuto* de todos os arquivos baixados (Exemplo: updraftplus_2026-03-29-1636.zip).
 9. Suba uma nova **Release** com o arquivo .zip, explicando as modificações.
 
 > "Se você quer ir rápido, vá sozinho. Se você quer ir longe, vá acompanhado." 🇮🇪
@@ -146,7 +146,7 @@ Dublin is one of the biggest tech hubs in Europe, but the information is often s
 5. Click **"Backup Now"**.
 6. This will generate a new entry under **"Existing Backups"**.
 7. Download all items from the backup.
-8. Once downloaded, compress all files into a single `.zip` file.
+8. After downloading, create a .zip file containing all the downloaded files, and name it with the date, hour, and minute (Example: updraftplus_2026-03-29-1636.zip).
 9. Upload a new **Release** with the `.zip` file, describing the changes made.
 
 > "If you want to go fast, go alone. If you want to go far, go together." 🇮🇪
