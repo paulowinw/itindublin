@@ -43,7 +43,7 @@ Para rodar o projeto em sua máquina, siga estes passos:
 
 > ⚠️ **Recomendação:** Sempre faça backup de **TODOS os tipos de componentes** (banco de dados, arquivos, plugins e temas) para garantir que seu site possa ser completamente restaurado em caso de problemas. Backups parciais podem deixar seu site em um estado inconsistente.
 
-5. Usuário do painel administrativo, usuário: admin, senha: admin.
+5. Usuário do painel administrativo, usuário: `local`, senha: `local`.
 
 **Por que contribuir?**
 Dublin é um dos maiores centros de tecnologia da Europa, mas as informações costumam estar dispersas. Ao contribuir com este projeto, você ajuda milhares de desenvolvedores, designers e profissionais de tecnologia a encontrarem seu caminho na Irlanda. Não importa se você está corrigindo um bug, traduzindo conteúdo ou melhorando a interface; sua ajuda é inestimável!
@@ -75,7 +75,7 @@ To get the project running on your machine, follow these steps:
 
 > ⚠️ **Recommendation:** Always backup **ALL backup types** (database, files, plugins, and themes) to ensure your site can be completely restored in case of issues. Partial backups may leave your site in an inconsistent state.
 
-5. Admin panel user: user `admin` password `admin`.
+5. Admin panel user: user `local` password `local`.
 
 ---
 
@@ -88,13 +88,31 @@ To get the project running on your machine, follow these steps:
 **Por que contribuir?**
 Dublin é um dos maiores centros de tecnologia da Europa, mas as informações costumam estar dispersas. Ao contribuir com este projeto, você ajuda milhares de desenvolvedores, designers e profissionais de tecnologia a encontrarem seu caminho na Irlanda. Não importa se você está corrigindo um bug, traduzindo conteúdo ou melhorando a interface; sua ajuda é inestimável!
 
-**Como contribuir?**
+**Como contribuir na alteração de código?**
 
 1. Faça um **Fork** do projeto.
 2. Crie uma **Branch** para sua funcionalidade (`git checkout -b feature/NovaFuncionalidade`).
 3. Faça o **Commit** de suas alterações (`git commit -m 'Adicionando nova funcionalidade'`).
 4. Envie para o **Repo Principal** (`git push origin feature/NovaFuncionalidade`).
 5. Abra um **Pull Request**.
+
+**Como contribuir no painel administrativo do WordPress?**
+
+1. Ao modificar qualquer informação no painel administrativo, faça uma **Branch** para a alteração (`git checkout -b adminPanel/NovaAlteracao`).
+2. Faça o **Commit** de suas alterações explicando o que foi feito (`git commit -m 'Adicionando nova funcionalidade'`).
+3. Ao dar o **Push** para o **Repo Principal** (`git push origin adminPanel/NovaAlteracao`), abrir um **Pull Request** explicando o que foi alterado.
+
+**Como gerar a nova release?** 
+
+1. Ao entrar no painel administrativo, acessar o plugin **Updraft Plus**.
+2. Clicar no botão "**Backup Now**".
+3. Clicar em "Include your database" e "**Include your files**".
+4. Selecionar todas as opções de backup (Plugins, Themes, etc).
+5. Clicar em "**Backup Now**".
+6. Esse ato gerará uma nova linha em "**Existing Backups**".
+7. Clique em todos os itens do backup.
+8. Ao baixar, faça um arquivo .zip de todos os arquivos baixados.
+9. Suba uma nova **Release** com o arquivo .zip, explicando as modificações.
 
 > "Se você quer ir rápido, vá sozinho. Se você quer ir longe, vá acompanhado." 🇮🇪
 
@@ -112,5 +130,23 @@ Dublin is one of the biggest tech hubs in Europe, but the information is often s
 3. **Commit** your changes (`git commit -m 'Adding a new feature'`).
 4. Push to the **Main Repo** (`git push origin feature/NewFeature`).
 5. Open a **Pull Request**.
+
+**How to contribute to the WordPress admin panel?
+
+1. When modifying any information in the admin panel, create a **Branch** for your changes (`git checkout -b adminPanel/NewChange`).
+2. Commit your changes with a clear description of what was done (`git commit -m 'Adding new feature'`).
+3. When pushing to the **Main Repository** (`git push origin adminPanel/NewChange`), open a **Pull Request** explaining what was changed.
+
+### **How to generate a new release?**
+
+1. Access the admin panel and open the **UpdraftPlus** plugin.
+2. Click the **"Backup Now"** button.
+3. Select **"Include your database"** and **"Include your files"**.
+4. Ensure all backup options are selected (Plugins, Themes, etc.).
+5. Click **"Backup Now"**.
+6. This will generate a new entry under **"Existing Backups"**.
+7. Download all items from the backup.
+8. Once downloaded, compress all files into a single `.zip` file.
+9. Upload a new **Release** with the `.zip` file, describing the changes made.
 
 > "If you want to go fast, go alone. If you want to go far, go together." 🇮🇪
