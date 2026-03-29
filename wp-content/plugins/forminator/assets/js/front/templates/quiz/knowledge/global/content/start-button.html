@@ -1,0 +1,83 @@
+/* Navigation Button */
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-button.forminator-quiz-start,
+#forminator-quiz-leads-<?php echo $properties['form_id'] ?>.forminator-ui button.forminator-button.forminator-quiz-start {
+	<?php if ( forminator_array_value_exists( $properties, 'knowledge-toggle-palette' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'start-button-background-static' ) ) { ?>
+			background-color: <?php echo $properties['start-button-background-static'] ?>;
+		<?php } else { ?>
+			background-color: #097BAA;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'start-button-color-static' ) ) { ?>
+			color: <?php echo $properties['start-button-color-static'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	<?php } else { ?>
+		background-color: #097BAA;
+		color: #FFFFFF;
+	<?php } ?>
+	<?php if ( forminator_array_value_exists( $properties, 'knowledge-toggle-typography' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'start-button-font-size' ) ) { ?>
+			font-size: <?php echo $properties['start-button-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 14px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'start-button-font-family' ) ) { ?>
+			<?php if ( $properties['start-button-font-family'] != 'custom' ) { ?>
+				font-family: <?php echo $properties['start-button-font-family'] ?>;
+			<?php } else { ?>
+				<?php if ( ! empty( $properties['start-button-custom-family'] ) ) { ?>
+					font-family: <?php echo $properties['start-button-custom-family'] ?>;
+				<?php } ?>
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'start-button-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'start-button-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 500;
+		<?php } ?>
+	<?php } else { ?>
+		font-size: 14px;
+		font-weight: 500;
+	<?php } ?>
+}
+
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-button.forminator-quiz-start:hover,
+#forminator-quiz-leads-<?php echo $properties['form_id'] ?>.forminator-ui button.forminator-button.forminator-quiz-start:hover {
+	<?php if ( forminator_array_value_exists( $properties, 'knowledge-toggle-palette' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'start-button-background-hover' ) ) { ?>
+			background-color: <?php echo $properties['start-button-background-hover'] ?>;
+		<?php } else { ?>
+			background-color: #086A91;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'start-button-color-hover' ) ) { ?>
+			color: <?php echo $properties['start-button-color-hover'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	<?php } else { ?>
+		background-color: #086A91;
+		color: #FFFFFF;
+	<?php } ?>
+}
+
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-button.forminator-quiz-start:focus,
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-button.forminator-quiz-start:active,
+#forminator-quiz-leads-<?php echo $properties['form_id'] ?>.forminator-ui button.forminator-button.forminator-quiz-start:focus,
+#forminator-quiz-leads-<?php echo $properties['form_id'] ?>.forminator-ui button.forminator-button.forminator-quiz-start:active {
+	<?php if ( forminator_array_value_exists( $properties, 'knowledge-toggle-palette' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'start-button-background-active' ) ) { ?>
+			background-color: <?php echo $properties['start-button-background-active'] ?>;
+		<?php } else { ?>
+			background-color: #086A91;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'start-button-color-active' ) ) { ?>
+			color: <?php echo $properties['start-button-color-active'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	<?php } else { ?>
+		background-color: #086A91;
+		color: #FFFFFF;
+	<?php } ?>
+}

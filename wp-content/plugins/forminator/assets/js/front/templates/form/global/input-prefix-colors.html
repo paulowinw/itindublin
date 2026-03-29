@@ -1,0 +1,17 @@
+<?php if ( forminator_array_value_exists( $properties, 'cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-prefix {
+		<?php if ( forminator_array_value_exists( $properties, 'prefix-color' ) && !empty( $properties['prefix-color'] ) ) { ?>
+			color: <?php echo $properties['prefix-color'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-prefix {
+		color: #000000;
+	}
+
+<?php } ?>

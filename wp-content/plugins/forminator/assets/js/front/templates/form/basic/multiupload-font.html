@@ -1,0 +1,69 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	/*
+	====================
+	MU Panel Font Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-multiple-panel-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-upload-multiple-panel-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 14px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-multiple-panel-font-family' ) ) { ?>
+			<?php if ( $properties['basic-upload-multiple-panel-font-family'] != 'custom' && !empty( $properties['basic-upload-multiple-panel-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-upload-multiple-panel-font-family'] ?>;
+			<?php } else if ( $properties['basic-upload-multiple-panel-font-family'] == 'custom' && !empty( $properties['basic-upload-multiple-panel-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-upload-multiple-panel-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-multiple-panel-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-upload-multiple-panel-font-weight' ); ?>
+		<?php } ?>
+	}
+
+	/*
+	====================
+	MU File Font Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--title {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-multiple-file-name-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-upload-multiple-file-name-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-multiple-file-name-font-family' ) ) { ?>
+			<?php if ( $properties['basic-upload-multiple-file-name-font-family'] != 'custom' && !empty( $properties['basic-upload-multiple-file-name-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-upload-multiple-file-name-font-family'] ?>;
+			<?php } else if ( $properties['basic-upload-multiple-file-name-font-family'] == 'custom' && !empty( $properties['basic-upload-multiple-file-name-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-upload-multiple-file-name-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-multiple-file-name-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-upload-multiple-file-name-font-weight' ); ?>
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--size {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-multiple-file-size-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-upload-multiple-file-size-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-multiple-file-size-font-family' ) ) { ?>
+			<?php if ( $properties['basic-upload-multiple-file-size-font-family'] != 'custom' && !empty( $properties['basic-upload-multiple-file-size-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-upload-multiple-file-size-font-family'] ?>;
+			<?php } else if ( $properties['basic-upload-multiple-file-size-font-family'] == 'custom' && !empty( $properties['basic-upload-multiple-file-size-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-upload-multiple-file-size-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-multiple-file-size-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-upload-multiple-file-size-font-weight' ); ?>
+		<?php } ?>
+	}
+
+<?php } ?>

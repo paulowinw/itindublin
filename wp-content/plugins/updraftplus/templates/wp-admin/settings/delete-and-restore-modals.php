@@ -1,4 +1,7 @@
-<?php if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed'); ?>
+<?php
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
+?>
 
 <div id="updraft-message-modal" title="UpdraftPlus">
 	<div id="updraft-message-modal-innards">
@@ -48,7 +51,7 @@
 			<div class="updraft-restore-modal--stage updraft--flex" id="updraft-restore-modal-stage1">
 				<div class="updraft--one-half updraft-color--very-light-grey">
 					<p><?php echo esc_html(__("Restoring will replace this site's themes, plugins, uploads, database and/or other content directories (according to what is contained in the backup set, and your selection).", 'updraftplus').' '.__('Choose the components to restore', 'updraftplus')); ?>:</p> 
-					<p><em><a href="<?php echo esc_url(apply_filters('updraftplus_com_link', "https://updraftplus.com/faqs/what-should-i-understand-before-undertaking-a-restoration/"));?>" target="_blank"><?php esc_html_e('Do read this helpful article of useful things to know before restoring.', 'updraftplus');?></a></em></p> 
+					<p><em><a href="<?php echo esc_url(apply_filters('updraftplus_com_link', "https://teamupdraft.com/blog/preparation-tips-for-restoring-your-wordpress-site/"));?>" target="_blank"><?php esc_html_e('Do read this helpful article of useful things to know before restoring.', 'updraftplus');?></a></em></p> 
 				</div>
 				<div class="updraft--one-half">
 					<form id="updraft_restore_form" method="post">
@@ -63,7 +66,7 @@
 
 								// The 'off' check is for badly configured setups - http://wordpress.org/support/topic/plugin-wp-super-cache-warning-php-safe-mode-enabled-but-safe-mode-is-off
 								if ($updraftplus->detect_safe_mode()) {
-									echo wp_kses_post("<p><em>".__("Your web server has PHP's so-called safe_mode active.", 'updraftplus').' '.__('This makes time-outs much more likely.', 'updraftplus').' '.__('You are recommended to turn safe_mode off, or to restore only one entity at a time', 'updraftplus').' <a href="'.esc_url(apply_filters('updraftplus_com_link', "https://updraftplus.com/faqs/i-want-to-restore-but-have-either-cannot-or-have-failed-to-do-so-from-the-wp-admin-console/")).'" target="_blank">'.__('or to restore manually', 'updraftplus').'.</a></em></p>');
+									echo wp_kses_post("<p><em>".__("Your web server has PHP's so-called safe_mode active.", 'updraftplus').' '.__('This makes time-outs much more likely.', 'updraftplus').' '.__('You are recommended to turn safe_mode off, or to restore only one entity at a time', 'updraftplus').' <a href="'.esc_url(apply_filters('updraftplus_com_link', "https://teamupdraft.com/documentation/updraftplus/topics/restoration/troubleshooting/i-cant-restore-from-wp-admin-console-can-i-restore-manually/")).'" target="_blank">'.__('or to restore manually', 'updraftplus').'.</a></em></p>');
 								}
 							?>
 							<p><strong><?php esc_html_e('Choose the components to restore:', 'updraftplus'); ?></strong></p> 

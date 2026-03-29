@@ -1,0 +1,21 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-prefix {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-input-prefix-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-input-prefix-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-input-prefix-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-input-prefix-font-family'] != 'custom' ) { ?>
+				font-family: <?php echo $properties['basic-cform-input-prefix-font-family'] ?>;
+			<?php } else { ?>
+				<?php if ( ! empty( $properties['basic-cform-input-prefix-custom-family'] ) ) { ?>
+					font-family: <?php echo $properties['basic-cform-input-prefix-custom-family'] ?>;
+				<?php } ?>
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-input-prefix-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-input-prefix-font-weight' ); ?>
+		<?php } ?>
+	}
+
+<?php } ?>

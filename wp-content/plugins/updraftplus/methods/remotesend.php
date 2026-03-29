@@ -1,5 +1,6 @@
 <?php
-
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- using the native PHP fclose() function instead of the WP Filesystem API.
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- Using the default PHP fopen() function instead of the WP Filesystem API.
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base_v2')) updraft_try_include_file('methods/addon-base-v2.php', 'require_once');

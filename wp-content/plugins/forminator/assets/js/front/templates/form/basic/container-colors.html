@@ -1,0 +1,12 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?> {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-form-border' ) && !empty( $properties['basic-cform-form-border'] ) ) { ?>
+			border-color: <?php echo $properties['basic-cform-form-border'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-form-background' ) && !empty( $properties['basic-cform-form-background'] ) ) { ?>
+			background-color: <?php echo $properties['basic-cform-form-background'] ?>;
+		<?php } ?>
+	}
+
+<?php } ?>

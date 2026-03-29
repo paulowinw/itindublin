@@ -4334,11 +4334,10 @@ div#updraft-restore-modal .udp-notice, .udp-notice.updraft-restore-option {
 .udp-dashicons-no-alt:before {
 	content: "";
 	display: inline-block;
-	width: 20px;
-	height: 20px;
+	width: 100%;
+	height: 100%;
+	line-height: 1;
 	background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBMaWNlbnNlOiBHUEwuIE1hZGUgYnkgV29yZHByZXNzOiBodHRwczovL2dpdGh1Yi5jb20vd29yZHByZXNzL2Rhc2hpY29ucyAtLT4KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCjxyZWN0IHg9IjAiIGZpbGw9Im5vbmUiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIvPgoKPGc+Cgo8cGF0aCBmaWxsPSIjMjI3MWIxIiBkPSJNMTQuOTUgNi40NkwxMS40MSAxMGwzLjU0IDMuNTQtMS40MSAxLjQxTDEwIDExLjQybC0zLjUzIDMuNTMtMS40Mi0xLjQyTDguNTggMTAgNS4wNSA2LjQ3bDEuNDItMS40MkwxMCA4LjU4bDMuNTQtMy41M3oiLz4KCjwvZz4KCjwvc3ZnPg==");
 	background-size: contain;
 	background-repeat: no-repeat;
-	position: relative;
-	top: 2px;
 }

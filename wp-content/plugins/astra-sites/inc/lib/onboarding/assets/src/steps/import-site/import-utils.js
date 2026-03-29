@@ -3,7 +3,7 @@ const { themeStatus } = starterTemplates;
 import apiFetch from '@wordpress/api-fetch';
 
 export const getDemo = async ( id, storedState ) => {
-	const [ { currentIndex }, dispatch ] = storedState;
+	const [ , dispatch ] = storedState; // Destructuring assignment only for dispatch method.
 
 	const generateData = new FormData();
 	generateData.append( 'action', 'astra-sites-api-request' );
@@ -109,7 +109,6 @@ export const getDemo = async ( id, storedState ) => {
 						importErrorMessages: errorMessages,
 						importErrorResponse: response.data,
 						templateResponse: null,
-						currentIndex: currentIndex + 3,
 					} );
 				}
 			}
@@ -211,6 +210,17 @@ export const checkRequiredPlugins = async ( storedState ) => {
 				requiredPlugins: response.data,
 				notInstalledList: notInstalledPlugin,
 				notActivatedList: notActivePlugins,
+				// Clear the flag so requiredPluginsDone can be set when lists are empty.
+				awaitingPluginCheck: false,
+			} );
+		} )
+		.catch( () => {
+			// On network failure, clear the flag so the import isn't permanently
+			// blocked — awaitingPluginCheck: true would prevent requiredPluginsDone
+			// from ever being set, leaving the user with a silent frozen state.
+			dispatch( {
+				type: 'set',
+				awaitingPluginCheck: false,
 			} );
 		} );
 };

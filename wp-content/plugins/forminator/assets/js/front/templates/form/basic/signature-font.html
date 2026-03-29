@@ -1,0 +1,27 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	/*
+	====================
+	Signature Font Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-signature .forminator-signature--placeholder {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-esign-placeholder-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-esign-placeholder-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-esign-placeholder-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-esign-placeholder-font-family'] != 'custom' && !empty( $properties['basic-cform-esign-placeholder-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-esign-placeholder-font-family'] ?>;
+			<?php } else if ( $properties['basic-cform-esign-placeholder-font-family'] == 'custom' && !empty( $properties['basic-cform-esign-placeholder-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-esign-placeholder-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-esign-placeholder-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-esign-placeholder-font-weight' ); ?>
+		<?php } ?>
+	}
+
+<?php } ?>

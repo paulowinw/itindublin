@@ -1,0 +1,21 @@
+<?php
+	$field_image_size = forminator_get_prefixed_key_name('field-image-size', $theme);
+	$field_image_width = forminator_get_prefixed_key_name('field-image-width', $theme );
+	$field_image_height = forminator_get_prefixed_key_name('field-image-height', $theme );
+
+	if ( forminator_array_value_exists( $properties, $field_image_size ) && 'auto' !== $properties[$field_image_size] ) { ?>
+
+		#forminator-module-<?php echo $properties['form_id'] ?> .forminator-field .forminator-radio .forminator-radio-image span,
+		#forminator-module-<?php echo $properties['form_id'] ?> .forminator-field .forminator-checkbox .forminator-checkbox-image span {
+			<?php if ( forminator_array_value_exists( $properties, $field_image_width ) && !empty( $properties[$field_image_width] ) ) { ?>
+				width: <?php echo $properties[$field_image_width] ?>px;
+			<?php } else { ?>
+				width: 70px;
+			<?php } if ( forminator_array_value_exists( $properties, $field_image_height ) && !empty( $properties[$field_image_height] ) ) { ?>
+				height: <?php echo $properties[$field_image_height] ?>px;
+			<?php } else { ?>
+				height: 70px;
+			<?php } ?>
+		}
+
+<?php } ?>

@@ -1380,6 +1380,10 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			$params = isset( $_POST['params'] ) ? array_map( 'sanitize_text_field', $_POST['params'] ) : array();
 
+			if ( empty( $this->pixabay_api_key ) ) {
+				wp_send_json_error( __( 'Pixabay API key is not configured. Set it via the astra_sites_pixabay_api_key filter or option.', 'astra-sites' ) );
+			}
+
 			$params['key'] = $this->pixabay_api_key;
 
 			$api_url = add_query_arg( $params, $this->pixabay_url );
@@ -1540,7 +1544,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					} else {
 
 						if ( is_serialized( $meta_value, true ) ) {
-							$raw_data = maybe_unserialize( stripslashes( $meta_value ) );
+							$raw_data = astra_sites_safe_unserialize( stripslashes( $meta_value ) );
 						} elseif ( is_array( $meta_value ) ) {
 							$raw_data = json_decode( stripslashes( $meta_value ), true );
 						} else {
@@ -1582,7 +1586,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					} else {
 
 						if ( is_serialized( $meta_value, true ) ) {
-							$raw_data = maybe_unserialize( stripslashes( $meta_value ) );
+							$raw_data = astra_sites_safe_unserialize( stripslashes( $meta_value ) );
 						} elseif ( is_array( $meta_value ) ) {
 							$raw_data = json_decode( stripslashes( $meta_value ), true );
 						} else {
@@ -1746,7 +1750,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$this->import_analytics_url = apply_filters( 'astra_sites_import_analytics_api_url', $this->api_domain . 'wp-json/analytics/v2/import/' );
 
 			$this->pixabay_url     = 'https://pixabay.com/api/';
-			$this->pixabay_api_key = '2727911-c4d7c1031949c7e0411d7e81e';
+			$this->pixabay_api_key = apply_filters( 'astra_sites_pixabay_api_key', get_option( 'astra_sites_pixabay_api_key', '' ) );
 		}
 
 		/**
@@ -1885,7 +1889,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			$remove_parameters = array( 'credit_token', 'token', 'email', 'ast_action', 'nonce' );
 			$credit_request_params = array(
-				'success_url' => isset( $_SERVER['REQUEST_URI'] ) ? urlencode( $this->remove_query_params( network_home_url() . $_SERVER['REQUEST_URI'], $remove_parameters ) . '&ast_action=credits' ) : '', // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				'success_url' => isset( $_SERVER['REQUEST_URI'] ) ? urlencode( $this->remove_query_params( network_home_url() . esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), $remove_parameters ) . '&ast_action=credits' ) : '',
 			);
 
 			$credit_purchase_url = defined( 'ZIP_AI_CREDIT_TOPUP_URL' ) ? ZIP_AI_CREDIT_TOPUP_URL : 'https://app.zipwp.com/credits-pricing';
@@ -2463,6 +2467,27 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$last_viewed_block_data = get_option( 'astra_sites_import_elementor_data_' . $id ) !== false ? get_option( 'astra_sites_import_elementor_data_' . $id ) : array();
 			}
 
+			$all_blocks = $this->get_all_blocks();
+
+			// Collect category IDs that have at least one block.
+			$used_category_ids = array();
+			foreach ( $all_blocks as $block ) {
+				if ( ! empty( $block['category'] ) ) {
+					$used_category_ids[ (int) $block['category'] ] = true;
+				}
+			}
+
+			// Filter block categories to only include those with available blocks.
+			$all_categories      = Astra_Sites_File_System::get_instance()->get_json_file_content( 'astra-blocks-categories.json' );
+			$filtered_categories = array();
+			if ( is_array( $all_categories ) ) {
+				foreach ( $all_categories as $cat_id => $cat_data ) {
+					if ( isset( $cat_data['id'] ) && isset( $used_category_ids[ (int) $cat_data['id'] ] ) ) {
+						$filtered_categories[ $cat_id ] = $cat_data;
+					}
+				}
+			}
+
 			$data = apply_filters(
 				'astra_sites_render_localize_vars',
 				array(
@@ -2473,7 +2498,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'page-builders'              => array(),
 					'categories'                 => array(),
 					'default_page_builder'       => 'elementor',
-					'astra_blocks'               => $this->get_all_blocks(),
+					'astra_blocks'               => $all_blocks,
 					'license_status'             => $license_status,
 					'ajaxurl'                    => esc_url( admin_url( 'admin-ajax.php' ) ),
 					'default_page_builder_sites' => Astra_Sites_Page::get_instance()->get_sites_by_page_builder( 'elementor' ),
@@ -2484,7 +2509,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'isWhiteLabeled'             => Astra_Sites_White_Label::get_instance()->is_white_labeled(),
 					'getProText'                 => __( 'Get Access!', 'astra-sites' ),
 					'getProURL'                  => esc_url( 'https://wpastra.com/starter-templates-plans/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
-					'astra_block_categories'     => Astra_Sites_File_System::get_instance()->get_json_file_content( 'astra-blocks-categories.json' ),
+					'astra_block_categories'     => $filtered_categories,
 					'siteURL'                    => site_url(),
 					'template'                   => esc_html__( 'Template', 'astra-sites' ),
 					'block'                      => esc_html__( 'Block', 'astra-sites' ),
@@ -2603,7 +2628,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-wp-cli.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-file-system.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-nps-notice.php';
-			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-analytics.php'; 
+			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-analytics-events.php';
+			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-analytics.php';
 
 			// Astra Onboarding Integration.
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-astra-onboarding.php';

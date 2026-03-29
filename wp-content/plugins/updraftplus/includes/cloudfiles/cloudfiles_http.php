@@ -1,4 +1,7 @@
 <?php
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- false positive; it's actually safe to use native PHP's fwrite()
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 /**
  * This is an HTTP client class for Cloud Files.  It uses PHP's cURL module
  * to handle the actual HTTP request/response.  This is NOT a generic HTTP

@@ -1,4 +1,5 @@
 <?php
+	if (!defined('ABSPATH')) exit;
 	if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 ?>
 <div class="advanced_tools export_settings">

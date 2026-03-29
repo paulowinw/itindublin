@@ -1,0 +1,97 @@
+<?php if ( forminator_array_value_exists( $properties, 'cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-repeater-action-button {
+		<?php if ( forminator_array_value_exists( $properties, 'repeater-button-background' ) ) { ?>
+			background-color: <?php echo $properties['repeater-button-background'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			background-color: #F8F8F8;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'repeater-button' ) ) { ?>
+			color: <?php echo $properties['repeater-button'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #666666;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'repeater-border' ) ) { ?>
+			border: 1px solid <?php echo $properties['repeater-border']; ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			border: 1px solid #AAAAAA;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-repeater-action-button:hover {
+		<?php if ( forminator_array_value_exists( $properties, 'repeater-button-background-hover' ) ) { ?>
+			background-color: <?php echo $properties['repeater-button-background-hover'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			background-color: #F1F1F1;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'repeater-button-hover' ) ) { ?>
+			color: <?php echo $properties['repeater-button-hover'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'repeater-border-hover' ) ) { ?>
+			border: 1px solid <?php echo $properties['repeater-border-hover']; ?>;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'repeater-button-outline-focus' ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-repeater-action-button:focus {
+			outline: 2px solid <?php echo $properties['repeater-button-outline-focus'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-repeater-action-button:active {
+		<?php if ( forminator_array_value_exists( $properties, 'repeater-button-background-focus' ) ) { ?>
+			background-color: <?php echo $properties['repeater-button-background-focus'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			background-color: #EEEEEE;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'repeater-button-focus' ) ) { ?>
+			color: <?php echo $properties['repeater-button-focus'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #333333;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'repeater-border-focus' ) ) { ?>
+			border: 1px solid <?php echo $properties['repeater-border-focus']; ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			border: 1px solid #888888;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-repeater-action-button:disabled {
+		background-color: transparent;
+		color: #AAAAAA;
+		border: 1px solid rgba(31, 31, 31, 0.12);
+	}
+
+<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-repeater-action-button {
+		background-color: #F8F8F8;
+		color: #666666;
+		border: 1px solid #AAAAAA;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-repeater-action-button:hover {
+		background-color: #F1F1F1;
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'repeater-button-outline-focus' ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-repeater-action-button:focus {
+			outline: 2px solid #254DEB;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-repeater-action-button:active {
+		background-color: #EEEEEE;
+		color: #333333;
+		border: 1px solid #888888;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-repeater-action-button:disabled {
+		background-color: transparent;
+		color: #AAAAAA;
+		border: 1px solid rgba(31, 31, 31, 0.12);
+	}
+
+<?php } ?>

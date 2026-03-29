@@ -105,21 +105,25 @@ class Astra_Sites_Error_Handler {
 		Astra_Sites_Importer_Log::add( $e );
 
 		if ( wp_doing_ajax() ) {
-			wp_send_json_error(
-				array(
-					'message' => __( 'There was an error on your website.', 'astra-sites' ),
-					'stack' => array(
-						'error-message' => sprintf(
-							'%s: %s',
-							$error,
-							$e->getMessage()
-						),
-						'file' => $e->getFile(),
-						'line' => $e->getLine(),
-						'trace' => $e->getTrace(),
-					),
-				)
+			$error_data = array(
+				'message' => __( 'There was an error on your website.', 'astra-sites' ),
 			);
+
+			// Only expose stack trace details when WP_DEBUG is enabled.
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				$error_data['stack'] = array(
+					'error-message' => sprintf(
+						'%s: %s',
+						$error,
+						$e->getMessage()
+					),
+					'file' => $e->getFile(),
+					'line' => $e->getLine(),
+					'trace' => $e->getTrace(),
+				);
+			}
+
+			wp_send_json_error( $error_data );
 		}
 
 		throw $e;
@@ -145,15 +149,19 @@ class Astra_Sites_Error_Handler {
 		Astra_Sites_Importer_Log::add( $e );
 
 		if ( wp_doing_ajax() ) {
-			wp_send_json_error(
-				array(
-					'message' => __( 'There was an error your website.', 'astra-sites' ),
-					'stack' => array(
-						'error-message' => $error,
-						'error' => $e,
-					),
-				)
+			$error_data = array(
+				'message' => __( 'There was an error on your website.', 'astra-sites' ),
 			);
+
+			// Only expose error details when WP_DEBUG is enabled.
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				$error_data['stack'] = array(
+					'error-message' => $error,
+					'error' => $e,
+				);
+			}
+
+			wp_send_json_error( $error_data );
 		}
 	}
 }

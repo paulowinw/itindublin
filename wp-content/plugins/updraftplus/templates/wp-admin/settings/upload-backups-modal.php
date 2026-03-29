@@ -1,4 +1,7 @@
-<?php if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed'); ?>
+<?php
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
+?>
 
 <div id="updraft-upload-modal" title="UpdraftPlus - <?php esc_attr_e('Upload backup', 'updraftplus');?>">
 	<p><?php esc_html_e("Select the remote storage destinations you want to upload this backup set to", 'updraftplus');?>:</p>

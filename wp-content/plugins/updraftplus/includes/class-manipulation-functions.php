@@ -53,13 +53,63 @@ class UpdraftPlus_Manipulation_Functions {
 	 *
 	 * The function wp_unslash() is WP 3.6+, so therefore we have a compatibility method here
 	 *
-	 * @param String|Array $value String or array of strings to unslash.
+	 * @param String|Array $value         String or array of strings to unslash.
+	 * @param Boolean      $force_unslash Strip slashes without checking whether wp_magic_quotes function and/or plugins_loaded action have already been called or not
 	 * @return String|Array Unslashed $value
 	 */
-	public static function wp_unslash($value) {
+	public static function wp_unslash($value, $force_unslash = true) {
+		if (!$force_unslash && (!did_action('plugins_loaded') || !isset($GLOBALS['wp_the_query']))) return $value;
 		return function_exists('wp_unslash') ? wp_unslash($value) : stripslashes_deep($value);
 	}
-	
+
+	/**
+	 * Return the value of a member of a superglobal, after slash-stripping and sanitisation.
+	 *
+	 * When using, it is recommended that if the $type or $sanitisation parameters are not used then a code comment is added to state the reason.
+	 *
+	 * @param String		$superglobal  - should be one of 'get', 'post', 'request' or 'cookie'
+	 * @param String		$key		  - the key to fetch from the superglobal array
+	 * @param Boolean       $auto_unslash - Whether to automatically strip slashes from the variable value but not to force it
+	 * @param String|Null	$type		  - if specified, then this must (modulo case) match what is returned by gettype() upon the returned value; otherwise, $default will be used. If it is not possible to return a value of the correct type (e.g. if $default itself is not of the correct type) then a TypeError will be thrown. This can be useful if the caller wishes to distinguish between the fetched value being equal to the default, and being invalid (the caller can catch the TypeError to detect this).
+	 * @param Callable|Null $sanitisation - the sanitisation function to run the result through (any function), with the first parameter being the putative value. Any $default value will not be sanitised, which allows different cases to be distinguished as described above.
+	 * @param Mixed			$default	  - value to return if the key is not found or if the value is invalid
+	 *
+	 * @see https://developer.wordpress.org/apis/security/sanitizing/
+	 * @see https://www.php.net/manual/en/function.gettype.php
+	 *
+	 * @throws Exception    If the fetched value does not match the specified $type or if $default itself is not of the correct type.
+	 *
+	 * @return Mixed The superglobal or global variable value or null
+	 */
+	public static function fetch_superglobal($superglobal, $key, $auto_unslash = false, $type = null, $sanitisation = null, $default = null) {
+
+		$superglobal = '_'.strtoupper($superglobal);
+		
+		// N.B. Superglobals can only be dereferenced by variable variables in the global scope; this is why we have to use $GLOBALS
+		if (!is_array($GLOBALS[$superglobal]) || !isset($GLOBALS[$superglobal][$key])) {
+			$putative_return = $default;
+		} else {
+			$putative_return = (is_string($GLOBALS[$superglobal][$key]) || is_array($GLOBALS[$superglobal][$key])) && $auto_unslash ? self::wp_unslash($GLOBALS[$superglobal][$key], false) : $GLOBALS[$superglobal][$key];
+			if (null !== $sanitisation) {
+				$putative_return = call_user_func($sanitisation, $putative_return);
+			}
+			if (null !== $type) {
+				if (strtolower(gettype($putative_return)) !== strtolower($type)) {
+					$putative_return = $default;
+				}
+			}
+		}
+		
+		if (null !== $type) {
+			if (strtolower(gettype($putative_return)) !== strtolower($type)) {
+				throw new Exception('fetch_superglobal() was unable to return any value of the required type '.$type, 255);
+			}
+		}
+		
+		return $putative_return;
+
+	}
+
 	/**
 	 * Parse a filename into components
 	 *

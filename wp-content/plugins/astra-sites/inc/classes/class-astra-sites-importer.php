@@ -61,6 +61,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			add_action( 'wp_ajax_astra-sites-import-cartflows', array( $this, 'import_cartflows' ) );
 			add_action( 'wp_ajax_astra-sites-import-cart-abandonment-recovery', array( $this, 'import_cart_abandonment_recovery' ) );
 			add_action( 'wp_ajax_astra-sites-import-latepoint', array( $this, 'import_latepoint' ) );
+			add_action( 'wp_ajax_astra-sites-verify-required-plugins', array( $this, 'verify_required_plugins' ) );
 			add_action( 'astra_sites_import_complete', array( $this, 'clear_related_cache' ) );
 
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing.php';
@@ -537,6 +538,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 							$forms->get_error_message()
 						)
 					);
+					return;
 				}
 
 				if ( empty( $forms ) ) {
@@ -793,7 +795,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 					Astra_Sites_Helper::error_response(
 						sprintf(
 							// translators: %s is the error message.
-							__( 'WPForms import failed: %s', 'astra-sites' ),
+							__( 'Cart Abandonment Recovery import failed: %s', 'astra-sites' ),
 							$data->get_error_message()
 						)
 					);
@@ -921,6 +923,96 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			Astra_Sites_Helper::success_response(
 				// translators: %s is the URL.
 				sprintf( __( 'Imported from %s', 'astra-sites' ), $url )
+			);
+		}
+
+		/**
+		 * Verify that all required plugins are installed and activated.
+		 *
+		 * This is called before import to ensure all plugins are ready.
+		 *
+		 * @since 4.4.51
+		 * @return void
+		 */
+		public function verify_required_plugins() {
+			// Verify Nonce.
+			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'activate_plugins' ) ) {
+				wp_send_json_error(
+					array(
+						'message' => __( 'Permission denied: You do not have permission to verify plugins.', 'astra-sites' ),
+					)
+				);
+				return;
+			}
+
+			// Include plugin.php for is_plugin_active check.
+			if ( ! function_exists( 'is_plugin_active' ) ) {
+				include_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON data needs to be decoded first.
+			$required_plugins_json = isset( $_POST['required_plugins'] ) ? wp_unslash( $_POST['required_plugins'] ) : '';
+			$required_plugins      = ! empty( $required_plugins_json ) ? json_decode( $required_plugins_json, true ) : array();
+
+			if ( empty( $required_plugins ) || ! is_array( $required_plugins ) ) {
+				// No plugins to verify - that's fine.
+				wp_send_json_success(
+					array(
+						'message' => __( 'No plugins to verify.', 'astra-sites' ),
+						'verified' => true,
+					)
+				);
+				return;
+			}
+
+			$missing       = array();
+			$not_activated = array();
+
+			foreach ( $required_plugins as $plugin ) {
+				if ( ! is_array( $plugin ) || empty( $plugin['init'] ) ) {
+					continue;
+				}
+
+				$plugin_init = sanitize_text_field( $plugin['init'] );
+
+				// Reject path traversal attempts.
+				if ( false !== strpos( $plugin_init, '..' ) || false !== strpos( $plugin_init, '\\' ) ) {
+					Astra_Sites_Importer_Log::add( 'Plugin verification blocked - invalid path: ' . $plugin_init );
+					continue;
+				}
+
+				$plugin_file = WP_PLUGIN_DIR . '/' . $plugin_init;
+
+				if ( ! file_exists( $plugin_file ) ) {
+					$missing[] = $plugin;
+					Astra_Sites_Importer_Log::add( 'Plugin verification failed - missing: ' . $plugin_init );
+				} elseif ( ! is_plugin_active( $plugin_init ) ) {
+					$not_activated[] = $plugin;
+					Astra_Sites_Importer_Log::add( 'Plugin verification failed - not activated: ' . $plugin_init );
+				}
+			}
+
+			if ( ! empty( $missing ) || ! empty( $not_activated ) ) {
+				Astra_Sites_Importer_Log::add( 'Plugin verification failed. Missing: ' . count( $missing ) . ', Not activated: ' . count( $not_activated ) );
+				wp_send_json_error(
+					array(
+						'message'       => __( 'Some required plugins are not ready.', 'astra-sites' ),
+						'missing'       => $missing,
+						'not_activated' => $not_activated,
+						'verified'      => false,
+					)
+				);
+				return;
+			}
+
+			Astra_Sites_Importer_Log::add( 'All required plugins verified successfully.' );
+			wp_send_json_success(
+				array(
+					'message'  => __( 'All plugins verified.', 'astra-sites' ),
+					'verified' => true,
+				)
 			);
 		}
 

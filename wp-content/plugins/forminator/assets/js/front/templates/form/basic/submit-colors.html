@@ -1,0 +1,38 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-submit {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-button-submit-background-static' ) && !empty( $properties['basic-button-submit-background-static'] ) ) { ?>
+			background-color: <?php echo $properties['basic-button-submit-background-static'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-button-submit-color-static' ) && !empty( $properties['basic-button-submit-color-static'] ) ) { ?>
+			color: <?php echo $properties['basic-button-submit-color-static'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-submit:hover {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-button-submit-background-hover' ) && !empty( $properties['basic-button-submit-background-hover'] ) ) { ?>
+			background-color: <?php echo $properties['basic-button-submit-background-hover'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-button-submit-color-hover' ) && !empty( $properties['basic-button-submit-color-hover'] ) ) { ?>
+			color: <?php echo $properties['basic-button-submit-color-hover'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-submit:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-submit:active {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-button-submit-background-active' ) && !empty( $properties['basic-button-submit-background-active'] ) ) { ?>
+			background-color: <?php echo $properties['basic-button-submit-background-active'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-button-submit-color-active' ) && !empty( $properties['basic-button-submit-color-active'] ) ) { ?>
+			color: <?php echo $properties['basic-button-submit-color-active'] ?>;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'basic-button-submit-focus-outline-color' ) && !empty( $properties['basic-button-submit-focus-outline-color'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-submit:focus {
+			outline: 2px solid <?php echo $properties['basic-button-submit-focus-outline-color'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+<?php } ?>

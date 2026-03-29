@@ -53,6 +53,8 @@ const ImportSite = () => {
 			selectedTemplateType,
 			builder,
 			pluginInstallationAttempts,
+			awaitingPluginCheck,
+			skippedPlugins,
 		},
 		dispatch,
 	] = storedState;
@@ -150,9 +152,162 @@ const ImportSite = () => {
 	};
 
 	/**
+	 * Verify that all required plugins are installed on the server.
+	 * This is a safety check before starting the import process.
+	 *
+	 * @return {Promise<Object>} Object with verified status and failed plugin details.
+	 */
+	const verifyPluginsBeforeImport = async () => {
+		const allRequiredPlugins =
+			templateResponse?.[ 'required-plugins' ] || [];
+
+		// Exclude plugins the user explicitly skipped on the
+		// "Required Plugins Missing" screen.
+		// Match on `init` (e.g. "sfwd-lms/sfwd_lms.php") because
+		// third-party plugin objects from PHP have { init, name, link }
+		// but no `slug` property.
+		const skippedInits = new Set(
+			( skippedPlugins || [] ).map( ( p ) => p.init )
+		);
+		const requiredPluginsList = allRequiredPlugins.filter(
+			( p ) => ! skippedInits.has( p.init )
+		);
+
+		if ( requiredPluginsList.length === 0 ) {
+			return { verified: true, missing: [], notActivated: [] };
+		}
+
+		// Show verification status with plugin names
+		const pluginNames = requiredPluginsList
+			.map( ( p ) => p.name )
+			.join( ', ' );
+		dispatch( {
+			type: 'set',
+			importStatus: sprintf(
+				// translators: %s: Plugin names being verified.
+				__( 'Verifying plugins: %s', 'astra-sites' ),
+				pluginNames
+			),
+		} );
+
+		const formData = new FormData();
+		formData.append( 'action', 'astra-sites-verify-required-plugins' );
+		formData.append( '_ajax_nonce', astraSitesVars?._ajax_nonce );
+		formData.append(
+			'required_plugins',
+			JSON.stringify( requiredPluginsList )
+		);
+
+		try {
+			const response = await fetch( ajaxurl, {
+				method: 'post',
+				body: formData,
+			} );
+			const result = await response.json();
+
+			if ( ! result.success ) {
+				// Plugins missing or not activated - handle recovery
+				const { missing, not_activated } = result.data || {};
+				const missingPlugins = missing || [];
+				const notActivatedPlugins = not_activated || [];
+
+				// Single atomic dispatch — two separate dispatches would cause two
+				// renders in React 17 (async context, no auto-batching). Between
+				// renders, one list would be empty and the other not, making the
+				// requiredPluginsDone useEffect fire with partial state.
+				dispatch( {
+					type: 'set',
+					notInstalledList: missingPlugins,
+					notActivatedList: notActivatedPlugins,
+					requiredPluginsDone: false,
+				} );
+
+				return {
+					verified: false,
+					missing: missingPlugins,
+					notActivated: notActivatedPlugins,
+				};
+			}
+
+			return { verified: true, missing: [], notActivated: [] };
+		} catch ( error ) {
+			// Surface the error to the user — silently returning would leave
+			// importPart1() returning early with no state change, and since
+			// no useEffect dependency changes, importPart1 would never retry.
+			report(
+				__( 'Plugin verification failed.', 'astra-sites' ),
+				'',
+				error.message,
+				'',
+				'',
+				''
+			);
+			return { verified: false, missing: [], notActivated: [], error };
+		}
+	};
+
+	/**
 	 * Start Import Part 1.
 	 */
 	const importPart1 = async () => {
+		// STEP 1: Verify all required plugins are installed on server
+		const verificationResult = await verifyPluginsBeforeImport();
+
+		if ( ! verificationResult.verified ) {
+			// Build a detailed message about which plugins need attention
+			const { missing, notActivated } = verificationResult;
+			const problemPlugins = [];
+
+			if ( missing.length > 0 ) {
+				const missingNames = missing
+					.map( ( p ) => p.name )
+					.join( ', ' );
+				problemPlugins.push(
+					sprintf(
+						// translators: %s: Plugin names that are not installed.
+						__( 'Not installed: %s', 'astra-sites' ),
+						missingNames
+					)
+				);
+			}
+
+			if ( notActivated.length > 0 ) {
+				const inactiveNames = notActivated
+					.map( ( p ) => p.name )
+					.join( ', ' );
+				problemPlugins.push(
+					sprintf(
+						// translators: %s: Plugin names that are not activated.
+						__( 'Not activated: %s', 'astra-sites' ),
+						inactiveNames
+					)
+				);
+			}
+
+			const statusMessage =
+				problemPlugins.length > 0
+					? sprintf(
+							// translators: %s: Details about plugins needing attention.
+							__(
+								'Plugins need attention. %s. Retrying…',
+								'astra-sites'
+							),
+							problemPlugins.join( '. ' )
+					  )
+					: __(
+							'Plugin verification failed. Retrying…',
+							'astra-sites'
+					  );
+
+			dispatch( {
+				type: 'set',
+				importStatus: statusMessage,
+			} );
+
+			return; // Exit - the useEffects will handle re-installation
+		}
+
+		// STEP 2: Proceed with existing import logic
 		let resetStatus = false;
 		let cfStatus = false;
 		let wooCARStatus = false;
@@ -162,7 +317,7 @@ const ImportSite = () => {
 		let spectraStatus = false;
 
 		// To make sure template data is available before import.
-		await getDemo( templateResponse.id, storedState );
+		await getDemo( templateId || templateResponse?.id, storedState );
 
 		resetStatus = await resetOldSite();
 
@@ -278,8 +433,11 @@ const ImportSite = () => {
 					clear_destination: true,
 					ajax_nonce: astraSitesVars?._ajax_nonce,
 					success() {
+						// Use reducer action to avoid closure issues
+						// The reducer uses current state, not stale closure values
 						dispatch( {
-							type: 'set',
+							type: 'plugin_installed',
+							plugin,
 							importStatus: sprintf(
 								// translators: Plugin Name.
 								__(
@@ -288,26 +446,6 @@ const ImportSite = () => {
 								),
 								plugin.name
 							),
-						} );
-
-						const inactiveList = notActivatedList;
-						inactiveList.push( plugin );
-
-						dispatch( {
-							type: 'set',
-							notActivatedList: inactiveList,
-						} );
-						const notInstalledPluginList = notInstalledList;
-						notInstalledPluginList.forEach(
-							( singlePlugin, index ) => {
-								if ( singlePlugin.slug === plugin.slug ) {
-									notInstalledPluginList.splice( index, 1 );
-								}
-							}
-						);
-						dispatch( {
-							type: 'set',
-							notInstalledList: notInstalledPluginList,
 						} );
 					},
 					error( err ) {
@@ -427,23 +565,12 @@ const ImportSite = () => {
 							} );
 						}
 
-						// Remove from active processing list
-						const notActivatedPluginList = notActivatedList;
-						notActivatedPluginList.forEach(
-							( singlePlugin, index ) => {
-								if ( singlePlugin.slug === plugin.slug ) {
-									notActivatedPluginList.splice( index, 1 );
-								}
-							}
-						);
-						dispatch( {
-							type: 'set',
-							notActivatedList: notActivatedPluginList,
-						} );
-
+						// Use reducer actions to avoid closure issues
+						// The reducer uses current state, not stale closure values
 						if ( deprioritizeStatus ) {
 							dispatch( {
-								type: 'set',
+								type: 'plugin_deferred',
+								plugin,
 								importStatus: sprintf(
 									// translators: Plugin Name.
 									__(
@@ -457,7 +584,8 @@ const ImportSite = () => {
 						} else {
 							percentage += 2;
 							dispatch( {
-								type: 'set',
+								type: 'plugin_activated',
+								plugin,
 								importStatus: sprintf(
 									// translators: Plugin Name.
 									__( '%1$s activated.', 'astra-sites' ),
@@ -1099,6 +1227,40 @@ const ImportSite = () => {
 	};
 
 	/**
+	 * Parse and validate an AJAX importer response.
+	 * Separates JSON parse failures from server-side errors so the real
+	 * error message from PHP is preserved and surfaced to the user.
+	 *
+	 * @param {string} text         Raw response text from the AJAX call.
+	 * @param {string} importerName Human-readable name for error context.
+	 * @return {Object} The parsed response data object on success.
+	 * @throws {Error} error.message contains the real failure reason.
+	 *                 error.type is 'parse_error' | 'server_error'
+	 */
+	const parseImporterResponse = ( text, importerName ) => {
+		let data;
+		try {
+			data = JSON.parse( text );
+		} catch ( parseError ) {
+			throw Object.assign(
+				new Error(
+					`${ importerName }: Server returned a non-JSON response.`
+				),
+				{ type: 'parse_error', raw: text }
+			);
+		}
+		if ( ! data.success ) {
+			throw Object.assign(
+				new Error(
+					data.data || `${ importerName }: Unknown server error.`
+				),
+				{ type: 'server_error', responseData: data.data }
+			);
+		}
+		return data;
+	};
+
+	/**
 	 * 2. Import CartFlows Flows.
 	 *
 	 * @param {boolean} suppressErrorReporting - If true, suppress error reporting (used by retry logic)
@@ -1133,29 +1295,24 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				try {
-					const data = JSON.parse( text );
-					if ( data.success ) {
-						percentage += 2;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage,
-						} );
-						return true;
-					}
-					throw data.data;
+					parseImporterResponse( text, 'CartFlows Import' );
+					percentage += 2;
+					dispatch( {
+						type: 'set',
+						importPercent: percentage,
+					} );
+					return true;
 				} catch ( error ) {
-					// Suppress error reporting if flag is set (used in retry logic)
 					if ( suppressErrorReporting ) {
 						return false;
 					}
-
 					report(
 						__(
 							'Importing CartFlows flows failed due to parse JSON error.',
 							'astra-sites'
 						),
 						'',
-						error,
+						error?.message || error,
 						'',
 						'',
 						text
@@ -1223,29 +1380,27 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				try {
-					const data = JSON.parse( text );
-					if ( data.success ) {
-						percentage += 2;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage,
-						} );
-						return true;
-					}
-					throw data.data;
+					parseImporterResponse(
+						text,
+						'Cart Abandonment Recovery Import'
+					);
+					percentage += 2;
+					dispatch( {
+						type: 'set',
+						importPercent: percentage,
+					} );
+					return true;
 				} catch ( error ) {
-					// Suppress error reporting if flag is set (used in retry logic)
 					if ( suppressErrorReporting ) {
 						return false;
 					}
-
 					report(
 						__(
 							'Importing Cart Abandonment Recovery data failed due to parse JSON error.',
 							'astra-sites'
 						),
 						'',
-						error,
+						error?.message || error,
 						'',
 						'',
 						text
@@ -1307,29 +1462,24 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				try {
-					const data = JSON.parse( text );
-					if ( data.success ) {
-						percentage += 2;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage,
-						} );
-						return true;
-					}
-					throw data.data;
+					parseImporterResponse( text, 'LatePoint Import' );
+					percentage += 2;
+					dispatch( {
+						type: 'set',
+						importPercent: percentage,
+					} );
+					return true;
 				} catch ( error ) {
-					// Suppress error reporting if flag is set (used in retry logic)
 					if ( suppressErrorReporting ) {
 						return false;
 					}
-
 					report(
 						__(
 							'Importing LatePoint data failed due to parse JSON error.',
 							'astra-sites'
 						),
 						'',
-						error,
+						error?.message || error,
 						'',
 						'',
 						text
@@ -1387,29 +1537,24 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				try {
-					const data = JSON.parse( text );
-					if ( data.success ) {
-						percentage += 2;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage >= 60 ? 60 : percentage,
-						} );
-						return true;
-					}
-					throw data.data;
+					parseImporterResponse( text, 'WPForms Import' );
+					percentage += 2;
+					dispatch( {
+						type: 'set',
+						importPercent: percentage >= 60 ? 60 : percentage,
+					} );
+					return true;
 				} catch ( error ) {
-					// Suppress error reporting if flag is set (used in retry logic)
 					if ( suppressErrorReporting ) {
 						return false;
 					}
-
 					report(
 						__(
 							'Importing forms failed due to parse JSON error.',
 							'astra-sites'
 						),
 						'',
-						error,
+						error?.message || error,
 						'',
 						'',
 						text
@@ -1461,16 +1606,13 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				try {
-					const data = JSON.parse( text );
-					if ( data.success ) {
-						percentage += 5;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage >= 65 ? 65 : percentage,
-						} );
-						return true;
-					}
-					throw data.data;
+					parseImporterResponse( text, 'Customizer Import' );
+					percentage += 5;
+					dispatch( {
+						type: 'set',
+						importPercent: percentage >= 65 ? 65 : percentage,
+					} );
+					return true;
 				} catch ( error ) {
 					report(
 						__(
@@ -1478,7 +1620,7 @@ const ImportSite = () => {
 							'astra-sites'
 						),
 						'',
-						error,
+						error?.message || error,
 						'',
 						'',
 						text
@@ -1888,16 +2030,13 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				try {
-					const data = JSON.parse( text );
-					if ( data.success ) {
-						percentage += 5;
-						dispatch( {
-							type: 'set',
-							importPercent: percentage >= 90 ? 90 : percentage,
-						} );
-						return true;
-					}
-					throw data.data;
+					parseImporterResponse( text, 'Site Options Import' );
+					percentage += 5;
+					dispatch( {
+						type: 'set',
+						importPercent: percentage >= 90 ? 90 : percentage,
+					} );
+					return true;
 				} catch ( error ) {
 					report(
 						__(
@@ -1956,15 +2095,12 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				try {
-					const data = JSON.parse( text );
-					if ( data.success ) {
-						dispatch( {
-							type: 'set',
-							importPercent: 90,
-						} );
-						return true;
-					}
-					throw data.data;
+					parseImporterResponse( text, 'Widgets Import' );
+					dispatch( {
+						type: 'set',
+						importPercent: 90,
+					} );
+					return true;
 				} catch ( error ) {
 					report(
 						__(
@@ -2025,19 +2161,16 @@ const ImportSite = () => {
 			.then( ( response ) => response.text() )
 			.then( ( text ) => {
 				try {
-					const data = JSON.parse( text );
-					if ( data.success ) {
-						localStorage.setItem( 'st-import-end', +new Date() );
-						setTimeout( function () {
-							dispatch( {
-								type: 'set',
-								importPercent: 100,
-								importEnd: true,
-							} );
-						}, successMessageDelay );
-						return true;
-					}
-					throw data.data;
+					parseImporterResponse( text, 'Final Finishings' );
+					localStorage.setItem( 'st-import-end', +new Date() );
+					setTimeout( function () {
+						dispatch( {
+							type: 'set',
+							importPercent: 100,
+							importEnd: true,
+						} );
+					}, successMessageDelay );
+					return true;
 				} catch ( error ) {
 					report(
 						__(
@@ -2057,7 +2190,6 @@ const ImportSite = () => {
 							importEnd: true,
 						} );
 					}, successMessageDelay );
-
 					localStorage.setItem( 'st-import-end', +new Date() );
 					return false;
 				}
@@ -2198,10 +2330,11 @@ const ImportSite = () => {
 		const pluginsToRetry = [ ...deferredPlugins ];
 		setDeferredPlugins( [] );
 
-		// Add them back to notActivatedList for retry
+		// Use reducer action so state.notActivatedList (not closure) is read at
+		// dispatch time — consistent with plugin_installed/plugin_activated fix.
 		dispatch( {
-			type: 'set',
-			notActivatedList: [ ...notActivatedList, ...pluginsToRetry ],
+			type: 'plugin_retry_deferred',
+			plugins: pluginsToRetry,
 		} );
 
 		setRetryingDeferred( false );
@@ -2209,6 +2342,12 @@ const ImportSite = () => {
 
 	// This checks if all the required plugins are installed and activated.
 	useEffect( () => {
+		// Don't set requiredPluginsDone if we're waiting for plugin check to complete.
+		// This prevents race condition in "Try Again" flow.
+		if ( awaitingPluginCheck ) {
+			return;
+		}
+
 		if ( notActivatedList.length <= 0 && notInstalledList.length <= 0 ) {
 			// Check if we have deferred plugins to retry
 			if ( deferredPlugins.length > 0 && ! retryingDeferred ) {
@@ -2226,6 +2365,7 @@ const ImportSite = () => {
 		notActivatedList.length,
 		notInstalledList.length,
 		deferredPlugins.length,
+		awaitingPluginCheck,
 	] );
 
 	// Activate plugins one by one using the prioritized list

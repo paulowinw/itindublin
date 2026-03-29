@@ -1,0 +1,61 @@
+<?php if ( forminator_array_value_exists( $properties, 'poll-colors' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back {
+		<?php if ( forminator_array_value_exists( $properties, 'button-submit-background-static' ) && !empty( $properties['button-submit-background-static'] ) ) { ?>
+			background-color: <?php echo $properties['button-submit-background-static'] ?>;
+		<?php } else { ?>
+			background-color: #097BAA;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'button-submit-color-static' ) && !empty( $properties['button-submit-color-static'] ) ) { ?>
+			color: <?php echo $properties['button-submit-color-static'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:hover {
+		<?php if ( forminator_array_value_exists( $properties, 'button-submit-background-hover' ) && !empty( $properties['button-submit-background-hover'] ) ) { ?>
+			background-color: <?php echo $properties['button-submit-background-hover'] ?>;
+		<?php } else { ?>
+			background-color: #086A91;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'button-submit-color-hover' ) && !empty( $properties['button-submit-color-hover'] ) ) { ?>
+			color: <?php echo $properties['button-submit-color-hover'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:active {
+		<?php if ( forminator_array_value_exists( $properties, 'button-submit-background-active' ) && !empty( $properties['button-submit-background-active'] ) ) { ?>
+			background-color: <?php echo $properties['button-submit-background-active'] ?>;
+		<?php } else { ?>
+			background-color: #086A91;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'button-submit-color-active' ) && !empty( $properties['button-submit-color-active'] ) ) { ?>
+			color: <?php echo $properties['button-submit-color-active'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back {
+		background-color: #097BAA;
+		color: #FFFFFF;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:hover {
+		background-color: #086A91;
+		color: #FFFFFF;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:active {
+		background-color: #086A91;
+		color: #FFFFFF;
+	}
+
+<?php } ?>

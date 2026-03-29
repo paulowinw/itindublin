@@ -1,0 +1,11 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent__label,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent__label p {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-consent-cbox-label' ) && !empty( $properties['basic-consent-cbox-label'] ) ) { ?>
+			color: <?php echo $properties['basic-consent-cbox-label'] ?>;
+		<?php } ?>
+	}
+
+<?php } ?>

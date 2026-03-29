@@ -1,0 +1,13 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	.forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-calendar--<?php echo $theme; ?> {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-calendar-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-calendar-font-family'] != 'custom' && !empty( $properties['basic-cform-calendar-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-calendar-font-family'] ?>;
+			<?php } else if ( $properties['basic-cform-calendar-font-family'] == 'custom' && !empty( $properties['basic-cform-calendar-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-calendar-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+	}
+
+<?php } ?>

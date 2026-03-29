@@ -1,0 +1,60 @@
+<?php if ( forminator_array_value_exists( $properties, 'form-font-family' ) ) { ?>
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-search input,
+	.forminator-select-dropdown-container--open .forminator-dropdown--multiple.forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-search input {
+		<?php if ( forminator_array_value_exists( $properties, 'cform-input-font-size' ) ) { ?>
+			font-size: <?php echo $properties['cform-input-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 16px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'cform-input-font-family' ) ) { ?>
+			<?php if ( $properties['cform-input-font-family'] != 'custom' && !empty( $properties['cform-input-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['cform-input-font-family'] ?>;
+			<?php } else if ( $properties['cform-input-font-family'] == 'custom' && !empty( $properties['cform-input-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['cform-input-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		line-height: 22px;
+		<?php if ( forminator_array_value_exists( $properties, 'cform-input-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'cform-input-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 400;
+		<?php } ?>
+	}
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option,
+	.forminator-select-dropdown-container--open .forminator-dropdown--multiple.forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option span {
+		<?php if ( forminator_array_value_exists( $properties, 'cform-dropdown-font-size' ) ) { ?>
+			font-size: <?php echo $properties['cform-dropdown-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 16px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'cform-dropdown-font-family' ) ) { ?>
+			<?php if ( $properties['cform-dropdown-font-family'] != 'custom' && !empty( $properties['cform-dropdown-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['cform-dropdown-font-family'] ?>;
+			<?php } else if ( $properties['cform-dropdown-font-family'] == 'custom' && !empty( $properties['cform-dropdown-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['cform-dropdown-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'cform-dropdown-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'cform-dropdown-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 400;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-search input,
+	.forminator-select-dropdown-container--open .forminator-dropdown--multiple.forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-search input {
+		font-size: 16px;
+		font-weight: 400;
+	}
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option,
+	.forminator-select-dropdown-container--open .forminator-dropdown--multiple.forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option span {
+		font-size: 16px;
+		font-weight: 400;
+	}
+
+<?php } ?>

@@ -1,6 +1,7 @@
 <?php
-
-if (!defined('UPDRAFTPLUS_DIR')) die('No direct access.');
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- Using the default PHP fopen() function instead of the WP Filesystem API.
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 /**
  * Converted to job_options: yes
@@ -247,6 +248,7 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 			$storage = $this->getCF($opts['user'], $opts['apikey'], $opts['authurl'], UpdraftPlus_Options::get_updraft_option('updraft_ssl_useservercerts'));
 			$container_object = $storage->create_container($container);
 		} catch (Exception $e) {
+			/* translators: %s: Authentication method */
 			return new WP_Error('no_access', sprintf(__('%s authentication failed', 'updraftplus'), 'Cloud Files').' ('.$e->getMessage().')');
 		}
 
@@ -452,19 +454,22 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 				// Check requirements.
 				global $updraftplus_admin;
 				if (!function_exists('mb_substr')) {
-					$updraftplus_admin->show_double_warning('<strong>'.__('Warning', 'updraftplus').':</strong> '.sprintf(__('Your web server\'s PHP installation does not included a required module (%s).', 'updraftplus'), 'mbstring').' '.__('Please contact your web hosting provider\'s support.', 'updraftplus').' '.sprintf(__("UpdraftPlus's %s module <strong>requires</strong> %s.", 'updraftplus'), 'Cloud Files', 'mbstring').' '.__('Please do not file any support requests; there is no alternative.', 'updraftplus'), 'cloudfiles', false);
+					$updraftplus_admin->show_double_warning(
+						'<strong>'.__('Warning', 'updraftplus').':</strong> '.
+						/* translators: %s: Missing PHP module */
+						sprintf(__('Your web server\'s PHP installation does not include a required module (%s).', 'updraftplus'), 'mbstring').' '.
+						__('Please contact your web hosting provider\'s support.', 'updraftplus').' '.
+						/* translators: 1: Module description, 2: Required module */
+						sprintf(__('UpdraftPlus\'s %1$s module <strong>requires</strong> %2$s.', 'updraftplus'), 'Cloud Files', 'mbstring').' '.
+						__('Please do not file any support requests; there is no alternative.', 'updraftplus'),
+						'cloudfiles'
+					);
 				}
 				$updraftplus_admin->curl_check('Rackspace Cloud Files', false, 'cloudfiles', false);
 			?>
 				<p>
 				<?php
-					printf(
-						// translators: %1$s - opening link tag to Rackspace Cloud console, %2$s - closing link tag, %3$s - opening link tag to instructions.
-						esc_html__('Get your API key from your %1$sRackspace Cloud console%2$s (%3$sread instructions here%2$s), then pick a container name to use for storage.', 'updraftplus'),
-						'<a href="https://mycloud.rackspace.com/" target="_blank">',
-						'</a>',
-						'<a href="http://www.rackspace.com/knowledge_center/article/rackspace-cloud-essentials-1-generating-your-api-key" target="_blank">'
-					);
+					echo wp_kses_post('Get your API key from your <a href="https://mycloud.rackspace.com/" target="_blank">Rackspace Cloud console</a> (<a href="http://www.rackspace.com/knowledge_center/article/rackspace-cloud-essentials-1-generating-your-api-key" target="_blank">read instructions here</a>), then pick a container name to use for storage.', 'updraftplus');
 					echo ' '.esc_html__('This container will be created for you if it does not already exist.', 'updraftplus').' <a href="https://updraftplus.com/faqs/there-appear-to-be-lots-of-extra-files-in-my-rackspace-cloud-files-container/" target="_blank">'.esc_html__('Also, you should read this important FAQ.', 'updraftplus').'</a>';
 				?>
 				</p>
@@ -539,12 +544,18 @@ class UpdraftPlus_BackupModule_cloudfiles_oldsdk extends UpdraftPlus_BackupModul
 	public function credentials_test($posted_settings) {
 
 		if (empty($posted_settings['apikey'])) {
-			echo esc_html(sprintf(__("Failure: No %s was given.", 'updraftplus'), __('API key', 'updraftplus')));
+			echo esc_html(sprintf(
+				/* translators: %s: API key */
+				__("Failure: No %s was given.", 'updraftplus'),
+			__('API key', 'updraftplus')));
 			return;
 		}
 
 		if (empty($posted_settings['user'])) {
-			echo esc_html(sprintf(__("Failure: No %s was given.", 'updraftplus'), __('Username', 'updraftplus')));
+			echo esc_html(sprintf(
+				/* translators: %s: Username */
+				__("Failure: No %s was given.", 'updraftplus'),
+			__('Username', 'updraftplus')));
 			return;
 		}
 

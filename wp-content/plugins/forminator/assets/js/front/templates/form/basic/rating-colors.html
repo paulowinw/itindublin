@@ -1,0 +1,65 @@
+
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-rating-suffix {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-rating-suffix' ) && !empty( $properties['basic-rating-suffix'] ) ) { ?>
+			color: <?php echo $properties['basic-rating-suffix'] ?>;
+		<?php } else { ?>
+			color: #888;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-rating-item [class*=forminator-icon-]:before {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-rating-icon' ) && !empty( $properties['basic-rating-icon'] ) ) { ?>
+			color: <?php echo $properties['basic-rating-icon'] ?>;
+		<?php } else { ?>
+			color: #aaa;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-rating-item.forminator-rating-hover [class*=forminator-icon-]:before {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-rating-icon-hover' ) && !empty( $properties['basic-rating-icon-hover'] ) ) { ?>
+			color: <?php echo $properties['basic-rating-icon-hover'] ?>;
+		<?php } else { ?>
+			color: #ff7e41;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-rating-item.forminator-rating-selected [class*=forminator-icon-]:before {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-rating-icon-active' ) && !empty( $properties['basic-rating-icon-active'] ) ) { ?>
+			color: <?php echo $properties['basic-rating-icon-active'] ?>;
+		<?php } else { ?>
+			color: #ff7e41;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'basic-rating-focus-outline-color' ) && !empty( $properties['basic-rating-focus-outline-color'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-rating-wrapper.forminator-rating-focused .forminator-rating-items {
+			outline: 2px solid <?php echo $properties['basic-rating-focus-outline-color'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-rating-suffix {
+		color: #888;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-rating-item [class*=forminator-icon-]:before {
+		color: #aaa;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-rating-item.forminator-rating-hover [class*=forminator-icon-]:before,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-rating-item.forminator-rating-selected [class*=forminator-icon-]:before {
+		color: #ff7e41;
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'basic-rating-focus-outline-color' ) && !empty( $properties['basic-rating-focus-outline-color'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-rating-wrapper.forminator-rating-focused .forminator-rating-items {
+			outline: 2px solid #254DEB;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+<?php } ?>

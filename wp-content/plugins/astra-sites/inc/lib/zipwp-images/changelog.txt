@@ -1,3 +1,6 @@
+v1.0.21 - 03-March-2026
+- ABSPATH guard added to zipwp-images.php — prevents direct file access by exiting early if ABSPATH is not defined.
+
 v1.0.20 - 30-December-2025
 - Improvement: Automatically use Unsplash image engine for Russian users as Pexels is blocked in Russia.
 - Fix: Media Uploader select button text now displays correctly by resolving the media API frame conflict from other plugins.

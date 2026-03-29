@@ -1,4 +1,7 @@
-<?php if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed'); ?>
+<?php
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
+?>
 <div style="max-width: 700px; border: 1px solid; border-radius: 4px; font-size:110%; line-height: 110%; padding:8px; margin: 6px 0 12px; clear:left;">
 <strong><?php
 	if (!empty($prefix)) echo esc_html($prefix).' ';

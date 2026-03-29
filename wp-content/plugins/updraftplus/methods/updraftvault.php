@@ -1,6 +1,7 @@
 <?php
 
-if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed.');
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 updraft_try_include_file('methods/s3.php', 'require_once');
 
@@ -678,6 +679,31 @@ class UpdraftPlus_BackupModule_updraftvault extends UpdraftPlus_BackupModule_s3 
 	}
 
 	/**
+	 * Get the numeric UpdraftVault quota for the current site.
+	 *
+	 * Returns the numeric quota value when the site is connected to UpdraftVault
+	 * and valid quota information is available. If the site is not connected or
+	 * the quota cannot be determined, null is returned.
+	 *
+	 * This method returns raw data only and does not generate any user-facing
+	 * output or HTML.
+	 *
+	 * @param array|false $vault_settings Optional Vault settings array. If false or invalid,
+	 *                                   options will be loaded from storage.
+	 *
+	 * @return string|null Quota usage with available quota information, or null if unavailable.
+	 */
+	private function connected_data($vault_settings = false) {
+		if (!is_array($vault_settings)) $vault_settings = $this->get_options();
+
+		if (!is_array($vault_settings) || empty($vault_settings['token']) || empty($vault_settings['email'])) return __('You are <strong>not connected</strong> to UpdraftVault.', 'updraftplus');
+
+		if (isset($vault_settings['quota']) || is_numeric($vault_settings['quota'])) return $this->s3_get_quota_info('text', $vault_settings['quota'], false);
+
+		return null;
+	}
+
+	/**
 	 * This function will output to the backup log when s3 is out of quota, it will then also clear the vault quota transient so a recount will happen at some point.
 	 *
 	 * @param Integer $total  - the total amount of quota
@@ -743,11 +769,13 @@ class UpdraftPlus_BackupModule_updraftvault extends UpdraftPlus_BackupModule_s3 
 	/**
 	 * This function will return the S3 quota Information
 	 *
-	 * @param  String|integer $format n numeric, returns an integer or false for an error (never returns an error)
-	 * @param  integer        $quota  S3 quota information
-	 * @return String|integer
+	 * @param  string $format                Either 'text' or 'numeric', returns an integer or false for an error (never returns an error)
+	 * @param  int    $quota                 S3 quota information
+	 * @param  bool   $include_recount_links Whether to include the recount links in the text output
+	 *
+	 * @return string|integer
 	 */
-	protected function s3_get_quota_info($format = 'numeric', $quota = 0) {
+	protected function s3_get_quota_info($format = 'numeric', $quota = 0, $include_recount_links = true) {
 		$ret = '';
 		$counted = 0;
 
@@ -808,7 +836,7 @@ class UpdraftPlus_BackupModule_updraftvault extends UpdraftPlus_BackupModule_s3 
 			$ret .= '0';
 		}
 		
-		$ret .= $this->get_quota_recount_links();
+		if ($include_recount_links) $ret .= $this->get_quota_recount_links();
 		
 		if ('text' == $format) set_transient('updraftvault_quota_text', $ret, 86400*3);
 
@@ -824,21 +852,45 @@ class UpdraftPlus_BackupModule_updraftvault extends UpdraftPlus_BackupModule_s3 
 		return ' - <a href="'.esc_attr($this->get_url('get_more_quota')).'">'.__('Get more quota', 'updraftplus').'</a> - <a href="'.esc_url(UpdraftPlus::get_current_clean_url()).'" id="updraftvault_recountquota">'.__('Refresh current status', 'updraftplus').'</a>';
 	}
 
-	public function ajax_vault_recountquota($echo_results = true) {
+	/**
+	 * AJAX handler to recount and return the current Vault quota status.
+	 *
+	 * This method refreshes the configuration, validates authentication state,
+	 * and returns quota information or error details depending on the connection
+	 * status. The response can either be echoed directly as JSON (default AJAX
+	 * behavior) or returned as an array for internal usage.
+	 *
+	 * @param bool $echo_results     Whether to echo the JSON-encoded results directly.
+	 *                               Defaults to true.
+	 * @param bool $return_data_only Whether to return structured quota data only instead
+	 *                               of rendered HTML. Defaults to false.
+	 *
+	 * @return array|null Returns an associative array of results when $echo_results is false;
+	 *                    otherwise, outputs JSON and returns null.
+	 */
+	public function ajax_vault_recountquota($echo_results = true, $return_data_only = false) {
 		// Force the opts to be refreshed
 		$config = $this->get_config();
 
 		if (empty($config['accesskey']) && !empty($config['error_message'])) {
 			if (!empty($config['error']) && is_array($config['error']) && 'fetch_credentials_error' == $config['error']['message']) {
 				$opts = array('token' => 'unknown', 'email' => $config['email'], 'quota' => -1);
-				$results = array('html' => $this->connected_html($opts, $config['error_message']), 'connected' => 1);
+				if ($return_data_only) {
+					$results = array('connected' => true, 'quota' => $this->connected_data($opts));
+				} else {
+					$results = array('connected' => true, 'html' => $this->connected_html($opts, $config['error_message']));
+				}
 			} else {
 				$results = array('html' => htmlspecialchars($config['error_message']), 'connected' => 0);
 			}
 		} else {
 			// Now read the opts
 			$opts = $this->get_options();
-			$results = array('html' => $this->connected_html($opts), 'connected' => 1);
+			if ($return_data_only) {
+				$results = array('connected' => true, 'quota' => $this->connected_data($opts));
+			} else {
+				$results = array('connected' => true, 'html' => $this->connected_html($opts));
+			}
 		}
 		if ($echo_results) {
 			echo json_encode($results);
@@ -897,17 +949,23 @@ class UpdraftPlus_BackupModule_updraftvault extends UpdraftPlus_BackupModule_s3 
 	/**
 	 * This is called from the UD admin object
 	 *
-	 * @param  Boolean       $echo_results    A Flag to see if results need to be echoed or returned
-	 * @param  Boolean|array $use_credentials Check if Vault needs to use credentials
-	 * @return Array
+	 * @param  bool       $echo_results     A Flag to see if results need to be echoed or returned
+	 * @param  bool|array $use_credentials  Check if Vault needs to use credentials
+	 * @param  bool       $return_data_only Whether to return only raw data for the connected HTML.
+	 *
+	 * @return array
 	 */
-	public function ajax_vault_connect($echo_results = true, $use_credentials = false) {
+	public function ajax_vault_connect($echo_results = true, $use_credentials = false, $return_data_only = false) {
 	
 		if (empty($use_credentials)) $use_credentials = $_REQUEST;
 	
 		$connect = $this->vault_connect($use_credentials['email'], $use_credentials['pass']);
 		if (true === $connect) {
-			$response = array('connected' => true, 'html' => $this->connected_html(false));
+			if ($return_data_only) {
+				$response = array('connected' => true, 'quota' => $this->connected_data(false));
+			} else {
+				$response = array('connected' => true, 'html' => $this->connected_html(false, false));
+			}
 		} else {
 			$response = array(
 				'e' => __('An unknown error occurred when trying to connect to UpdraftPlus.Com', 'updraftplus')

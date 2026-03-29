@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 /*
  * Copyright 2014 Google Inc.
  *

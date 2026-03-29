@@ -31,6 +31,8 @@
  * Amazon S3 is a trademark of Amazon.com, Inc. or its affiliates.
  */
 // @codingStandardsIgnoreEnd
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- Using the default PHP fopen() function instead of the WP Filesystem API.
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- using the native PHP fclose() function instead of the WP Filesystem API.
 
 // SDK requires PHP 5.5+
 use Aws\Common\RulesEndpointProvider;

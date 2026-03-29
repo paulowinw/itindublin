@@ -1,0 +1,229 @@
+<?php if ( forminator_array_value_exists( $properties, 'cform-color-settings' ) ) { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input {
+		<?php if ( forminator_array_value_exists( $properties, 'input-border' ) && !empty( $properties['input-border'] ) ) { ?>
+			border-color: <?php echo $properties['input-border'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			border-color: #777771;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'input-color' ) && !empty( $properties['input-color'] ) ) { ?>
+			color: <?php echo $properties['input-color'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-iti-input .iti__selected-dial-code {
+		<?php if ( forminator_array_value_exists( $properties, 'input-color' ) && !empty( $properties['input-color'] ) ) { ?>
+			color: <?php echo $properties['input-color'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:disabled,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-calculation:disabled {
+		<?php if ( forminator_array_value_exists( $properties, 'input-color' ) && !empty( $properties['input-color'] ) ) { ?>
+			-webkit-text-fill-color: <?php echo $properties['input-color'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			-webkit-text-fill-color: #000000;
+		<?php } ?>
+		opacity: 1;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:hover,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-iti-input:hover .iti__selected-dial-code {
+		<?php if ( forminator_array_value_exists( $properties, 'input-hover-color' ) && !empty( $properties['input-hover-color'] ) ) { ?>
+			color: <?php echo $properties['input-hover-color'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:focus,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:active,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-iti-input:focus-within .iti__selected-dial-code,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-iti-input:active .iti__selected-dial-code {
+		<?php if ( forminator_array_value_exists( $properties, 'input-active-color' ) && !empty( $properties['input-active-color'] ) ) { ?>
+			color: <?php echo $properties['input-active-color'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'input-focus-outline-color' ) && !empty( $properties['input-focus-outline-color'] ) ) { ?>
+		#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:focus,
+		#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input-with-phone .iti__country-container .iti__selected-country:focus {
+			outline: 2px solid <?php echo $properties['input-focus-outline-color'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input::placeholder {
+		<?php if ( forminator_array_value_exists( $properties, 'input-placeholder' ) && !empty( $properties['input-placeholder'] ) ) { ?>
+			color: <?php echo $properties['input-placeholder'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #888888;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:-moz-placeholder {
+		<?php if ( forminator_array_value_exists( $properties, 'input-placeholder' ) && !empty( $properties['input-placeholder'] ) ) { ?>
+			color: <?php echo $properties['input-placeholder'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #888888;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input::-moz-placeholder {
+		<?php if ( forminator_array_value_exists( $properties, 'input-placeholder' ) && !empty( $properties['input-placeholder'] ) ) { ?>
+			color: <?php echo $properties['input-placeholder'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #888888;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:-ms-input-placeholder {
+		<?php if ( forminator_array_value_exists( $properties, 'input-placeholder' ) && !empty( $properties['input-placeholder'] ) ) { ?>
+			color: <?php echo $properties['input-placeholder'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #888888;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input::-webkit-input-placeholder {
+		<?php if ( forminator_array_value_exists( $properties, 'input-placeholder' ) && !empty( $properties['input-placeholder'] ) ) { ?>
+			color: <?php echo $properties['input-placeholder'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #888888;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input--wrap:after {
+		<?php if ( forminator_array_value_exists( $properties, 'input-border-hover' ) && !empty( $properties['input-border-hover'] ) ) { ?>
+			background-color: <?php echo $properties['input-border-hover'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			background-color: #097BAA;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-is_active .forminator-input--wrap:after {
+		<?php if ( forminator_array_value_exists( $properties, 'input-border-active' ) && !empty( $properties['input-border-active'] ) ) { ?>
+			background-color: <?php echo $properties['input-border-active'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			background-color: #097BAA;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-has_error .forminator-input--wrap:after {
+		<?php if ( forminator_array_value_exists( $properties, 'label-validation-color' ) && !empty( $properties['label-validation-color'] ) ) { ?>
+			background-color: <?php echo $properties['label-validation-color'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			background-color: #E51919;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input-with-icon [class*="forminator-icon-"] {
+		<?php if ( forminator_array_value_exists( $properties, 'input-icon' ) && !empty( $properties['input-icon'] ) ) { ?>
+			color: <?php echo $properties['input-icon'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #777771;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input-with-icon:hover [class*="forminator-icon-"] {
+		<?php if ( forminator_array_value_exists( $properties, 'input-icon-hover' ) && !empty( $properties['input-icon-hover'] ) ) { ?>
+			color: <?php echo $properties['input-icon-hover']; ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #777771;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-is_active .forminator-input-with-icon [class*="forminator-icon-"] {
+		<?php if ( forminator_array_value_exists( $properties, 'input-icon-focus' ) && !empty( $properties['input-icon-focus'] ) ) { ?>
+			color: <?php echo $properties['input-icon-focus']; ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #777771;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-is_active .forminator-input-with-icon [class*="forminator-icon-"] {
+		<?php if ( forminator_array_value_exists( $properties, 'input-border-active' ) && !empty( $properties['input-border-active'] ) ) { ?>
+			border-color: <?php echo $properties['input-border-active'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			border-color: #097BAA;
+		<?php } ?>
+	}
+
+<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:hover,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:focus,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:active {
+		border-color: #777771;
+		color: #000000;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-iti-input .iti__selected-dial-code,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-iti-input:hover .iti__selected-dial-code,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-iti-input:active .iti__selected-dial-code,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-iti-input:focus-within .iti__selected-dial-code {
+		color: #000000;
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'input-focus-outline-color' ) && !empty( $properties['input-focus-outline-color'] ) ) { ?>
+		#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:focus,
+		#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input-with-phone .iti__country-container .iti__selected-country:focus {
+			outline: 2px solid #254DEB;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:disabled,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-calculation:disabled {
+		-webkit-text-fill-color: #000000;
+		opacity: 1;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input::placeholder {
+		color: #888888;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:-moz-placeholder {
+		color: #888888;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input::-moz-placeholder {
+		color: #888888;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input:-ms-input-placeholder {
+		color: #888888;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input::-webkit-input-placeholder {
+		color: #888888;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input--wrap:after {
+		background-color: #097BAA;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-is_active .forminator-input--wrap:after {
+		background-color: #097BAA;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-has_error .forminator-input--wrap:after {
+		background-color: #E51919;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input-with-icon [class*="forminator-icon-"] {
+		color: #777771;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-is_active .forminator-input-with-icon [class*="forminator-icon-"] {
+		color: #097BAA;
+	}
+
+<?php } ?>

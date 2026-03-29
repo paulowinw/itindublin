@@ -119,10 +119,11 @@ if ( ! class_exists( 'Astra_Command_Palette' ) ) {
 			// Enqueue command palette CSS.
 			wp_enqueue_style(
 				'astra-command-palette',
-				ASTRA_THEME_URI . 'assets/css/' . $dir_name . '/command-palette' . $file_prefix . '.css',
+				ASTRA_THEME_URI . 'assets/css/minified/command-palette.min.css',
 				array(),
 				ASTRA_THEME_VERSION
 			);
+			wp_style_add_data( 'astra-command-palette', 'rtl', 'replace' );
 
 			/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 			wp_enqueue_script(

@@ -56,6 +56,17 @@ if ( ! class_exists( 'Astra_Elementor_Editor_Settings' ) ) {
 				return;
 			}
 
+			/**
+			 * Filter to disable Astra meta settings on the Elementor editor.
+			 *
+			 * @since 4.12.4
+			 *
+			 * @param bool $disable Whether to disable Astra meta settings on the Elementor editor. Default false.
+			 */
+			if ( apply_filters( 'astra_disable_elementor_editor_meta_settings', false ) ) {
+				return;
+			}
+
 			// Get post ID.
 			$post_id = 0;
 			if ( isset( $_REQUEST['post'] ) ) {
@@ -764,6 +775,11 @@ if ( ! class_exists( 'Astra_Elementor_Editor_Settings' ) ) {
 				return;
 			}
 
+			// Check if the current user has permission to edit the post.
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+				return;
+			}
+
 			// Get fresh saved settings directly from the meta.
 			$page_settings = $document->get_meta( '_elementor_page_settings' );
 
@@ -896,6 +912,11 @@ if ( ! class_exists( 'Astra_Elementor_Editor_Settings' ) ) {
 		public function sync_site_post_title_to_elementor( $post_id ) {
 			// Skip if this is a revision or autosave.
 			if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+				return;
+			}
+
+			// Check if the current user has permission to edit the post.
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
 				return;
 			}
 

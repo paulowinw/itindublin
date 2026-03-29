@@ -150,11 +150,24 @@ class License extends Api_Base {
 	/**
 	 * BSF get API URL.
 	 *
+	 * @since 2.4.21 Updated to use a filterable ajax path instead of hardcoding wp-admin/admin-ajax.php.
+	 *
 	 * @param bool $prefer_unsecure Prefer unsecure.
 	 * @return string $bsf_api_url.
 	 */
 	public static function get_api_url( $prefer_unsecure = false ) {
-		return self::get_api_site( $prefer_unsecure ) . 'wp-admin/admin-ajax.php';
+		/**
+		 * Filters the remote ajax path appended to the BSF API site URL.
+		 *
+		 * Allows overriding the default admin-ajax.php path used for license
+		 * activation and status check requests to the BSF API server.
+		 *
+		 * @since 2.4.21
+		 *
+		 * @param string $ajax_path The ajax endpoint path. Default 'wp-admin/admin-ajax.php'.
+		 */
+		$ajax_path = apply_filters( 'ast_block_templates_remote_ajax_path', 'wp-admin/admin-ajax.php' );
+		return self::get_api_site( $prefer_unsecure ) . $ajax_path;
 	}
 
 	/**

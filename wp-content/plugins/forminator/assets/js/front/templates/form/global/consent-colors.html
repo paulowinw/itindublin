@@ -1,0 +1,103 @@
+<?php if ( forminator_array_value_exists( $properties, 'cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent__label,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent__label p {
+		<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-label' ) && !empty( $properties['consent-cbox-label'] ) ) { ?>
+			color: <?php echo $properties['consent-cbox-label'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-checkbox.forminator-consent .forminator-checkbox-box {
+		<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-border-static' ) && !empty( $properties['consent-cbox-border-static'] ) ) { ?>
+			border-color: <?php echo $properties['consent-cbox-border-static'] ?>;
+		<?php } else { ?>
+			border-color: #777771;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-background-static' ) && !empty( $properties['consent-cbox-background-static'] ) ) { ?>
+			background-color: <?php echo $properties['consent-cbox-background-static'] ?>;
+		<?php } else { ?>
+			background-color: #EDEDED;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-icon' ) && !empty( $properties['consent-cbox-icon'] ) ) { ?>
+			color: <?php echo $properties['consent-cbox-icon'] ?>;
+		<?php } else { ?>
+			color: #097BAA;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-border-hover' ) && !empty( $properties['consent-cbox-border-hover'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-checkbox.forminator-consent .forminator-checkbox-box:hover {
+			border-color: <?php echo $properties['consent-cbox-border-hover'] ?>;
+		}
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-outline-focus' ) && !empty( $properties['consent-cbox-outline-focus'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-checkbox.forminator-consent input:focus + .forminator-checkbox-box {
+			outline: 2px solid <?php echo $properties['consent-cbox-outline-focus'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent input:checked + .forminator-checkbox-box {
+		<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-border-active' ) && !empty( $properties['consent-cbox-border-active'] ) ) { ?>
+			border-color: <?php echo $properties['consent-cbox-border-active'] ?>;
+		<?php } else { ?>
+			border-color: #097BAA;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-background-active' ) && !empty( $properties['consent-cbox-background-active'] ) ) { ?>
+			background-color: <?php echo $properties['consent-cbox-background-active'] ?>;
+		<?php } else { ?>
+			background-color: #EDEDED;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-has_error .forminator-consent .forminator-checkbox-box {
+		<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-border-error' ) && !empty( $properties['consent-cbox-border-error'] ) ) { ?>
+			border-color: <?php echo $properties['consent-cbox-border-error'] ?>;
+		<?php } else { ?>
+			border-color: #E51919;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	<?php if ( forminator_can_apply_default_color( $properties ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent,
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent__label,
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent__label p {
+			color: #000000;
+		}
+
+		<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-border-hover' ) && !empty( $properties['consent-cbox-border-hover'] ) ) { ?>
+			.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-checkbox.forminator-consent .forminator-checkbox-box:hover {
+				border-color: #097BAA;
+			}
+		<?php } ?>
+
+		<?php if ( forminator_array_value_exists( $properties, 'consent-cbox-outline-focus' ) && !empty( $properties['consent-cbox-outline-focus'] ) ) { ?>
+			.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-checkbox.forminator-consent input:focus + .forminator-checkbox-box {
+				outline: 2px solid #254DEB;
+				outline-offset: 1px;
+			}
+		<?php } ?>
+	<?php } ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent .forminator-checkbox-box {
+		border-color: #777771;
+		background-color: #EDEDED;
+		color: #097BAA;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-consent input:checked + .forminator-checkbox-box {
+		border-color: #097BAA;
+		background-color: #EDEDED;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-has_error .forminator-consent .forminator-checkbox-box {
+		border-color: #E51919;
+	}
+
+<?php } ?>

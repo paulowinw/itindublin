@@ -1,6 +1,7 @@
 <?php
 
-if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed.');
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 // Files can easily get too big for this method
 

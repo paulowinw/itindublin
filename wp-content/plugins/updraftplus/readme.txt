@@ -3,7 +3,7 @@ Contributors: Backup with UpdraftPlus, DavidAnderson, pmbaldha, DNutbourne, apor
 Tags: backup, database backup, wordpress backup, cloud backup, migration
 Requires at least: 3.2
 Tested up to: 6.9
-Stable tag: 1.26.1
+Stable tag: 1.26.2
 Author URI: https://updraftplus.com
 Donate link: https://david.dw-perspective.org.uk/donate
 License: GPLv3 or later
@@ -141,7 +141,7 @@ Many thanks to our existing translators.
 
 = How do I install the UpdraftPlus backup & migration plugin? =
 
-Here are the installation guidelines from our <a href="https://www.youtube.com/watch?v=7ReY7Z19h2I">YouTube channel</a> or from <a href="https://updraftplus.com/download/">our website</a>.
+Here are the installation guidelines from our [YouTube channel](https://www.youtube.com/watch?v=7ReY7Z19h2I) or from [our website](https://updraftplus.com/download/).
 
 = What if I have a problem / need support ? =
 
@@ -149,9 +149,9 @@ If you’re struggling to backup, migrate or restore there’s help available.
 
 Search existing topics on the WordPress support forum or post a new one. Our support and development teams check and respond to queries everyday.
 
-UpdraftPlus Premium customers can log a ticket directly with our support and development teams via the <a href="https://updraftplus.com/support/">UpdraftPlus support hub</a>.
+UpdraftPlus Premium customers can log a ticket directly with our support and development teams via the [UpdraftPlus support hub](https://updraftplus.com/support/).
 
-Before you get in touch, please ensure that you have read through our <a href=https://updraftplus.com/frequently-asked-questions/">FAQs</a> and that you’ve updated to the latest release of our plugin.
+Before you get in touch, please ensure that you have read through our [FAQs](https://updraftplus.com/frequently-asked-questions) and that you’ve updated to the latest release of our plugin.
 
 It helps greatly if you can include the backup log and as much other information as possible in your report, for example the PHP version, your website, the error description, how you got to the page that caused it, any other relevant plugins you have installed, plus any other information that might be of use.
 
@@ -175,9 +175,19 @@ This problem is probably caused by your account being starved of resources by yo
 
 == Changelog ==
 
-The <a href="https://updraftplus.com/news/">UpdraftPlus backup blog</a> is the best place to learn in more detail about any important changes.
+The [UpdraftPlus backup blog](https://updraftplus.com/news/) is the best place to learn in more detail about any important changes.
 
 N.B. Paid versions of UpdraftPlus Backup / Restore have a version number which is 1 higher in the first digit, and has an extra component on the end, but the changelog below still applies. i.e. changes listed for 1.16.32.x of the free version correspond to changes made in 2.16.32.x of the paid version.
+
+= 1.26.2 - 03/Mar/2026 =
+
+* TWEAK: Added PHP 8.5 support to UpdraftClone
+* TWEAK: Fix deprecation warnings in PHP 8.4 for the Dropbox integration
+* TWEAK: Make abort backup warning icon responsive with percentage-based sizing
+* TWEAK: Prevent the suppressed PHP warnings from being output in the backup and restore log on PHP 8.0+
+* TWEAK: On a site where the site owner has restricted (super-)administrators (so that they can't restore backups), require a constant to first be set to use the HTTP debug tool for internal IP addresses.
+* TWEAK: Update all links in the settings folder to use teamupdraft.com instead of updraftplus.com. 
+* TWEAK: When deleting backup sets created through a direct site-to-site migration, the 'Also delete from remote storage' checkbox is unnecessary.
 
 = 1.26.1 - 19/Jan/2026 =
 
@@ -2121,4 +2131,4 @@ Non-English translators are provided by volunteers, and wordpress.org does not g
 We recognise and thank those mentioned at https://updraftplus.com/acknowledgements/ for code and/or libraries used and/or modified under the terms of their open source licences.
 
 == Upgrade Notice ==
-* 1.26.1: Google Drive chunk uploads resumption improvement, various fixes and small tweaks - see the changelog for details. A recommended update for all.
+* 1.26.2: PHP 8.5 support for UpdraftClone, various fixes and small tweaks for PHP 8.0+ - see the changelog for details. A recommended update for all.

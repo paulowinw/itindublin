@@ -1,0 +1,20 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> select.forminator-select2 + .forminator-select .selection .select2-selection--single[role="combobox"] .select2-selection__rendered,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> select {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-select-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-select-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-select-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-select-font-family'] != 'custom' && !empty( $properties['basic-cform-select-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-select-font-family'] ?>;
+			<?php } else if ( $properties['basic-cform-select-font-family'] == 'custom' && !empty( $properties['basic-cform-select-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-select-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-select-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-select-font-weight' ); ?>
+		<?php } ?>
+	}
+
+<?php } ?>

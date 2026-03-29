@@ -1,0 +1,42 @@
+/* ELEMENT: Quiz Description */
+<?php if ( forminator_array_value_exists( $properties, 'hasLeads' ) && $properties['hasLeads'] ) { ?>
+	.forminator-ui.forminator-quiz-leads#forminator-quiz-leads-<?php echo $properties['form_id'] ?> .forminator-quiz--description,
+	.forminator-ui.forminator-quiz-leads#forminator-quiz-leads-<?php echo $properties['form_id'] ?> .forminator-quiz--description p {
+<?php } else { ?>
+	.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-quiz--description,
+	.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-quiz--description p {
+<?php } ?>
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-toggle-palette' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'nowrong-description-color' ) ) { ?>
+			color: <?php echo $properties['nowrong-description-color'] ?>;
+		<?php } else { ?>
+			color: #8C8C8C;
+		<?php } ?>
+	<?php } else { ?>
+		color: #8C8C8C;
+	<?php } ?>
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-toggle-typography' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'nowrong-description-font-size' ) ) { ?>
+			font-size: <?php echo $properties['nowrong-description-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 20px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'nowrong-description-font-family' ) ) { ?>
+			<?php if ( $properties['nowrong-description-font-family'] != 'custom' ) { ?>
+				font-family: <?php echo $properties['nowrong-description-font-family'] ?>;
+			<?php } else { ?>
+				<?php if ( ! empty( $properties['nowrong-description-custom-family'] ) ) { ?>
+					font-family: <?php echo $properties['nowrong-description-custom-family'] ?>;
+				<?php } ?>
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'nowrong-description-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'nowrong-description-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 400;
+		<?php } ?>
+	<?php } else { ?>
+		font-size: 20px;
+		font-weight: 400;
+	<?php } ?>
+}

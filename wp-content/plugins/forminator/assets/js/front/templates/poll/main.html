@@ -1,0 +1,39 @@
+<?php
+include('global/container-colors.html');
+include('global/container-padding.html');
+include('global/container-border.html');
+include('global/answers-grid.html');
+include('global/answers-list.html');
+include('global/chart-colors.html');
+include('global/footer.html');
+
+include('global/question-colors.html');
+include('global/question-font.html');
+
+include('global/description-colors.html');
+include('global/description-font.html');
+
+include self::get_template( $theme, 'radio-colors.html');
+include('global/radio-font.html');
+
+include self::get_template( $theme, 'input-colors.html');
+include('global/input-font.html');
+
+include('global/field-image-size.html');
+
+include self::get_template( $theme, 'submit-colors.html');
+include('global/submit-font.html');
+
+include self::get_template( $theme, 'back-colors.html');
+include('global/back-font.html');
+
+include('global/link-colors.html');
+include('global/link-font.html');
+
+include('global/note-colors.html');
+include('global/note-font.html');
+
+include self::get_template( $theme, 'response-colors.html');
+include('global/response-font.html');
+
+echo $properties['custom_css'];

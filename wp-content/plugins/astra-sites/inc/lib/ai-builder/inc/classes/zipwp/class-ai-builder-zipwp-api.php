@@ -413,12 +413,35 @@ class Ai_Builder_ZipWP_Api {
 						),
 						'page'          => array(
 							'type'     => 'integer',
-							'required' => true,
+							'required' => false,
 						),
 						'page_builder'  => array(
 							'type'              => 'string',
 							'sanitize_callback' => 'sanitize_text_field',
 							'required'          => false,
+						),
+						'keyword'       => array(
+							'type'              => 'string',
+							'required'          => false,
+							'sanitize_callback' => 'sanitize_text_field',
+						),
+						'sort'          => array(
+							'type'              => 'object',
+							'required'          => false,
+							'validate_callback' => static function ( $value ) {
+								if ( ! is_array( $value ) ) {
+									return new \WP_Error( 'invalid_sort', __( 'Invalid sort parameter.', 'astra-sites' ) );
+								}
+								$allowed_by    = array( 'newest', 'premium' );
+								$allowed_order = array( 'asc', 'desc' );
+								if ( isset( $value['by'] ) && ! in_array( $value['by'], $allowed_by, true ) ) {
+									return new \WP_Error( 'invalid_sort_by', __( 'Invalid sort.by value.', 'astra-sites' ) );
+								}
+								if ( isset( $value['order'] ) && ! in_array( $value['order'], $allowed_order, true ) ) {
+									return new \WP_Error( 'invalid_sort_order', __( 'Invalid sort.order value.', 'astra-sites' ) );
+								}
+								return true;
+							},
 						),
 					),
 				),
@@ -1603,8 +1626,14 @@ class Ai_Builder_ZipWP_Api {
 
 		$per_page = isset( $request['per_page'] ) ? intval( $request['per_page'] ) : 9;
 		$page     = isset( $request['page'] ) ? intval( $request['page'] ) : 1;
+		$keyword  = isset( $request['keyword'] ) ? sanitize_text_field( $request['keyword'] ) : '';
+		$sort     = isset( $request['sort'] ) ? $request['sort'] : null;
 
 		$api_endpoint = $this->get_api_domain() . '/sites/templates/all';
+
+		if ( ! empty( $keyword ) ) {
+			$api_endpoint .= '?query=' . rawurlencode( $keyword );
+		}
 
 		$post_data = array(
 			'business_name' => isset( $request['business_name'] ) ? sanitize_text_field( $request['business_name'] ) : '',
@@ -1613,6 +1642,13 @@ class Ai_Builder_ZipWP_Api {
 			'per_page'      => $per_page,
 			'page'          => $page,
 		);
+
+		if ( ! empty( $sort ) && ! empty( $sort['by'] ) ) {
+			$post_data['sort'] = array(
+				'by'    => sanitize_text_field( $sort['by'] ),
+				'order' => sanitize_text_field( $sort['order'] ?? 'desc' ),
+			);
+		}
 
 		$body = wp_json_encode( $post_data );
 

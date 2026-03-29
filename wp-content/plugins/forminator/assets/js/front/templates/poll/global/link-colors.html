@@ -1,0 +1,53 @@
+<?php if ( forminator_array_value_exists( $properties, 'poll-colors' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-link {
+		<?php if ( forminator_array_value_exists( $properties, 'color_link' ) ) { ?>
+			color: <?php echo $properties['color_link'] ?>;
+		<?php } else { ?>
+			color: #097BAA;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-link:visited {
+		<?php if ( forminator_array_value_exists( $properties, 'color_link' ) ) { ?>
+			color: <?php echo $properties['color_link'] ?>;
+		<?php } else { ?>
+			color: #097BAA;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-link:hover {
+		<?php if ( forminator_array_value_exists( $properties, 'color_link_hover' ) ) { ?>
+			color: <?php echo $properties['color_link_hover'] ?>;
+		<?php } else { ?>
+			color: #086A91;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-link:active {
+		<?php if ( forminator_array_value_exists( $properties, 'color_link_active' ) ) { ?>
+			color: <?php echo $properties['color_link_active'] ?>;
+		<?php } else { ?>
+			color: #086A91;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-link {
+		color: #097BAA;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-link:visited {
+		color: #097BAA;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-link:hover {
+		color: #086A91;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-link:active {
+		color: #086A91;
+	}
+
+<?php } ?>

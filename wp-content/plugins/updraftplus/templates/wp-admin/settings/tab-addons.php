@@ -1,5 +1,6 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 global $updraftplus, $updraftplus_checkout_embed;
@@ -60,7 +61,7 @@ if ($updraftplus_checkout_embed) {
 
 	<section class="premium-upgrade-purchase-success" <?php if (!$user_bought_udp) echo 'style="display: none;"';?>>
 		<h3><span class="dashicons dashicons-yes"></span><?php esc_html_e('You successfully purchased UpdraftPremium.', 'updraftplus');?></h3>
-		<p><a target="_blank" href="<?php echo esc_url(apply_filters('updraftplus_com_link', "https://updraftplus.com/support/installing-updraftplus-premium-your-add-on/"));?>"> <?php esc_html_e('Follow this link to the installation instructions (particularly step 1).', 'updraftplus');?></a></p>
+		<p><a target="_blank" href="<?php echo esc_url(apply_filters('updraftplus_com_link', "https://teamupdraft.com/documentation/updraftplus/getting-started/how-to-install-updraftplus-premium/"));?>"> <?php esc_html_e('Follow this link to the installation instructions (particularly step 1).', 'updraftplus');?></a></p>
 	</section>
 
 	<?php if (!$user_bought_udp) : ?>

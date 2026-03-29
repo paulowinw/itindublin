@@ -79,7 +79,13 @@ const Steps = () => {
 			document.body.classList.remove( STEPS[ previousIndex ].class );
 		}
 
-		document.body.classList.add( STEPS[ currentIndex ].class );
+		if (
+			currentIndex >= 0 &&
+			currentIndex < STEPS.length &&
+			STEPS[ currentIndex ]
+		) {
+			document.body.classList.add( STEPS[ currentIndex ].class );
+		}
 	} );
 
 	useEffect( () => {
@@ -239,7 +245,7 @@ const Steps = () => {
 	};
 
 	return (
-		<div className={ `st-step ${ current.class }` }>
+		<div className={ `st-step ${ current?.class ?? '' }` }>
 			{ ! [ getStepIndex( 'customizer' ) ].includes( currentIndex ) && (
 				<div className="step-header">
 					{ current.header ? (

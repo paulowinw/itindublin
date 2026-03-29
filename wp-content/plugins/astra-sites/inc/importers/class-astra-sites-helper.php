@@ -57,7 +57,7 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 		 * @param array  $meta        Attachment meta data.
 		 */
 		public function add_svg_image_support( $response, $attachment, $meta ) {
-			if ( ! function_exists( 'simplexml_load_file' ) ) {
+			if ( ! function_exists( 'simplexml_load_string' ) ) {
 				return $response;
 			}
 
@@ -95,7 +95,7 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 		 */
 		public static function get_svg_dimensions( $svg ) {
 
-			$svg = simplexml_load_file( $svg );
+			$svg = simplexml_load_string( file_get_contents( $svg ), 'SimpleXMLElement', LIBXML_NONET ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 			if ( false === $svg ) {
 				$width  = '0';

@@ -1,0 +1,162 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	/*
+	====================
+	MU Panel Color Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload {
+		cursor: pointer;
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-border-default' ) && !empty( $properties['basic-multiupload-panel-border-default'] ) ) { ?>
+			border-color: <?php echo $properties['basic-multiupload-panel-border-default'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-background-default' ) && !empty( $properties['basic-multiupload-panel-background-default'] ) ) { ?>
+			background-color: <?php echo $properties['basic-multiupload-panel-background-default'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-icon-default' ) && !empty( $properties['basic-multiupload-panel-icon-default'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-panel-icon-default'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-text-default' ) && !empty( $properties['basic-multiupload-panel-text-default'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-panel-text-default'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a:visited,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a:hover,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a:focus {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-link-default' ) && !empty( $properties['basic-multiupload-panel-link-default'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-panel-link-default'] ?>;
+		<?php } ?>
+	}
+
+	/* STATE: Hover */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload:hover {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-border-hover' ) && !empty( $properties['basic-multiupload-panel-border-hover'] ) ) { ?>
+			border-color: <?php echo $properties['basic-multiupload-panel-border-hover'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-background-hover' ) && !empty( $properties['basic-multiupload-panel-background-hover'] ) ) { ?>
+			background-color: <?php echo $properties['basic-multiupload-panel-background-hover'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-icon-hover' ) && !empty( $properties['basic-multiupload-panel-icon-hover'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-panel-icon-hover'] ?>;
+		<?php } ?>
+	}
+
+	/* STATE: Focus */
+
+	<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-focus-outline-color' ) && !empty( $properties['basic-multiupload-panel-focus-outline-color'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload:focus-within {
+			outline: 2px solid <?php echo $properties['basic-multiupload-panel-focus-outline-color'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-link-focus-outline-color' ) && !empty( $properties['basic-multiupload-panel-link-focus-outline-color'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a:focus {
+			outline: 2px solid <?php echo $properties['basic-multiupload-panel-link-focus-outline-color'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+	/* STATE: Drag Over */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload.forminator-dragover {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-border-drop' ) && !empty( $properties['basic-multiupload-panel-border-drop'] ) ) { ?>
+			border-color: <?php echo $properties['basic-multiupload-panel-border-drop'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-background-drop' ) && !empty( $properties['basic-multiupload-panel-background-drop'] ) ) { ?>
+			background-color: <?php echo $properties['basic-multiupload-panel-background-drop'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-icon-drop' ) && !empty( $properties['basic-multiupload-panel-icon-drop'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-panel-icon-drop'] ?>;
+		<?php } ?>
+	}
+
+	/* STATE: Error */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-has_error .forminator-multi-upload {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-border-error' ) && !empty( $properties['basic-multiupload-panel-border-error'] ) ) { ?>
+			border-color: <?php echo $properties['basic-multiupload-panel-border-error'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-background-error' ) && !empty( $properties['basic-multiupload-panel-background-error'] ) ) { ?>
+			background-color: <?php echo $properties['basic-multiupload-panel-background-error'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-panel-icon-error' ) && !empty( $properties['basic-multiupload-panel-icon-error'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-panel-icon-error'] ?>;
+		<?php } ?>
+	}
+
+	/*
+	====================
+	MU File Color Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--preview {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-file-preview-border-default' ) && !empty( $properties['basic-multiupload-file-preview-border-default'] ) ) { ?>
+			border-color: <?php echo $properties['basic-multiupload-file-preview-border-default'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-file-preview-background-default' ) && !empty( $properties['basic-multiupload-file-preview-background-default'] ) ) { ?>
+			background-color: <?php echo $properties['basic-multiupload-file-preview-background-default'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--preview [class*="forminator-icon-"] {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-file-preview-icon-default' ) && !empty( $properties['basic-multiupload-file-preview-icon-default'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-file-preview-icon-default'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--title {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-file-name-default' ) && !empty( $properties['basic-multiupload-file-name-default'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-file-name-default'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--size {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-file-size-default' ) && !empty( $properties['basic-multiupload-file-size-default'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-file-size-default'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--size [class*="forminator-icon-"] {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-file-loader-color' ) && !empty( $properties['basic-multiupload-file-loader-color'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-file-loader-color'] ?>;
+		<?php } ?>
+	}
+
+	/* Error */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file.forminator-has_error .forminator-uploaded-file--image,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file.forminator-has_error .forminator-uploaded-file--preview {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-file-preview-border-error' ) && !empty( $properties['basic-multiupload-file-preview-border-error'] ) ) { ?>
+			border-color: <?php echo $properties['basic-multiupload-file-preview-border-error'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-file-preview-background-error' ) && !empty( $properties['basic-multiupload-file-preview-background-error'] ) ) { ?>
+			background-color: <?php echo $properties['basic-multiupload-file-preview-background-error'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file.forminator-has_error .forminator-uploaded-file--preview [class*="forminator-icon-"] {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-file-preview-icon-error' ) && !empty( $properties['basic-multiupload-file-preview-icon-error'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-file-preview-icon-error'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file.forminator-has_error .forminator-uploaded-file--size [class*="forminator-icon-"] {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiupload-file-error-color' ) && !empty( $properties['basic-multiupload-file-error-color'] ) ) { ?>
+			color: <?php echo $properties['basic-multiupload-file-error-color'] ?>;
+		<?php } ?>
+	}
+
+<?php } ?>

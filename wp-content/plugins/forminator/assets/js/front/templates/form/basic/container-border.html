@@ -1,0 +1,17 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-border' ) ) { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?> {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-form-border-width' ) ) { ?>
+			border-width: <?php echo $properties['basic-form-border-width'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-form-border-style' ) ) { ?>
+			border-style: <?php echo $properties['basic-form-border-style'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-form-border-radius' ) ) { ?>
+			border-radius: <?php echo $properties['basic-form-border-radius'] ?>px;
+			-moz-border-radius: <?php echo $properties['basic-form-border-radius'] ?>px;
+			-webkit-border-radius: <?php echo $properties['basic-form-border-radius'] ?>px;
+		<?php } ?>
+	}
+
+<?php } ?>

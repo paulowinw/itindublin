@@ -1,0 +1,159 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-01-12T15:41:05+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: plugin-cross-sell-textdomain\n"
+
+#: assets/js/crosssellpage.js:619
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:346
+msgid "Explore our powerful WordPress plugins."
+msgstr ""
+
+#: assets/js/crosssellpage.js:626
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:352
+msgid "Smart, reliable, and completely free - what’s not to love?"
+msgstr ""
+
+#: assets/js/crosssellpage.js:740
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:417
+msgid "About WPMU DEV"
+msgstr ""
+
+#: assets/js/crosssellpage.js:747
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:419
+msgid "Made for web developers, by web developers"
+msgstr ""
+
+#: assets/js/crosssellpage.js:762
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:427
+msgid "Since 2006, our award-winning WordPress plugins, hosting, world beating support and site management tools have helped hundreds of thousands of web developers, freelancers and agencies run and grow their businesses. "
+msgstr ""
+
+#: assets/js/crosssellpage.js:774
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:436
+msgid "Learn more"
+msgstr ""
+
+#: assets/js/crosssellpage.js:789
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:443
+msgid "Everything Wordpress found in one place. "
+msgstr ""
+
+#: assets/js/crosssellpage.js:801
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:452
+msgid "WPMU DEV"
+msgstr ""
+
+#: assets/js/crosssellpage.js:926
+#: assets/js/crosssellpage.js:936
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:504
+#: assets/js/crosssellpage.js:516
+msgid "4.8/5"
+msgstr ""
+
+#: assets/js/crosssellpage.js:927
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:505
+msgid "3,026+"
+msgstr ""
+
+#: assets/js/crosssellpage.js:931
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:510
+msgid "4.9/5"
+msgstr ""
+
+#: assets/js/crosssellpage.js:932
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:511
+msgid "1,751"
+msgstr ""
+
+#: assets/js/crosssellpage.js:937
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:517
+msgid "700+"
+msgstr ""
+
+#: assets/js/crosssellpage.js:1139
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:622
+msgid "Did you know WPMU DEV Membership includes "
+msgstr ""
+
+#: assets/js/crosssellpage.js:1147
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:627
+msgid "ALL our Pro Plugins?"
+msgstr ""
+
+#: assets/js/crosssellpage.js:1154
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:632
+msgid "Join to unlock the full toolkit - hosting, reselling, and more."
+msgstr ""
+
+#: assets/js/crosssellpage.js:1168
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:645
+msgid "Get All Pro Plugins & More!"
+msgstr ""
+
+#: assets/js/crosssellpage.js:1825
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:1249
+msgid " plugin has been installed successfully!"
+msgstr ""
+
+#: assets/js/crosssellpage.js:1884
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:1297
+msgid " plugin has been activated successfully!"
+msgstr ""
+
+#: assets/js/crosssellpage.js:2095
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:1406
+msgid "Installing..."
+msgstr ""
+
+#: assets/js/crosssellpage.js:2095
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:1407
+msgid "Install"
+msgstr ""
+
+#: assets/js/crosssellpage.js:2106
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:1417
+msgid "Activating..."
+msgstr ""
+
+#: assets/js/crosssellpage.js:2106
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:1418
+msgid "Activate"
+msgstr ""
+
+#: assets/js/crosssellpage.js:2117
+#: assets/js/crosssellpage.min.js:1
+#: assets/js/crosssellpage.js:1426
+msgid "Active"
+msgstr ""

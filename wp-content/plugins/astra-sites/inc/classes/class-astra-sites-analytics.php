@@ -51,6 +51,14 @@ if ( ! class_exists( 'Astra_Sites_Analytics' ) ) {
 			add_action( 'wp_ajax_astra_sites_set_woopayments_analytics', array( $this, 'set_woopayments_analytics' ) );
 			add_filter( 'bsf_core_stats', array( $this, 'add_astra_sites_analytics_data' ), 10, 1 );
 			add_action( 'customize_save_after', array( $this, 'track_astra_customizer_update' ) );
+
+			// Track import events for events_record.
+			add_action( 'astra_sites_import_complete', array( $this, 'track_template_imported_event' ) );
+			add_action( 'ast_block_templates_after_block_import', array( $this, 'track_block_pattern_imported_event' ), 10, 2 );
+			add_action( 'ast_block_templates_after_kit_import', array( $this, 'track_kit_imported_event' ) );
+
+			// Track content edits for KPI records.
+			add_action( 'save_post', array( $this, 'track_content_edited' ), 10, 2 );
 		}
 
 		/**
@@ -100,6 +108,11 @@ if ( ! class_exists( 'Astra_Sites_Analytics' ) ) {
 		 * @return void
 		 */
 		public function maybe_update_finish_setup_banner_clicked() {
+			// Only allow administrators to update this setting.
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
 			// Bail early if the source is not dashboard-banner.
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not needed here.
 			if ( ! isset( $_GET['source'] ) || 'dashboard-banner' !== sanitize_text_field( $_GET['source'] ) ) {
@@ -150,6 +163,12 @@ if ( ! class_exists( 'Astra_Sites_Analytics' ) ) {
 		 * @return void
 		 */
 		public function set_woopayments_analytics() {
+			// Verify user has permission to modify settings.
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( array( 'message' => __( 'You do not have permission to perform this action.', 'astra-sites' ) ) );
+				exit;
+			}
+
 			// Verify nonce.
 			if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'woopayments_nonce' ) ) {
 				wp_send_json_error( array( 'message' => __( 'Invalid nonce', 'astra-sites' ) ) );
@@ -167,6 +186,131 @@ if ( ! class_exists( 'Astra_Sites_Analytics' ) ) {
 
 			wp_send_json_success( array( 'message' => 'WooPayments analytics updated!' ) );
 			exit;
+		}
+
+		/**
+		 * Track when a full template import completes.
+		 *
+		 * @param array $demo_data Demo data from the import.
+		 *
+		 * @since 4.4.51
+		 * @return void
+		 */
+		public function track_template_imported_event( $demo_data = array() ) {
+			$properties = array(
+				'template_id'  => ! empty( $demo_data['id'] ) ? $demo_data['id'] : '',
+				'template_url' => ! empty( $demo_data['astra-site-url'] ) ? $demo_data['astra-site-url'] : '',
+				'title'        => ! empty( $demo_data['title']['rendered'] ) ? sanitize_text_field( $demo_data['title']['rendered'] ) : '',
+				'site_type'    => ! empty( $demo_data['astra-site-type'] ) ? $demo_data['astra-site-type'] : '',
+			);
+
+			Astra_Sites_Analytics_Events::track(
+				'template_imported',
+				defined( 'ASTRA_SITES_VER' ) ? ASTRA_SITES_VER : 'unknown',
+				$properties
+			);
+
+			// Store timestamp for KPI records.
+			$this->store_kpi_timestamp( 'template' );
+		}
+
+		/**
+		 * Track when a block pattern is imported.
+		 *
+		 * @param int    $block_id The ID of the imported block.
+		 * @param string $type     The type of pattern (e.g., 'block', 'page').
+		 *
+		 * @since 4.4.51
+		 * @return void
+		 */
+		public function track_block_pattern_imported_event( $block_id, $type ) {
+			$properties = array(
+				'block_id' => $block_id,
+				'type'     => $type,
+			);
+
+			Astra_Sites_Analytics_Events::track(
+				'block_pattern_imported',
+				defined( 'ASTRA_SITES_VER' ) ? ASTRA_SITES_VER : 'unknown',
+				$properties
+			);
+
+			// Store timestamp for KPI records — $type is 'block' or 'page'.
+			$this->store_kpi_timestamp( $type );
+		}
+
+		/**
+		 * Track when a template kit is imported.
+		 *
+		 * @since 4.4.51
+		 * @return void
+		 */
+		public function track_kit_imported_event() {
+			Astra_Sites_Analytics_Events::track(
+				'kit_imported',
+				defined( 'ASTRA_SITES_VER' ) ? ASTRA_SITES_VER : 'unknown'
+			);
+
+			// Store timestamp for KPI records.
+			$this->store_kpi_timestamp( 'kit' );
+		}
+
+		/**
+		 * Store a timestamp for KPI tracking.
+		 *
+		 * @param string $type The type of import ('template', 'block', 'page', 'kit', 'content_edited').
+		 *
+		 * @since 4.4.51
+		 * @return void
+		 */
+		private function store_kpi_timestamp( $type ) {
+			$timestamps = Astra_Sites_Page::get_instance()->get_setting( '_import_timestamps', array() );
+			if ( ! is_array( $timestamps ) ) {
+				$timestamps = array();
+			}
+
+			$bucket_map = array(
+				'template'       => 'templates',
+				'kit'            => 'kits',
+				'content_edited' => 'content_edited',
+			);
+			$bucket     = isset( $bucket_map[ $type ] ) ? $bucket_map[ $type ] : 'block_patterns';
+
+			if ( ! isset( $timestamps[ $bucket ] ) || ! is_array( $timestamps[ $bucket ] ) ) {
+				$timestamps[ $bucket ] = array();
+			}
+
+			$timestamps[ $bucket ][] = time();
+			Astra_Sites_Page::get_instance()->update_settings( array( '_import_timestamps' => $timestamps ) );
+		}
+
+		/**
+		 * Track when a post, page, or CPT is added or edited.
+		 *
+		 * Stores a timestamp in the 'content_edited' bucket for KPI tracking.
+		 * Skips auto-saves, revisions, and non-public post types.
+		 *
+		 * @param int      $post_id The post ID.
+		 * @param \WP_Post $post    The post object.
+		 *
+		 * @since 4.4.51
+		 * @return void
+		 */
+		public function track_content_edited( $post_id, $post ) {
+			if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+				return;
+			}
+
+			if ( wp_is_post_revision( $post_id ) ) {
+				return;
+			}
+
+			$post_type_obj = get_post_type_object( $post->post_type );
+			if ( ! $post_type_obj || ! $post_type_obj->public ) {
+				return;
+			}
+
+			$this->store_kpi_timestamp( 'content_edited' );
 		}
 
 		/**
@@ -742,6 +886,98 @@ if ( ! class_exists( 'Astra_Sites_Analytics' ) ) {
 		}
 
 		/**
+		 * Add KPI tracking data for import events.
+		 *
+		 * Groups stored timestamps by date, counts per metric per day,
+		 * skips today's (incomplete) data, and cleans up sent timestamps.
+		 *
+		 * @param array $stats Reference to the astra sites stats data.
+		 * @since 4.4.51
+		 * @return void
+		 */
+		public static function add_kpi_tracking_data( &$stats ) {
+			$timestamps = Astra_Sites_Page::get_instance()->get_setting( '_import_timestamps', array() );
+			if ( empty( $timestamps ) || ! is_array( $timestamps ) ) {
+				return;
+			}
+
+			$kpi_data = array();
+
+			// Mapping: option key => KPI metric name.
+			$metric_map = array(
+				'templates'      => 'templates_imported',
+				'block_patterns' => 'block_patterns_imported',
+				'kits'           => 'kits_imported',
+				'content_edited' => 'post_content_edited',
+			);
+
+			$remaining_timestamps = array();
+
+			foreach ( $metric_map as $bucket => $metric_name ) {
+				if ( empty( $timestamps[ $bucket ] ) || ! is_array( $timestamps[ $bucket ] ) ) {
+					continue;
+				}
+
+				$result                          = self::process_kpi_bucket( $timestamps[ $bucket ], $metric_name, $kpi_data );
+				$kpi_data                        = $result['kpi_data'];
+				$remaining_timestamps[ $bucket ] = $result['remaining'];
+			}
+
+			// Only add to stats if we have data to report.
+			if ( ! empty( $kpi_data ) ) {
+				$stats['kpi_records'] = $kpi_data;
+			}
+
+			// Cleanup: keep only today's timestamps.
+			$remaining_timestamps = array_filter( $remaining_timestamps );
+			Astra_Sites_Page::get_instance()->update_settings( array( '_import_timestamps' => $remaining_timestamps ) );
+		}
+
+		/**
+		 * Process a single bucket of timestamps for KPI reporting.
+		 *
+		 * @param array  $bucket_timestamps Array of Unix timestamps.
+		 * @param string $metric_name       The KPI metric name.
+		 * @param array  $kpi_data          Existing KPI data to merge into.
+		 *
+		 * @since 4.4.51
+		 * @return array { kpi_data: array, remaining: array }
+		 */
+		private static function process_kpi_bucket( $bucket_timestamps, $metric_name, $kpi_data ) {
+			$today     = gmdate( 'Y-m-d' );
+			$remaining = array();
+
+			foreach ( $bucket_timestamps as $timestamp ) {
+				if ( ! is_numeric( $timestamp ) ) {
+					continue;
+				}
+
+				$date = gmdate( 'Y-m-d', (int) $timestamp );
+
+				// Keep today's timestamps — incomplete day, skip from reporting.
+				if ( $date === $today ) {
+					$remaining[] = $timestamp;
+					continue;
+				}
+
+				if ( ! isset( $kpi_data[ $date ] ) ) {
+					$kpi_data[ $date ] = array( 'numeric_values' => array() );
+				}
+
+				if ( ! isset( $kpi_data[ $date ]['numeric_values'][ $metric_name ] ) ) {
+					$kpi_data[ $date ]['numeric_values'][ $metric_name ] = 0;
+				}
+
+				$kpi_data[ $date ]['numeric_values'][ $metric_name ]++;
+			}
+
+			return array(
+				'kpi_data'  => $kpi_data,
+				'remaining' => $remaining,
+			);
+		}
+
+		/**
 		 * Add astra sites analytics data.
 		 *
 		 * @param array $stats stats array.
@@ -781,6 +1017,15 @@ if ( ! class_exists( 'Astra_Sites_Analytics' ) ) {
 				self::add_required_plugins_analytics( $stats['plugin_data']['astra_sites'] );
 				self::add_plugin_active_analytics( $stats['plugin_data']['astra_sites']['boolean_values'] );
 				self::add_finish_setup_analytics( $stats['plugin_data']['astra_sites'] );
+			}
+
+			// Add KPI tracking data.
+			self::add_kpi_tracking_data( $stats['plugin_data']['astra_sites'] );
+
+			// Flush pending events into payload (only if any exist).
+			$pending_events = Astra_Sites_Analytics_Events::flush_pending();
+			if ( ! empty( $pending_events ) ) {
+				$stats['plugin_data']['astra_sites']['events_record'] = $pending_events;
 			}
 
 			return $stats;

@@ -5,7 +5,7 @@ Tags: Elementor,Templates,Gutenberg,Block Editor,Astra Starter Sites
 Requires at least: 6.6
 Requires PHP: 7.4
 Tested up to: 6.9
-Stable tag: 4.4.50
+Stable tag: 4.4.52
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -245,6 +245,23 @@ You can report the issue through our [Bug Bounty Program](https://brainstormforc
 6. Use the power of AI with a single click to write copy, proofread, translate content into different languages. Adjust content length and tone seamlessly for maximum appeal.
 
 == Changelog ==
+v4.4.52 - 19-March-2026
+- Fix:
+    - Fixed import stalling when user skips third-party plugins on the Required Plugins Missing screen.
+    - Fixed Elementor Blocks category dropdown showing empty categories with no available blocks.
+- Security:
+    - Strengthen plugin security and harden against potential vulnerabilities.
+
+v4.4.51 - 05-March-2026
+- Improvement:
+    - Improved Plugin installation and error handling to reduce import failure rates.
+    - Added compatibility for Power Coupons plugin.
+    - AI Builder: Introduced filter option to templates listing to list premium, most used and newest templates.
+    - Design Kit: Added new extensibility filter hooks for post-import actions and customization.
+- Fix:
+    - Design Kit: Resolved issue with color palette when adaptive mode is turned off.
+    - Import blank screen issue during Child theme template exporter.
+
 v4.4.50 - 17-February-2026
 - Improvement:
     - Importer: Added compatibility for SureCart Product List and Buy Button blocks.

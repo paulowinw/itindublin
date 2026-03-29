@@ -1,6 +1,12 @@
+v.2.4.21 - 02-March-2026
+Improvement: Added `ast_block_templates_after_block_import` action hook fired after a block is imported.
+Improvement: Added `ast_block_templates_after_kit_import` action hook fired after a template kit is imported.
+Improvement: Added `ast_block_templates_remote_ajax_path` filter to allow customizing the remote API ajax endpoint path.
+Fix: Resolved issue with color palette when adaptive mode is turned off.
+
 v.2.4.20 - 03-February-2026
 New: Show Design Library patterns for newly created pages.
-Improvement: Improved ZipWP connection setup in new window to retain Design Library state and improve UX.
+Improvement: Improved ZipWP connection setup in the new window to retain Design Library state and improve UX.
 Improvement: Enabled Design library pattern import to inner containers and popup builder.
 
 v.2.4.19 - 10-January-2026
@@ -11,13 +17,13 @@ Improvement: Enhanced Design Library sync to ensure proper compatibility with Sp
 Fix: Resolved an issue where some Spectra v3 Premium patterns were not appearing in the Design Library.
 
 v.2.4.17 - 30-December-2025
-Improvement: Added Astra Color Palette reorganize compatibility.
+Improvement: Added Astra Color Palette reorganization compatibility.
 
 v.2.4.16 - 05-December-2025
-Improvement: Added automatic library sync when Spectra plugin is installed, updated, or deleted to ensure proper version switching between v2 and v3.
+Improvement: Added automatic library sync when the Spectra plugin is installed, updated, or deleted to ensure proper version switching between v2 and v3.
 
 v.2.4.15 - 03-November-2025
-Improvement: Streamlined Spectra version handling by unifying multiple version filters into a single state and refining the toggle UX for Pages tab.
+Improvement: Streamlined Spectra version handling by unifying multiple version filters into a single state and refining the toggle UX for the Pages tab.
 Improvement: Enhanced premium patterns import flow.
 Fix: Corrected hover height issue in Notice blocks.
 
@@ -33,7 +39,7 @@ Misc: Updated Spectra plugin version.
 v.2.4.11 - 28-October-2025
 New: Added compatibility for Spectra v3.
 New: Added SureForms compatibility for block patterns and pages.
-Improvement: Use only Unsplash image engine for Russian users as Pexels is blocked in Russia.
+Improvement: Use only Unsplash image engine for Russian users, as Pexels is blocked in Russia.
 
 v.2.4.10 - 21-August-2025
 New: Added compatibility with Spectra version 3.

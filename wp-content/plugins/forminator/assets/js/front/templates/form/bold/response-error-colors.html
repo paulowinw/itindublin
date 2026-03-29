@@ -1,0 +1,65 @@
+<?php if ( forminator_array_value_exists( $properties, 'cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error {
+		<?php if ( forminator_array_value_exists( $properties, 'response-error-background' ) && !empty( $properties['response-error-background'] ) ) { ?>
+			background-color: <?php echo $properties['response-error-background'] ?>;
+		<?php } else { ?>
+			background-color: #F9E4E8;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'response-error-border' ) && !empty( $properties['response-error-border'] ) ) { ?>
+			box-shadow: inset 4px 0 0 0 <?php echo $properties['response-error-border'] ?>;
+			-moz-box-shadow: inset 4px 0 0 0 <?php echo $properties['response-error-border'] ?>;
+			-webkit-box-shadow: inset 4px 0 0 0 <?php echo $properties['response-error-border'] ?>;
+		<?php } else { ?>
+			box-shadow: inset 4px 0 0 0 #E51919;
+			-moz-box-shadow: inset 4px 0 0 0 #E51919;
+			-webkit-box-shadow: inset 4px 0 0 0 #E51919;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error:hover,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error:active {
+		<?php if ( forminator_array_value_exists( $properties, 'response-error-border' ) && !empty( $properties['response-error-border'] ) ) { ?>
+			box-shadow: inset 4px 0 0 0 <?php echo $properties['response-error-border'] ?>;
+			-moz-box-shadow: inset 4px 0 0 0 <?php echo $properties['response-error-border'] ?>;
+			-webkit-box-shadow: inset 4px 0 0 0 <?php echo $properties['response-error-border'] ?>;
+		<?php } else { ?>
+			box-shadow: inset 4px 0 0 0 #E51919;
+			-moz-box-shadow: inset 4px 0 0 0 #E51919;
+			-webkit-box-shadow: inset 4px 0 0 0 #E51919;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error p {
+		<?php if ( forminator_array_value_exists( $properties, 'response-error-color' ) && !empty( $properties['response-error-color'] ) ) { ?>
+			color: <?php echo $properties['response-error-color'] ?>;
+		<?php } else { ?>
+			color: #333333;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error {
+		background-color: #F9E4E8;
+		box-shadow: inset 4px 0 0 0 #E51919;
+		-moz-box-shadow: inset 4px 0 0 0 #E51919;
+		-webkit-box-shadow: inset 4px 0 0 0 #E51919;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error:hover,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error:active {
+		box-shadow: inset 4px 0 0 0 #E51919;
+		-moz-box-shadow: inset 4px 0 0 0 #E51919;
+		-webkit-box-shadow: inset 4px 0 0 0 #E51919;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-response-message.forminator-error p {
+		color: #333333;
+	}
+
+<?php } ?>

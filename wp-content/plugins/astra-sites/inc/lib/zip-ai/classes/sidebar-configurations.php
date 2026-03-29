@@ -440,7 +440,7 @@ class Sidebar_Configurations {
 		}
 
 		// Get the ID based on the current URL - this will avoid incorrectly getting popups as the page.
-		$current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$current_url = esc_url_raw( home_url( isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '' ) );
 		$post_id     = url_to_postid( set_url_scheme( $current_url ) );
 		// If this is an editor page, this won't work - so if it doesn't, try getting the ID.
 		if ( empty( $post_id ) ) {

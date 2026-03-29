@@ -1,0 +1,116 @@
+<?php if ( forminator_array_value_exists( $properties, 'cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio {
+		<?php if ( forminator_array_value_exists( $properties, 'radio-label' ) && !empty( $properties['radio-label'] ) ) { ?>
+			color: <?php echo $properties['radio-label'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio .forminator-radio-bullet {
+		<?php if ( forminator_array_value_exists( $properties, 'radio-background-static' ) && !empty( $properties['radio-background-static'] ) ) { ?>
+			background-color: <?php echo $properties['radio-background-static'] ?>;
+		<?php } else { ?>
+			background-color: #EDEDED;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'radio-background-hover' ) && !empty( $properties['radio-background-hover'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio .forminator-radio-bullet:hover {
+			background-color: <?php echo $properties['radio-background-hover'] ?>;
+		}
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'radio-outline-focus' ) && !empty( $properties['radio-outline-focus'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio input:focus-visible + .forminator-radio-bullet {
+			outline: 2px solid <?php echo $properties['radio-outline-focus'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio .forminator-radio-image {
+		<?php if ( forminator_array_value_exists( $properties, 'radio-image-background' ) && !empty( $properties['radio-image-background'] ) ) { ?>
+			background-color: <?php echo $properties['radio-image-background'] ?>;
+		<?php } else { ?>
+			background-color: #EDEDED;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio .forminator-radio-bullet:before {
+		<?php if ( forminator_array_value_exists( $properties, 'radio-icon' ) && !empty( $properties['radio-icon'] ) ) { ?>
+			background-color: <?php echo $properties['radio-icon'] ?>;
+		<?php } else { ?>
+			background-color: #097BAA;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio input:checked + .forminator-radio-bullet {
+		<?php if ( forminator_array_value_exists( $properties, 'radio-background-active' ) && !empty( $properties['radio-background-active'] ) ) { ?>
+			background-color: <?php echo $properties['radio-background-active'] ?>;
+		<?php } else { ?>
+			background-color: #EDEDED;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio:hover .forminator-radio-image,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio input:checked ~ .forminator-radio-image {
+		<?php if ( forminator_array_value_exists( $properties, 'radio-image-background-active' ) && !empty( $properties['radio-image-background-active'] ) ) { ?>
+			background-color: <?php echo $properties['radio-image-background-active'] ?>;
+		<?php } else { ?>
+			background-color: #E1F6FF;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-has_error .forminator-radio span[aria-hidden] {
+		<?php if ( forminator_array_value_exists( $properties, 'radio-background-error' ) && !empty( $properties['radio-background-error'] ) ) { ?>
+			background-color: <?php echo $properties['radio-background-error'] ?>;
+		<?php } else { ?>
+			background-color: #F9E4E8;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	<?php if ( forminator_can_apply_default_color( $properties ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio {
+			color: #000000;
+		}
+	<?php } ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio .forminator-radio-bullet,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio .forminator-radio-image {
+		background-color: #EDEDED;
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'radio-background-hover' ) && !empty( $properties['radio-background-hover'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio .forminator-radio-bullet:hover {
+			background-color: #E1F6FF;
+		}
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'radio-outline-focus' ) && !empty( $properties['radio-outline-focus'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio input:focus-visible + .forminator-radio-bullet {
+			outline: 2px solid #254DEB;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio .forminator-radio-bullet:before {
+		background-color: #097BAA;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio input:checked + .forminator-radio-bullet {
+		background-color: #EDEDED;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio:hover .forminator-radio-image,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio input:checked ~ .forminator-radio-image {
+		background-color: #E1F6FF;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-has_error .forminator-radio span[aria-hidden] {
+		background-color: #F9E4E8;
+	}
+
+<?php } ?>

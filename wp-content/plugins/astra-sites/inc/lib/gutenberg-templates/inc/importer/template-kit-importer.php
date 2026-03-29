@@ -136,6 +136,15 @@ class Template_Kit_Importer {
 		// $content = str_replace( '&amp;', "\u0026amp;", $content );
 		$content = $this->get_content( $content );
 
+		/**
+		 * Fires after a template kit is successfully imported.
+		 *
+		 * @since 2.4.21
+		 *
+		 * @param string $content The imported content after processing (e.g., hotlink replacement).
+		 */
+		do_action( 'ast_block_templates_after_kit_import', $content );
+
 		// Update content.
 		wp_send_json_success( $content );
 	}

@@ -36,6 +36,7 @@ import toast from 'react-hot-toast';
 import Heading from '../components/heading';
 import { SelectTemplatePageBuilderDropdown } from '../components/page-builder-dropdown';
 import { debounce } from 'lodash';
+import SortByDropdown from '../components/sort-by-dropdown';
 export const USER_KEYWORD = 'st-template-search';
 export const getRandomUniqueId = () =>
 	Math.random().toString( 16 ).substring( 3 );
@@ -109,6 +110,11 @@ const SelectTemplate = () => {
 	const [ backToTop, setBackToTop ] = useState( false );
 	const [ selectedBuilder, setSelectedBuilder ] =
 		useState( defaultPageBuilder );
+
+	const [ sortBy, setSortBy ] = useState( 'most-used' );
+	const isDefaultSort = sortBy === 'most-used';
+	const buildSortPayload = () =>
+		isDefaultSort ? {} : { sort: { by: sortBy, order: 'desc' } };
 
 	useEffect( () => {
 		setSelectedPageBuilder(
@@ -297,19 +303,36 @@ const SelectTemplate = () => {
 			const abortController = new AbortController();
 			abortRequest.current.push( abortController );
 
-			// Send all keywords in a single request
-			const response = await apiFetch( {
-				path: 'zipwp/v1/templates',
-				method: 'POST',
-				data: {
-					keywords: finalKeywords, // Send array of keywords
-					business_name: businessName,
-					page_builder: _selectedBuilder,
-				},
-				signal: abortController.signal,
-			} );
-
-			let result = response?.data?.data || [];
+			// Use search endpoint for default sort, all-templates for active sort
+			let result = [];
+			if ( isDefaultSort ) {
+				const response = await apiFetch( {
+					path: 'zipwp/v1/templates',
+					method: 'POST',
+					data: {
+						keywords: finalKeywords,
+						business_name: businessName,
+						page_builder: _selectedBuilder,
+					},
+					signal: abortController.signal,
+				} );
+				result = response?.data?.data || [];
+			} else {
+				const response = await apiFetch( {
+					path: 'zipwp/v1/all-templates',
+					method: 'POST',
+					data: {
+						business_name: businessName,
+						page_builder: _selectedBuilder,
+						keyword,
+						per_page: 20,
+						page: 0,
+						...buildSortPayload(),
+					},
+					signal: abortController.signal,
+				} );
+				result = response?.data?.data?.result || [];
+			}
 
 			// Filter out Hidden templates based on the settings.
 			result = handleHiddenTemplates( result );
@@ -371,11 +394,11 @@ const SelectTemplate = () => {
 				};
 			} );
 
-			if ( allTemplatesList.length < 4 ) {
+			if ( isDefaultSort && allTemplatesList.length < 4 ) {
 				fetchAllTemplatesByPage( 1, {
 					searchResults: results,
 					templateList: allTemplatesList,
-					showLoadMoreTemplates: loadMoreTemplates.showLoadMore,
+					showLoadMoreTemplates,
 				} );
 			}
 		} catch ( error ) {
@@ -409,6 +432,10 @@ const SelectTemplate = () => {
 					page_builder: selectedBuilder,
 					per_page: 9,
 					page,
+					...( ! isDefaultSort && {
+						keyword: debouncedKeyword || getInitialUserKeyword(),
+					} ),
+					...buildSortPayload(),
 				},
 			} );
 
@@ -573,7 +600,7 @@ const SelectTemplate = () => {
 
 	useEffect( () => {
 		fetchNewTemplates( false );
-	}, [ debouncedKeyword ] );
+	}, [ debouncedKeyword, sortBy ] );
 
 	useEffect( () => {
 		// if there's a uuid in the query params, find the template
@@ -622,7 +649,19 @@ const SelectTemplate = () => {
 			! partialTemplates?.length &&
 			! genericTemplates?.length
 		) {
-			return null;
+			return (
+				<div className="col-span-full flex flex-col items-center justify-center py-16">
+					<div className="text-base font-semibold text-app-heading">
+						{ __( 'No templates found', 'ai-builder' ) }
+					</div>
+					<div className="text-sm mt-2 text-zip-body-text">
+						{ __(
+							'Try changing your search keyword or sort options.',
+							'ai-builder'
+						) }
+					</div>
+				</div>
+			);
 		}
 
 		const recommendedTemplateIdSet = new Set(
@@ -794,7 +833,7 @@ const SelectTemplate = () => {
 							);
 						} }
 					/>
-					<span className="hidden xs:block h-6 w-px bg-gray-900/10"></span>
+					<span className="hidden md:block h-6 w-px bg-gray-900/10"></span>
 					<Input
 						name="keyword"
 						inputClassName={ 'pr-11 pl-2 !text-base' }
@@ -822,6 +861,13 @@ const SelectTemplate = () => {
 					/>
 				</div>
 			</form>
+
+			<div className="flex justify-end px-5 md:px-10 lg:px-14 xl:px-15 mt-2">
+				<SortByDropdown
+					value={ sortBy }
+					onChange={ ( option ) => setSortBy( option.id ) }
+				/>
+			</div>
 
 			<div
 				ref={ templatesContainer }

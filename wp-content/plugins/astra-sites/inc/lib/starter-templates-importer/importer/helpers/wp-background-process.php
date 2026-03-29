@@ -300,7 +300,7 @@ if ( ! class_exists( 'WP_Background_Process' ) ) {
 
 			$batch       = new \stdClass();
 			$batch->key  = $query->$column;
-			$batch->data = maybe_unserialize( $query->$value_column );
+			$batch->data = \STImporter\Importer\ST_Importer_Helper::safe_unserialize( $query->$value_column );
 
 			return $batch;
 		}

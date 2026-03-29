@@ -1,6 +1,7 @@
 <?php
-
-if (!defined('UPDRAFTCENTRAL_CLIENT_DIR')) die('No access.');
+// phpcs:disable WordPress.WP.AlternativeFunctions.rename_rename -- rename() usage is intentional and safe within this context.
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 /**
  * - A container for all the RPC commands implemented. Commands map exactly onto method names (and hence this class should not implement anything else, beyond the constructor, and private methods)

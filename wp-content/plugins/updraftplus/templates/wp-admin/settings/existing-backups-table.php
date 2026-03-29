@@ -1,5 +1,6 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 $accept = apply_filters('updraftplus_accept_archivename', array());
@@ -12,7 +13,12 @@ $image_folder_url = UPDRAFTPLUS_URL.'/images/icons/';
 	<thead>
 		<tr style="margin-bottom: 4px;">
 			<?php if (!defined('UPDRAFTCENTRAL_COMMAND')) : ?>
-			<th class="check-column"><label class="screen-reader-text" for="cb-select-all"><?php esc_html_e('Select All'); ?></label><input id="cb-select-all" type="checkbox"></th>
+			<th class="check-column">
+				<label class="screen-reader-text" for="cb-select-all">
+					<?php esc_html_e('Select All'); // phpcs:ignore WordPress.WP.I18n.MissingArgDomain -- The string exists within the WordPress core. ?>
+				</label>
+				<input id="cb-select-all" type="checkbox">
+			</th>
 			<?php endif; ?>
 			<th class="backup-date"><?php esc_html_e('Backup date', 'updraftplus');?></th>
 			<th class="backup-data"><?php esc_html_e('Backup data (click to download)', 'updraftplus');?></th>
@@ -55,7 +61,10 @@ $image_folder_url = UPDRAFTPLUS_URL.'/images/icons/';
 			<tr class="updraft_existing_backups_row updraft_existing_backups_row_<?php echo esc_attr($key);?>" data-key="<?php echo esc_attr($key);?>" data-nonce="<?php echo esc_attr($nonce);?>">
 				<?php if (!defined('UPDRAFTCENTRAL_COMMAND')) : ?>
 				<td class="backup-select">
-					<label class="screen-reader-text"><?php esc_html_e('Select All'); ?></label><input type="checkbox">
+					<label class="screen-reader-text">
+						<?php esc_html_e('Select All'); // phpcs:ignore WordPress.WP.I18n.MissingArgDomain -- The string exists within the WordPress core. ?>
+					</label>
+					<input type="checkbox">
 				</td>
 				<?php endif; ?>
 				<td class="updraft_existingbackup_date " data-nonce="<?php echo esc_attr(wp_create_nonce("updraftplus-credentialtest-nonce")); ?>" data-timestamp="<?php echo esc_attr($key); ?>" data-label="<?php esc_attr_e('Backup date', 'updraftplus');?>">

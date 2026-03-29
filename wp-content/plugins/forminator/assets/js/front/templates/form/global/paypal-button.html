@@ -1,0 +1,56 @@
+<?php
+	$paypal_width = 'paypal-width';
+	$paypal_height = 'paypal-height';
+	$paypal_layout = 'paypal-layout';
+	$paypal_tagline = 'paypal-tagline';
+?>
+
+#forminator-module-<?php echo $properties['form_id'] ?> .forminator-pagination-footer .forminator-button-paypal {
+	<?php if ( forminator_array_value_exists( $properties, $paypal_width ) && '' !== $properties[$paypal_width] ) { ?>
+		flex: 0 1 <?php echo $properties[$paypal_width] ?>px;
+	<?php } else { ?>
+		flex: 1;
+	<?php } ?>
+}
+#forminator-module-<?php echo $properties['form_id'] ?> .forminator-button-paypal > .paypal-buttons {
+	<?php if ( forminator_array_value_exists( $properties, $paypal_width ) && '' !== $properties[$paypal_width] ) { ?>
+		max-width: <?php echo $properties[$paypal_width] ?>px !important;
+	<?php } ?>
+	<?php if ( ( forminator_array_value_exists( $properties, $paypal_layout ) && 'horizontal' === $properties[$paypal_layout] ) && ( forminator_array_value_exists( $properties, $paypal_tagline ) && 'true' === $properties[$paypal_tagline] ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, $paypal_width ) ) { ?>
+			<?php if ( $properties[$paypal_height] < '30' ) { ?>
+				<?php if ( $properties[$paypal_width] < '160' ) { ?>
+					height: <?php echo $properties[$paypal_height] ?>px !important;
+				<?php } ?>
+			<?php } else if ( $properties[$paypal_height] < '33' ) { ?>
+				<?php if ( $properties[$paypal_width] < '165' ) { ?>
+					height: <?php echo $properties[$paypal_height] ?>px !important;
+				<?php } ?>
+			<?php } else if ( $properties[$paypal_height] < '36' ) { ?>
+				<?php if ( $properties[$paypal_width] < '175' ) { ?>
+					height: <?php echo $properties[$paypal_height] ?>px !important;
+				<?php } ?>
+			<?php } else if ( $properties[$paypal_height] < '40' ) { ?>
+				<?php if ( $properties[$paypal_width] < '190' ) { ?>
+					height: <?php echo $properties[$paypal_height] ?>px !important;
+				<?php } ?>
+			<?php } else if ( $properties[$paypal_height] < '45' ) { ?>
+				<?php if ( $properties[$paypal_width] < '215' ) { ?>
+					height: <?php echo $properties[$paypal_height] ?>px !important;
+				<?php } ?>
+			<?php } else if ( $properties[$paypal_height] < '50' ) { ?>
+				<?php if ( $properties[$paypal_width] < '245' ) { ?>
+					height: <?php echo $properties[$paypal_height] ?>px !important;
+				<?php } ?>
+			<?php } else if ( $properties[$paypal_height] < '54' ) { ?>
+				<?php if ( $properties[$paypal_width] < '250' ) { ?>
+					height: <?php echo $properties[$paypal_height] ?>px !important;
+				<?php } ?>
+			<?php } else { ?>
+				<?php if ( $properties[$paypal_width] < '270' ) { ?>
+					height: <?php echo $properties[$paypal_height] ?>px !important;
+				<?php } ?>
+			<?php } ?>
+		<?php } ?>
+	<?php } ?>
+}

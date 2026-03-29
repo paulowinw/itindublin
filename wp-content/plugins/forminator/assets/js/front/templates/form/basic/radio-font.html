@@ -1,0 +1,19 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-radio-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-radio-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-radio-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-radio-font-family'] != 'custom' && !empty( $properties['basic-cform-radio-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-radio-font-family'] ?>;
+			<?php } else if ( $properties['basic-cform-radio-font-family'] == 'custom' && !empty( $properties['basic-cform-radio-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-radio-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-radio-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-radio-font-weight' ); ?>
+		<?php } ?>
+	}
+
+<?php } ?>

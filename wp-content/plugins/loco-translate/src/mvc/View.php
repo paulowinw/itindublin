@@ -34,7 +34,7 @@ class Loco_mvc_View implements IteratorAggregate {
      * Name of current output buffer
      * @var string
      */
-    private $block;
+    private $name;
 
 
     /**
@@ -66,7 +66,7 @@ class Loco_mvc_View implements IteratorAggregate {
      * Clean up if something abruptly stopped rendering before graceful end
      */
     public function __destruct(){
-        if( $this->block ){
+        if( $this->name ){
             ob_end_clean();
         }
     }
@@ -106,7 +106,7 @@ class Loco_mvc_View implements IteratorAggregate {
     private function start( string $name ):void {
         $this->stop();
         $this->scope[$name] = null;
-        $this->block = $name;
+        $this->name = $name;
     }
 
 
@@ -117,13 +117,26 @@ class Loco_mvc_View implements IteratorAggregate {
     private function stop(){
         $content = ob_get_contents();
         ob_clean();
-        if( $b = $this->block ){
+        if( $b = $this->name ){
             if( isset($this->scope[$b]) ){
                 $content = $this->scope[$b].$content;
             }
             $this->scope[$b] = new _LocoViewBuffer($content);
         }
-        $this->block = '_trash';
+        $this->name = '_trash';
+    }
+
+
+    /**
+     * Output a captured block buffer, as long as it's valid
+     */
+    private function block( string $name ):void {
+        if( $this->has($name) ){
+            $view = $this->get($name);
+            if( $view instanceof _LocoViewBuffer ){
+                echo $view->__toString();
+            }
+        }
     }
 
 
@@ -146,8 +159,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
 
     /**
-     * @param string $prop
-     * @return bool
+     * Test if a view argument exists
      */
     public function has( string $prop ):bool {
         return $this->scope->offsetExists($prop);
@@ -156,7 +168,6 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Get property after checking with self::has
-     * @param string $prop
      * @return mixed
      */
     public function get( string $prop ){
@@ -166,10 +177,6 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Set a view argument
-     * @param string $prop
-     * @param mixed $value
-     *
-     * @return Loco_mvc_View
      */
     public function set( string $prop, $value ):self {
         $this->scope[$prop] = $value;
@@ -177,6 +184,13 @@ class Loco_mvc_View implements IteratorAggregate {
     }
 
 
+    /**
+     * Remove a view argument
+     */
+    public function unset( string $prop ):void {
+        $this->scope->offsetUnset($prop);
+    }
+    
 
     /**
      * Main entry to rendering complete template
@@ -185,7 +199,7 @@ class Loco_mvc_View implements IteratorAggregate {
      * @param self|null $parent parent view rendering this view
      */
     public function render( string $tpl, ?array $args = null, ?Loco_mvc_View $parent = null ):string {
-        if( $this->block ){
+        if( $this->name ){
             return $this->fork()->render( $tpl, $args, $this );
         }
         $this->setTemplate($tpl);
@@ -213,7 +227,7 @@ class Loco_mvc_View implements IteratorAggregate {
         $this->start('_trash');
         $this->execTemplate( $this->template );
         $this->stop();
-        $this->block = null;
+        $this->name = null;
         // decorate via parent view if there is one
         if( $this->parent ){
             $this->parent->scope = clone $this->scope;
@@ -294,9 +308,9 @@ class Loco_mvc_View implements IteratorAggregate {
  */
 class _LocoViewBuffer {
     
-    private $s;
+    private string $s;
 
-    public function __construct( $s ){
+    public function __construct( string $s ){
         $this->s = $s;
     }
 

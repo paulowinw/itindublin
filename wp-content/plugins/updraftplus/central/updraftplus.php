@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 if (class_exists('UpdraftPlus_Host')) return;
 
 if (!defined('UPDRAFTCENTRAL_CLIENT_DIR')) define('UPDRAFTCENTRAL_CLIENT_DIR', dirname(__FILE__));

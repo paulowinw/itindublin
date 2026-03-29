@@ -1,0 +1,88 @@
+/* Social Sharing */
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-quiz--result .forminator-quiz--social {
+	border-top-color: rgba(0,0,0,0.12);
+}
+
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-quiz--result .forminator-quiz--social .forminator-social--text {
+	<?php if ( forminator_array_value_exists( $properties, 'knowledge-toggle-palette' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'knowledge-sshare-color' ) ) { ?>
+			color: <?php echo $properties['knowledge-sshare-color'] ?>;
+		<?php } else { ?>
+			color: #000000;
+		<?php } ?>
+	<?php } else { ?>
+		color: #000000;
+	<?php } ?>
+	<?php if ( forminator_array_value_exists( $properties, 'knowledge-toggle-typography' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'knowledge-sshare-font-size' ) ) { ?>
+			font-size: <?php echo $properties['knowledge-sshare-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 20px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'knowledge-sshare-font-family' ) ) { ?>
+			<?php if ( $properties['knowledge-sshare-font-family'] != 'custom' ) { ?>
+				font-family: <?php echo $properties['knowledge-sshare-font-family'] ?>;
+			<?php } else { ?>
+				<?php if ( ! empty( $properties['knowledge-sshare-custom-family'] ) ) { ?>
+					font-family: <?php echo $properties['knowledge-sshare-custom-family'] ?>;
+				<?php } ?>
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'knowledge-sshare-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'knowledge-sshare-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 400;
+		<?php } ?>
+	<?php } else { ?>
+		font-size: 20px;
+		font-weight: 400;
+	<?php } ?>
+}
+
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-quiz--result .forminator-quiz--social .forminator-social--icon {
+	<?php if ( forminator_array_value_exists( $properties, 'knowledge-toggle-typography' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'knowledge-social-size' ) ) { ?>
+			font-size: <?php echo $properties['knowledge-social-size'] ?>px;
+		<?php } else { ?>
+			font-size: 36px;
+		<?php } ?>
+	<?php } else { ?>
+		font-size: 36px;
+	<?php } ?>
+}
+
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-quiz--result .forminator-quiz--social .forminator-social--icon .forminator-icon-social-facebook {
+	<?php if ( forminator_array_value_exists( $properties, 'knowledge-toggle-palette' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'knowledge-social-facebook' ) ) { ?>
+			color: <?php echo $properties['knowledge-social-facebook'] ?> !important;
+		<?php } else { ?>
+			color: #0084BF !important;
+		<?php } ?>
+	<?php } else { ?>
+		color: #0084BF !important;
+	<?php } ?>
+}
+
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-quiz--result .forminator-quiz--social .forminator-social--icon .forminator-icon-social-twitter {
+	<?php if ( forminator_array_value_exists( $properties, 'knowledge-toggle-palette' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'knowledge-social-twitter' ) ) { ?>
+			color: <?php echo $properties['knowledge-social-twitter'] ?> !important;
+		<?php } else { ?>
+			color: #1DA1F2 !important;
+		<?php } ?>
+	<?php } else { ?>
+		color: #1DA1F2 !important;
+	<?php } ?>
+}
+
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-quiz--result .forminator-quiz--social .forminator-social--icon .forminator-icon-social-linkedin {
+	<?php if ( forminator_array_value_exists( $properties, 'knowledge-toggle-palette' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'knowledge-social-linkedin' ) ) { ?>
+			color: <?php echo $properties['knowledge-social-linkedin'] ?> !important;
+		<?php } else { ?>
+			color: #0084BF !important;
+		<?php } ?>
+	<?php } else { ?>
+		color: #0084BF !important;
+	<?php } ?>
+}

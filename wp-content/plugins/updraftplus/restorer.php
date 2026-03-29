@@ -1,5 +1,6 @@
 <?php
-
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose, PHPCompatibility.Classes.NewClasses.errorFound, PHPCompatibility.IniDirectives.RemovedIniDirectives.safe_modeDeprecatedRemoved, PHPCompatibility.Extensions.RemovedExtensions.mysql_DeprecatedRemoved, Generic.PHP.NoSilencedErrors.Discouraged -- using the native PHP fclose() function instead of the WP Filesystem API.
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 if (!class_exists('Updraft_Restorer_Skin')) updraft_try_include_file('includes/updraft-restorer-skin.php', 'require_once');
@@ -3848,7 +3849,7 @@ class Updraft_Restorer {
 			$req = mysqli_query($this->mysql_dbh, "UNLOCK TABLES;");// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable -- Function isnt being used yet
 		} else {
 			// @codingStandardsIgnoreLine
-			$req = mysql_unbuffered_query("UNLOCK TABLES;");
+			$req = mysql_unbuffered_query("UNLOCK TABLES;");// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable -- Function isnt being used yet
 		}
 	}
 
@@ -4293,7 +4294,7 @@ class Updraft_Restorer {
 						} else {
 							$updraftplus->log_e("Uploads path (%s) has changed during a migration - resetting (to: %s)", $new_upload_path, $this->prior_upload_path);
 						}
-						if (false === $wpdb->query($wpdb->prepare("UPDATE {$import_table_prefix}".$mprefix."options SET option_value='%s' WHERE option_name='upload_path' LIMIT 1", array($this->prior_upload_path)))) {
+						if (false === $wpdb->query($wpdb->prepare("UPDATE {$import_table_prefix}".$mprefix."options SET option_value=%s WHERE option_name='upload_path' LIMIT 1", array($this->prior_upload_path)))) {
 							$updraftplus->log(__('Error', 'updraftplus'), 'notice-restore');
 							$updraftplus->log("Error when changing upload path: ".$wpdb->last_error);
 							$updraftplus->log("Failed");
@@ -4369,7 +4370,7 @@ class Updraft_Restorer {
 						}
 					}
 					$crons = serialize($crons);
-					$wpdb->query($wpdb->prepare("UPDATE {$import_table_prefix}{$mprefix}options SET option_value='%s' WHERE option_name='cron'", $crons));
+					$wpdb->query($wpdb->prepare("UPDATE {$import_table_prefix}{$mprefix}options SET option_value=%s WHERE option_name='cron'", $crons));
 				}
 
 			}

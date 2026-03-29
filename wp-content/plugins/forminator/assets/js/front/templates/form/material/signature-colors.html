@@ -1,0 +1,112 @@
+<?php if ( forminator_array_value_exists( $properties, 'cform-color-settings' ) ) { ?>
+
+	/*
+	====================
+	Signature Colors
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-signature {
+		<?php if ( forminator_array_value_exists( $properties, 'signature-border-default' ) && !empty( $properties['signature-border-default'] ) ) { ?>
+			border-color: <?php echo $properties['signature-border-default'] ?>;
+		<?php } else { ?>
+			border-color: #777771;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-signature .forminator-signature--placeholder,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field-signature:not(.forminator-is_hover):not(.forminator-is_filled) .forminator-label {
+		<?php if ( forminator_array_value_exists( $properties, 'signature-placeholder' ) && !empty( $properties['signature-placeholder'] ) ) { ?>
+			color: <?php echo $properties['signature-placeholder'] ?>;
+		<?php } else { ?>
+			color: #888888;
+		<?php } ?>
+	}
+
+	/* STATE: Hover */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field-signature.forminator-is_hover .forminator-signature {
+		<?php if ( forminator_array_value_exists( $properties, 'signature-border-hover' ) && !empty( $properties['signature-border-hover'] ) ) { ?>
+			border-color: <?php echo $properties['signature-border-hover'] ?>;
+		<?php } else { ?>
+			border-color: #097BAA;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field-signature.forminator-is_hover .forminator-label {
+		<?php if ( forminator_array_value_exists( $properties, 'signature-border-hover' ) && !empty( $properties['signature-border-hover'] ) ) { ?>
+			color: <?php echo $properties['signature-border-hover'] ?>;
+		<?php } else { ?>
+			color: #097BAA;
+		<?php } ?>
+	}
+
+	/* STATE: Error */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field-signature.forminator-has_error .forminator-signature {
+		<?php if ( forminator_array_value_exists( $properties, 'signature-border-error' ) && !empty( $properties['signature-border-error'] ) ) { ?>
+			border-color: <?php echo $properties['signature-border-error'] ?>;
+			box-shadow: inset 0 0 0 1px <?php echo $properties['signature-border-error'] ?>;
+			-moz-box-shadow: inset 0 0 0 1px <?php echo $properties['signature-border-error'] ?>;
+			-webkit-box-shadow: inset 0 0 0 1px <?php echo $properties['signature-border-error'] ?>;
+		<?php } else { ?>
+			border-color: #E51919;
+			box-shadow: inset 0 0 0 1px #E51919;
+			-moz-box-shadow: inset 0 0 0 1px #E51919;
+			-webkit-box-shadow: inset 0 0 0 1px #E51919;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field-signature.forminator-has_error.forminator-is_hover .forminator-label {
+		<?php if ( forminator_array_value_exists( $properties, 'signature-border-error' ) && !empty( $properties['signature-border-error'] ) ) { ?>
+			color: <?php echo $properties['signature-border-error'] ?>;
+		<?php } else { ?>
+			color: #E51919;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	/*
+	====================
+	Signature Colors
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-signature {
+		border-color: #777771;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-signature .forminator-signature--placeholder,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field-signature:not(.forminator-is_hover):not(.forminator-is_filled) .forminator-label {
+		color: #888888;
+	}
+
+	/* STATE: Hover */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field-signature.forminator-is_hover .forminator-signature {
+		border-color: #097BAA;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field-signature.forminator-is_hover .forminator-label {
+		color: #097BAA;
+	}
+
+	/* STATE: Error */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field-signature.forminator-has_error .forminator-signature {
+		border-color: #E51919;
+		box-shadow: inset 0 0 0 1px #E51919;
+		-moz-box-shadow: inset 0 0 0 1px #E51919;
+		-webkit-box-shadow: inset 0 0 0 1px #E51919;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field-signature.forminator-has_error.forminator-is_hover .forminator-label {
+		color: #E51919;
+	}
+
+<?php } ?>

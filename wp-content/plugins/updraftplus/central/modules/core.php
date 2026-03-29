@@ -93,7 +93,7 @@ class UpdraftCentral_Core_Commands extends UpdraftCentral_Commands {
 	 */
 	public function handle_site_icon_upload($query) {
 		if (!current_user_can('upload_files')) {
-			return $this->_generic_error_response('insufficient_permission', array('error_message' => __('You do not have the necessary permissions to upload files.', 'updraftcentral')));
+			return $this->_generic_error_response('insufficient_permission', array('error_message' => __('You do not have the necessary permissions to upload files.', 'updraftplus')));
 		}
 
 		$data_uri = sanitize_text_field($query['data_uri']);
@@ -117,7 +117,7 @@ class UpdraftCentral_Core_Commands extends UpdraftCentral_Commands {
 			if (false !== $mime_type && !empty($matches[1]) && strtolower($mime_type) === strtolower($matches[1]) && !empty($file_ext) && in_array(strtolower($file_ext), $allowed_ext)) {
 				$upload = wp_upload_bits($filename, null, $decoded_data);
 			} else {
-				$upload = array('error' => __("Couldn't verify the actual MIME type of the given site icon image data.", 'updraftcentral'));
+				$upload = array('error' => __("Couldn't verify the actual MIME type of the given site icon image data.", 'updraftplus'));
 			}
 
 			if (!$upload['error']) {
@@ -163,13 +163,13 @@ class UpdraftCentral_Core_Commands extends UpdraftCentral_Commands {
 						return $this->get_site_icon();
 					}
 				} else {
-					return $this->_generic_error_response('upload_error', array('error_message' => __('Unable to set uploaded file as site icon.', 'updraftcentral')));
+					return $this->_generic_error_response('upload_error', array('error_message' => __('Unable to set uploaded file as site icon.', 'updraftplus')));
 				}
 			} else {
 				return $this->_generic_error_response('upload_error', array('error_message' => $upload['error']));
 			}
 		} else {
-			return $this->_generic_error_response('data_uri_field_empty_or_invalid', array('error_message' => __('Required data URI is either missing or invalid.', 'updraftcentral')));
+			return $this->_generic_error_response('data_uri_field_empty_or_invalid', array('error_message' => __('Required data URI is either missing or invalid.', 'updraftplus')));
 		}
 	}
 

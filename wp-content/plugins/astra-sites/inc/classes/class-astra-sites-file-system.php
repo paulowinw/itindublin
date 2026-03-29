@@ -71,6 +71,7 @@ if ( ! class_exists( 'Astra_Sites_File_System' ) ) {
 		 * @return void True on success, false on failure.
 		 */
 		public function delete_json_file( $file_name ) {
+			$file_name = wp_basename( $file_name );
 			$upload_dir = wp_upload_dir();
 			$file_name = $upload_dir['basedir'] . '/astra-sites/' . self::$folder_name . '/' . $file_name;
 			
@@ -90,6 +91,7 @@ if ( ! class_exists( 'Astra_Sites_File_System' ) ) {
 		 * @return mixed
 		 */
 		public function get_json_file_content( $file_name, $array_format = true ) {
+			$file_name = wp_basename( $file_name );
 			$upload_dir = wp_upload_dir();
 			$file_name = $upload_dir['basedir'] . '/astra-sites/' . self::$folder_name . '/' . $file_name;
 
@@ -160,6 +162,7 @@ if ( ! class_exists( 'Astra_Sites_File_System' ) ) {
 		 * @return void
 		 */
 		public function update_json_file( $file_name, $file_content ) {
+			$file_name = wp_basename( $file_name );
 			$upload_dir = wp_upload_dir();
 			$dir_info = array(
 				'path' => $upload_dir['basedir'] . '/astra-sites/' . self::$folder_name . '/',

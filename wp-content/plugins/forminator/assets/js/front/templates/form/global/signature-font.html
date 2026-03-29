@@ -1,0 +1,46 @@
+<?php if ( forminator_array_value_exists( $properties, 'form-font-family' ) ) { ?>
+
+	/*
+	====================
+	Signature Font Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-signature .forminator-signature--placeholder {
+		<?php if ( forminator_array_value_exists( $properties, 'cform-esign-placeholder-font-size' ) ) { ?>
+			font-size: <?php echo $properties['cform-esign-placeholder-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 16px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'cform-esign-placeholder-font-family' ) ) { ?>
+			<?php if ( $properties['cform-esign-placeholder-font-family'] != 'custom' && !empty( $properties['cform-esign-placeholder-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['cform-esign-placeholder-font-family'] ?>;
+			<?php } else if ( $properties['cform-esign-placeholder-font-family'] == 'custom' && !empty( $properties['cform-esign-placeholder-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['cform-esign-placeholder-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'cform-esign-placeholder-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'cform-esign-placeholder-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 400;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	/*
+	====================
+	Signature Font Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-signature .forminator-signature--placeholder {
+		font-size: 16px;
+		font-weight: 400;
+	}
+
+<?php } ?>

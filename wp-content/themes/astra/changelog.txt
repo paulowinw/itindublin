@@ -1,5 +1,26 @@
 *** Astra Changelog ***
 
+2026-03-24 - version 4.12.6
+* Improvement: Performance - Removed legacy browser polyfills, optimized asset loading, and reduced frontend payload for improved Core Web Vitals.
+* Improvement: Improved submenu toggle keyboard accessibility for better WCAG compliance.
+* Fix: Header height CSS rule conflicting with sticky header shrink effect when used with "Hide When Scrolling Down" option.
+* Fix: EDD Add to Cart button appearing twice on archive pages.
+
+2026-03-16 - version 4.12.5
+* Fix: LifterLMS course review submission not working due to nonce mismatch.
+* Security: Strengthen theme security and harden against potential vulnerabilities.
+
+2026-03-10 - version 4.12.4
+* New: Added a "Show Learn Tab" toggle in Dashboard Settings to allow users to show or hide the Learn tab from the Astra Dashboard navigation.
+* Improvement: Refined the WooCommerce section UI in the Astra Dashboard with improved layout, hero feature dividers, and better navigation visibility.
+* Improvement: Enhanced submenu accessibility by automatically closing the previous submenu when a new menu item receives focus, ensuring better keyboard navigation.
+* Improvement: Added the filter to allow disabling Astra meta settings on the Elementor editor.
+* Improvement: Ensured all SureCart dark mode styles correctly use the .astra-dark-mode-enable prefix when file generation is enabled.
+* Fix: Scoped WooCommerce quantity CSS to prevent conflicts with third-party number fields (e.g., Ninja Forms).
+* Fix: Resolved invalid meta key registration for excluded post types during REST API requests.
+* Fix: Resolved unwanted spacing in Off-Canvas Menu appearing in certain edge cases.
+* Security: Fixed Stored Cross-Site Scripting via post background meta fields. (Props - Wordfence)
+
 2026-02-06 - version 4.12.3
 * Fix: Resolved WP admin bar search icons styling issues.
 
@@ -13,7 +34,7 @@
 * Improvement: Removed extra padding applied to the WooCommerce Product Collection block.
 * Fix: Resolved the hover layout issue on the “Enroll in this Course” button.
 * Fix: Resolved a menu padding glitch when using the Cambria font via Custom Adobe Fonts.
-* Fix: Resolved an issue with Customizer Reset button display issue on RTL mode.
+* Fix: Resolved an issue with the Customizer Reset button display in RTL mode.
 
 2026-01-06 - version 4.12.0
 * New: Integrated Astra Customizer panels with the WordPress Command Palette, enabling instant access via the Cmd + K / Ctrl + K keyboard shortcut.

@@ -1,0 +1,35 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-upload {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-single-button-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-upload-single-button-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-single-button-font-family' ) ) { ?>
+			<?php if ( $properties['basic-upload-single-button-font-family'] != 'custom' && !empty( $properties['basic-upload-single-button-font-family'] ) ) { ?>
+				font-family: "<?php echo $properties['basic-upload-single-button-font-family'] ?>";
+			<?php } else if ( $properties['basic-upload-single-button-font-family'] == 'custom' && !empty( $properties['basic-upload-single-button-custom-family'] ) ) { ?>
+				font-family: "<?php echo $properties['basic-upload-single-button-custom-family'] ?>";
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-single-button-font-weight' ) ) { ?>
+			font-weight: <?php echo $properties['basic-upload-single-button-font-weight'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-file-upload > span {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-single-text-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-upload-single-text-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-single-text-font-family' ) ) { ?>
+			<?php if ( $properties['basic-upload-single-text-font-family'] != 'custom' && !empty( $properties['basic-upload-single-text-font-family'] ) ) { ?>
+				font-family: "<?php echo $properties['basic-upload-single-text-font-family'] ?>";
+			<?php } else if ( $properties['basic-upload-single-text-font-family'] == 'custom' && !empty( $properties['basic-upload-single-text-custom-family'] ) ) { ?>
+				font-family: "<?php echo $properties['basic-upload-single-text-custom-family'] ?>";
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-upload-single-text-font-weight' ) ) { ?>
+			font-weight: <?php echo $properties['basic-upload-single-text-font-weight'] ?>;
+		<?php } ?>
+	}
+
+<?php } ?>

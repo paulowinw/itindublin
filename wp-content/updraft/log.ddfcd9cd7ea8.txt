@@ -1,0 +1,479 @@
+0000.000 (0) Opened log file at time: Thu, 12 Mar 2026 01:56:37 +0000 on https://itindublin.com
+0000.003 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.26.2 WP: 6.9.4 PHP: 8.3.30 (litespeed, Linux br934.hostgator.com.br 4.19.286-203.ELK.el7.x86_64 #1 SMP Wed Jun 14 04:33:55 CDT 2023 x86_64) MySQL: 5.7.23-23 (max packet size=268435456) WPLANG: pt_BR Server: Apache safe_mode: 0 max_execution_time: 900 memory_limit: 512M (used: 11.7M | 14M) multisite: N openssl: OpenSSL 1.1.1w  11 Sep 2023 mcrypt: N LANG:  WP Proxy: disabled ZipArchive::addFile: Y
+0000.054 (0) Free space on disk containing Updraft's temporary directory: 221129.4 MB / Free disk space in account: 91937.1 MB (10.2 % used)
+0000.066 (0) Tasks: Backup files: 1 (schedule: daily) Backup DB: 1 (schedule: daily)
+0000.072 (0) Requesting semaphore lock (fd) (apparently not via scheduler)
+0000.074 (0) Set semaphore last lock (fd) time to 2026-03-12 01:56:37
+0000.075 (0) Semaphore lock (fd) complete
+0000.077 (0) Backup run: resumption=0, nonce=ddfcd9cd7ea8, file_nonce=ddfcd9cd7ea8 begun at=1773280597 (0s ago), job type=backup
+0000.079 (0) Scheduling a resumption (1) after 300 seconds (1773280897) in case this run gets aborted
+0000.114 (0) Checking if we have a zip executable available
+0000.114 (0) Testing: /usr/bin/zip
+0000.125 (0) Output: zip warning: binziptest/test.zip not found or empty
+0000.126 (0) Output: adding: binziptest/subdir1/	(in=0) (out=0) (stored 0%)
+0000.127 (0) Output: adding: binziptest/subdir1/subdir2/	(in=0) (out=0) (stored 0%)
+0000.127 (0) Output: adding: binziptest/subdir1/subdir2/test.html	(in=131) (out=107) (deflated 18%)
+0000.128 (0) Output: total bytes=131, compressed=107 -> 18% savings
+0000.134 (0) Output: adding: binziptest/subdir1/subdir2/test2.html	(in=138) (out=113) (deflated 18%)
+0000.136 (0) Output: total bytes=269, compressed=220 -> 18% savings
+0000.137 (0) Working binary zip found: /usr/bin/zip
+0000.138 (0) Zip engine: found/will use a binary zip: /usr/bin/zip
+0000.139 (0) Creation of backups of directories: beginning
+0000.141 (0) Beginning creation of dump of plugins (split every: 25 MB)
+0000.181 (0) Free disk space in account: 91937.1 MB (10.2 % used)
+0000.800 (0) Total entities for the zip file: 1703 directories, 9119 files (0 skipped as non-modified), 133.7 MB
+0000.803 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 100 files added (on-disk size: 0 KB)
+0000.806 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 200 files added (on-disk size: 0 KB)
+0000.808 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 300 files added (on-disk size: 0 KB)
+0000.811 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 400 files added (on-disk size: 0 KB)
+0000.813 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 500 files added (on-disk size: 0 KB)
+0000.815 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 600 files added (on-disk size: 0 KB)
+0000.818 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 700 files added (on-disk size: 0 KB)
+0000.820 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 800 files added (on-disk size: 0 KB)
+0000.822 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 900 files added (on-disk size: 0 KB)
+0000.831 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 1000 files added (on-disk size: 0 KB)
+0000.832 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (6.7 MB, 9119 files batched, 1001 (1001) added so far); re-opening (prior size: 0 KB)
+0001.571 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: size is now: 2.40 MB
+0001.574 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 1100 files added (on-disk size: 2501.2 KB)
+0001.579 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 1200 files added (on-disk size: 2501.2 KB)
+0001.583 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 1300 files added (on-disk size: 2501.2 KB)
+0001.587 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 1400 files added (on-disk size: 2501.2 KB)
+0001.591 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 1500 files added (on-disk size: 2501.2 KB)
+0001.594 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 1600 files added (on-disk size: 2501.2 KB)
+0001.600 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 1700 files added (on-disk size: 2501.2 KB)
+0001.603 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 1800 files added (on-disk size: 2501.2 KB)
+0001.606 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 1900 files added (on-disk size: 2501.2 KB)
+0001.610 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 2000 files added (on-disk size: 2501.2 KB)
+0001.611 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (5.6 MB, 9119 files batched, 1001 (2002) added so far); re-opening (prior size: 2501.2 KB)
+0002.099 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: size is now: 4.20 MB
+0002.103 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 2100 files added (on-disk size: 4265.2 KB)
+0002.106 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 2200 files added (on-disk size: 4265.2 KB)
+0002.108 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 2300 files added (on-disk size: 4265.2 KB)
+0002.111 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 2400 files added (on-disk size: 4265.2 KB)
+0002.115 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 2500 files added (on-disk size: 4265.2 KB)
+0002.119 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 2600 files added (on-disk size: 4265.2 KB)
+0002.122 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 2700 files added (on-disk size: 4265.2 KB)
+0002.125 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 2800 files added (on-disk size: 4265.2 KB)
+0002.128 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 2900 files added (on-disk size: 4265.2 KB)
+0002.132 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 3000 files added (on-disk size: 4265.2 KB)
+0002.133 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (13.7 MB, 9119 files batched, 1001 (3003) added so far); re-opening (prior size: 4265.2 KB)
+0003.003 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: size is now: 8.40 MB
+0003.007 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 3100 files added (on-disk size: 8569.7 KB)
+0003.010 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 3200 files added (on-disk size: 8569.7 KB)
+0003.012 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 3300 files added (on-disk size: 8569.7 KB)
+0003.015 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 3400 files added (on-disk size: 8569.7 KB)
+0003.017 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 3500 files added (on-disk size: 8569.7 KB)
+0003.020 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 3600 files added (on-disk size: 8569.7 KB)
+0003.022 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 3700 files added (on-disk size: 8569.7 KB)
+0003.025 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 3800 files added (on-disk size: 8569.7 KB)
+0003.028 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 3900 files added (on-disk size: 8569.7 KB)
+0003.030 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 4000 files added (on-disk size: 8569.7 KB)
+0003.030 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (22.5 MB, 9119 files batched, 1001 (4004) added so far); re-opening (prior size: 8569.7 KB)
+0004.181 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: size is now: 13.50 MB
+0004.186 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 4100 files added (on-disk size: 13785.3 KB)
+0004.189 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 4200 files added (on-disk size: 13785.3 KB)
+0004.192 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 4300 files added (on-disk size: 13785.3 KB)
+0004.195 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 4400 files added (on-disk size: 13785.3 KB)
+0004.197 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 4500 files added (on-disk size: 13785.3 KB)
+0004.200 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 4600 files added (on-disk size: 13785.3 KB)
+0004.203 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 4700 files added (on-disk size: 13785.3 KB)
+0004.206 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 4800 files added (on-disk size: 13785.3 KB)
+0004.208 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 4900 files added (on-disk size: 13785.3 KB)
+0004.214 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 5000 files added (on-disk size: 13785.3 KB)
+0004.216 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (13.9 MB, 9119 files batched, 1001 (5005) added so far); re-opening (prior size: 13785.3 KB)
+0005.290 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: size is now: 18.40 MB
+0005.300 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 5100 files added (on-disk size: 18884.2 KB)
+0005.305 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 5200 files added (on-disk size: 18884.2 KB)
+0005.315 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 5300 files added (on-disk size: 18884.2 KB)
+0005.317 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 5400 files added (on-disk size: 18884.2 KB)
+0005.328 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 5500 files added (on-disk size: 18884.2 KB)
+0005.335 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 5600 files added (on-disk size: 18884.2 KB)
+0005.339 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 5700 files added (on-disk size: 18884.2 KB)
+0005.346 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 5800 files added (on-disk size: 18884.2 KB)
+0005.350 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 5900 files added (on-disk size: 18884.2 KB)
+0005.354 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 6000 files added (on-disk size: 18884.2 KB)
+0005.357 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (9.9 MB, 9119 files batched, 1001 (6006) added so far); re-opening (prior size: 18884.2 KB)
+0006.170 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 6100 files added (on-disk size: 22516.8 KB)
+0006.173 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 6200 files added (on-disk size: 22516.8 KB)
+0006.179 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.tmp: 6300 files added (on-disk size: 22516.8 KB)
+0006.181 (0) Adding batch to zip file (UpdraftPlus_BinZip): possibly approaching split limit (9.9 MB, 309 (6315) files added so far); last ratio: 0.36; re-opening (prior size: 22516.8 KB)
+0006.989 (0) Zip size is at/near split limit (24.8 MB / 25 MB) - bumping index (from: 0)
+0007.555 (0) Creating zip file manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.list-temp.tmp)
+0007.583 (0) Successfully created zip file manifest (size: 623523)
+0007.587 (0) Created plugins zip (0) - 25364.2 KB in 6.8 s (3729.6 KB/s) (checksums: sha1: ce7437e149839b8c405edeee08e5e113c10a049a, sha256: 02cf6fa81acbbbda17cb556ad9a5156d21176e2d84a4ddefbb2e7b674b80441b)
+0007.598 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0007.598 (0) No remote despatch: user chose no remote backup service
+0007.599 (0) Recording as successfully uploaded: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip
+0007.600 (0) Deleting zip manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip.list.tmp)
+0007.601 (0) Prune old backups from local store: nothing to do, since the user disabled local deletion and we are using local backups
+0007.605 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 6400 files added (on-disk size: 0 KB)
+0007.608 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 6500 files added (on-disk size: 0 KB)
+0007.610 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 6600 files added (on-disk size: 0 KB)
+0007.613 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 6700 files added (on-disk size: 0 KB)
+0007.616 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 6800 files added (on-disk size: 0 KB)
+0007.619 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 6900 files added (on-disk size: 0 KB)
+0007.622 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 7000 files added (on-disk size: 0 KB)
+0007.624 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 7100 files added (on-disk size: 0 KB)
+0007.627 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 7200 files added (on-disk size: 0 KB)
+0007.630 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 7300 files added (on-disk size: 0 KB)
+0007.631 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (11.6 MB, 9119 files batched, 1001 (7316) added so far); re-opening (prior size: 0 KB)
+0008.691 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: size is now: 3.30 MB
+0008.696 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 7400 files added (on-disk size: 3406.7 KB)
+0008.699 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 7500 files added (on-disk size: 3406.7 KB)
+0008.703 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 7600 files added (on-disk size: 3406.7 KB)
+0008.706 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 7700 files added (on-disk size: 3406.7 KB)
+0008.709 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 7800 files added (on-disk size: 3406.7 KB)
+0008.712 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 7900 files added (on-disk size: 3406.7 KB)
+0008.715 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 8000 files added (on-disk size: 3406.7 KB)
+0008.718 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 8100 files added (on-disk size: 3406.7 KB)
+0008.722 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 8200 files added (on-disk size: 3406.7 KB)
+0008.725 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 8300 files added (on-disk size: 3406.7 KB)
+0008.726 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (17.6 MB, 9119 files batched, 1001 (8317) added so far); re-opening (prior size: 3406.7 KB)
+0010.107 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: size is now: 8.70 MB
+0010.111 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 8400 files added (on-disk size: 8911.5 KB)
+0010.114 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 8500 files added (on-disk size: 8911.5 KB)
+0010.117 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 8600 files added (on-disk size: 8911.5 KB)
+0010.119 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 8700 files added (on-disk size: 8911.5 KB)
+0010.125 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 8800 files added (on-disk size: 8911.5 KB)
+0010.128 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 8900 files added (on-disk size: 8911.5 KB)
+0010.131 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 9000 files added (on-disk size: 8911.5 KB)
+0010.134 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: 9100 files added (on-disk size: 8911.5 KB)
+0011.644 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.tmp: size is now: 16.40 MB
+0011.710 (0) Creating zip file manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.list-temp.tmp)
+0011.723 (0) Successfully created zip file manifest (size: 226164)
+0012.059 (0) Created plugins zip (1) - 16806 KB in 4.5 s (3758.8 KB/s) (sha1: 2d81075e745d1bf3b73ab6a35675847cebaf5d40, sha256: 9f98b3418b01619a65acd1a7b0ecac995bd4b5ecae483c0771023f3b357fdf27)
+0012.063 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0012.064 (0) No remote despatch: user chose no remote backup service
+0012.065 (0) Recording as successfully uploaded: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip
+0012.065 (0) Deleting zip manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip.list.tmp)
+0012.067 (0) Prune old backups from local store: nothing to do, since the user disabled local deletion and we are using local backups
+0012.069 (0) Beginning creation of dump of themes (split every: 25 MB)
+0012.115 (0) Free disk space in account: 91937.1 MB (10.2 % used)
+0012.290 (0) Total entities for the zip file: 356 directories, 971 files (0 skipped as non-modified), 32.6 MB
+0012.293 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: 100 files added (on-disk size: 0 KB)
+0012.296 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: 200 files added (on-disk size: 0 KB)
+0012.299 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: 300 files added (on-disk size: 0 KB)
+0012.302 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: 400 files added (on-disk size: 0 KB)
+0012.305 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: 500 files added (on-disk size: 0 KB)
+0012.309 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: 600 files added (on-disk size: 0 KB)
+0012.311 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: 700 files added (on-disk size: 0 KB)
+0012.315 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: 800 files added (on-disk size: 0 KB)
+0012.318 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 25 MB added on this batch (25 MB, 971 files batched, 811 (811) added so far); re-opening (prior size: 0 KB)
+0013.871 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: size is now: 8.70 MB
+0013.873 (0) A useful amount of data was added after this amount of zip processing: 2.7 s (normalised: 2.7 s, rate: 9318.1 KB/s)
+0013.875 (0) Performance is good - but we will not increase the amount of data we batch, as we are already at the present limit (time=2.7479250431061, normalised_time=2.7473550180838, max_time=13.874690055847, data points known=1, max_bytes=26214400)
+0013.878 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: 900 files added (on-disk size: 8905.2 KB)
+0014.330 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.tmp: size is now: 16.10 MB
+0014.351 (0) Creating zip file manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.list-temp.tmp)
+0014.361 (0) Successfully created zip file manifest (size: 79338)
+0014.587 (0) Created themes zip (0) - 16465 KB in 2.5 s (6670.2 KB/s) (sha1: 6c99b41979255f34995965a6cf9f9b1795a7e4b4, sha256: b3bdba149c9ba70b05a88fb5add92b13672d10e913af0edd6556b1e8e5be9b0e)
+0014.593 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0014.594 (0) No remote despatch: user chose no remote backup service
+0014.595 (0) Recording as successfully uploaded: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip
+0014.604 (0) Deleting zip manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip.list.tmp)
+0014.607 (0) Prune old backups from local store: nothing to do, since the user disabled local deletion and we are using local backups
+0014.612 (0) Exclusion option setting (uploads): 
+0014.613 (0) Looking for candidates to backup in: /home4/winwcomb/itindublin.com/wp-content/uploads
+0014.614 (0) finding files: really-simple-ssl: adding to list (1)
+0014.616 (0) finding files: 2026: adding to list (2)
+0014.617 (0) finding files: ast-block-templates-json: adding to list (3)
+0014.618 (0) finding files: astra-docs: adding to list (4)
+0014.619 (0) finding files: wpcf7_uploads: adding to list (5)
+0014.620 (0) finding files: forminator: adding to list (6)
+0014.621 (0) finding files: 2018: adding to list (7)
+0014.621 (0) finding files: astra-sites: adding to list (8)
+0014.623 (0) finding files: 2022: adding to list (9)
+0014.624 (0) finding files: wpforms: adding to list (10)
+0014.624 (0) finding files: ultimatemember: adding to list (11)
+0014.625 (0) finding files: 2020: adding to list (12)
+0014.626 (0) finding files: 2024: adding to list (13)
+0014.628 (0) finding files: ai-builder: adding to list (14)
+0014.629 (0) finding files: uag-plugin: adding to list (15)
+0014.629 (0) finding files: 2021: adding to list (16)
+0014.630 (0) finding files: presto-player-private: adding to list (17)
+0014.631 (0) finding files: .htaccess: adding to list (18)
+0014.632 (0) Beginning creation of dump of uploads (split every: 25 MB)
+0014.686 (0) Free disk space in account: 91937.1 MB (10.2 % used)
+0014.739 (0) Total entities for the zip file: 43 directories, 533 files (0 skipped as non-modified), 62.4 MB
+0014.742 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads.zip.tmp: 100 files added (on-disk size: 0 KB)
+0014.744 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 25 MB added on this batch (25 MB, 533 files batched, 145 (145) added so far); re-opening (prior size: 0 KB)
+0015.281 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads.zip.tmp: size is now: 9.00 MB
+0015.283 (0) A useful amount of data was added after this amount of zip processing: 1.2 s (normalised: 1.2 s, rate: 22156.8 KB/s)
+0015.284 (0) Performance is good - but we will not increase the amount of data we batch, as we are already at the present limit (time=1.1576359272003, normalised_time=1.1554003537467, max_time=15.283685922623, data points known=1, max_bytes=26214400)
+0015.287 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads.zip.tmp: 200 files added (on-disk size: 9235.8 KB)
+0015.289 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads.zip.tmp: 300 files added (on-disk size: 9235.8 KB)
+0015.292 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 25 MB added on this batch (25.2 MB, 533 files batched, 250 (395) added so far); re-opening (prior size: 9235.8 KB)
+0015.897 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads.zip.tmp: size is now: 24.90 MB
+0015.900 (0) A useful amount of data was added after this amount of zip processing: 0.8 s (normalised: 0.8 s, rate: 33289.1 KB/s)
+0015.906 (0) Performance is good - but we will not increase the amount of data we batch, as we are already at the present limit (time=0.77482795715332, normalised_time=0.76902128088774, max_time=15.905571937561, data points known=1, max_bytes=26214400)
+0015.911 (0) Adding batch to zip file (UpdraftPlus_BinZip): possibly approaching split limit (1.2 MB, 3 (398) files added so far); last ratio: 0.6292; re-opening (prior size: 25465.8 KB)
+0015.971 (0) Zip size is at/near split limit (26.1 MB / 25 MB) - bumping index (from: 0)
+0016.399 (0) Creating zip file manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads.zip.list-temp.tmp)
+0016.402 (0) Successfully created zip file manifest (size: 23449)
+0016.403 (0) Created uploads zip (0) - 26686.6 KB in 1.3 s (20779.3 KB/s) (checksums: sha1: 98ba8e25e67837c5587487d9c0502bf0efade248, sha256: 11e55a672fe52170a6d1b13a167af6a3d193eb062054dbf532e2e524c3005985)
+0016.408 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0016.409 (0) No remote despatch: user chose no remote backup service
+0016.409 (0) Recording as successfully uploaded: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads.zip
+0016.411 (0) Deleting zip manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads.zip.list.tmp)
+0016.412 (0) Prune old backups from local store: nothing to do, since the user disabled local deletion and we are using local backups
+0016.413 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads2.zip.tmp: 400 files added (on-disk size: 0 KB)
+0016.416 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads2.zip.tmp: 500 files added (on-disk size: 0 KB)
+0016.660 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads2.zip.tmp: size is now: 9.80 MB
+0016.665 (0) Creating zip file manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads2.zip.list-temp.tmp)
+0016.667 (0) Successfully created zip file manifest (size: 7735)
+0016.871 (0) Created uploads zip (1) - 10003.1 KB in 0.5 s (21460.2 KB/s) (sha1: f8ff35db3c1d068605b78ebb08c35c31da8ba39e, sha256: 5f3668244d0d50d990237ed055cec6475322ebf4c6795683f0ede7d3e5de2d7e)
+0016.875 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0016.875 (0) No remote despatch: user chose no remote backup service
+0016.876 (0) Recording as successfully uploaded: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads2.zip
+0016.877 (0) Deleting zip manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads2.zip.list.tmp)
+0016.878 (0) Prune old backups from local store: nothing to do, since the user disabled local deletion and we are using local backups
+0016.881 (0) Beginning creation of dump of mu-plugins (split every: 25 MB)
+0016.931 (0) Free disk space in account: 91937.1 MB (10.2 % used)
+0016.933 (0) Total entities for the zip file: 1 directories, 1 files (0 skipped as non-modified), 0.1 MB
+0016.945 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-mu-plugins.zip.tmp: size is now: 0.00 MB
+0016.948 (0) Creating zip file manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-mu-plugins.zip.list-temp.tmp)
+0016.948 (0) Successfully created zip file manifest (size: 73)
+0016.953 (0) Created mu-plugins zip (0) - 15.9 KB in 0 s (786.2 KB/s) (sha1: 09fc5cdf85c16cb07b5e8adcb7eba5953ad187d6, sha256: f833d0c40d92de659710232920ec8886ed75c46f67be78b965edaccdaeba56e4)
+0016.956 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0016.956 (0) No remote despatch: user chose no remote backup service
+0016.957 (0) Recording as successfully uploaded: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-mu-plugins.zip
+0016.958 (0) Deleting zip manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-mu-plugins.zip.list.tmp)
+0016.959 (0) Prune old backups from local store: nothing to do, since the user disabled local deletion and we are using local backups
+0016.962 (0) Beginning backup of other directories found in the content directory (index: 0)
+0016.963 (0) Exclusion option setting (others): 
+0016.964 (0) Looking for candidates to backup in: /home4/winwcomb/itindublin.com/wp-content
+0016.964 (0) finding files: uploads: skipping: this is the uploads directory
+0016.965 (0) finding files: mu-plugins: skipping: this is the mu-plugins directory
+0016.965 (0) finding files: themes: skipping: this is the themes directory
+0016.966 (0) finding files: updraft: skipping: this is the updraft directory
+0016.966 (0) finding files: index.php: adding to list (1)
+0016.967 (0) finding files: advanced-headers.php: adding to list (2)
+0016.967 (0) finding files: upgrade: adding to list (3)
+0016.968 (0) finding files: upgrade-temp-backup: adding to list (4)
+0016.968 (0) finding files: plugins: skipping: this is the plugins directory
+0016.969 (0) finding files: languages: adding to list (5)
+0017.025 (0) Free disk space in account: 91937.1 MB (10.2 % used)
+0017.036 (0) Total entities for the zip file: 7 directories, 311 files (0 skipped as non-modified), 17.5 MB
+0017.039 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-others.zip.tmp: 100 files added (on-disk size: 0 KB)
+0017.042 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-others.zip.tmp: 200 files added (on-disk size: 0 KB)
+0017.045 (0) Zip: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-others.zip.tmp: 300 files added (on-disk size: 0 KB)
+0018.426 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-others.zip.tmp: size is now: 5.00 MB
+0018.432 (0) Creating zip file manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-others.zip.list-temp.tmp)
+0018.435 (0) Successfully created zip file manifest (size: 20674)
+0018.522 (0) Created others zip (0) - 5083.6 KB in 1.5 s (3407.9 KB/s) (sha1: de7a60e44dd6b2f55ac733218cf4dd13072d38ac, sha256: ef453f4a6146d0b11a817cb89631419bdbec20c8f471f003946269ef21673be8)
+0018.527 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0018.527 (0) No remote despatch: user chose no remote backup service
+0018.529 (0) Recording as successfully uploaded: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-others.zip
+0018.530 (0) Deleting zip manifest (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-others.zip.list.tmp)
+0018.531 (0) Prune old backups from local store: nothing to do, since the user disabled local deletion and we are using local backups
+0018.540 (0) Saving backup status to database (elements: 12)
+0018.545 (0) Beginning creation of database dump (WordPress DB)
+0018.546 (0) SQL compatibility mode is: NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+0018.549 (0) Testing potential mysqldump binary: /usr/bin/mysqldump
+0018.579 (0) Output: /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n/*!40103 SET TIME_ZONE='+00:00' */;\n/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;\n/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;\n/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\n/*!50717 SELECT COUNT(*) INTO @rocksdb_has_p_s_session_variables FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'performance_schema' AND TABL (truncated - 2575 bytes total)
+0018.580 (0) Working binary mysqldump found: /usr/bin/mysqldump
+0018.640 (0) Table wp_options: Total expected rows (via COUNT): 630
+0018.745 (0) Table wp_options: Rows added in this batch (next record: 60923): 626 (uncompressed bytes in this segment=2517759) in 0.12 seconds
+0018.754 (0) Table wp_options: finishing file(s) (2, 331 KB)
+0018.763 (0) Table wp_users: Total expected rows (via COUNT): 9
+0018.764 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0018.766 (0) Table wp_users: Rows added in this batch (next record: 10): 9 (uncompressed bytes in this segment=2947) in 0.00 seconds
+0018.770 (0) Table wp_users: finishing file(s) (2, 1.4 KB)
+0018.776 (0) Table wp_usermeta: Total expected rows (via COUNT): 242
+0018.777 (0) Table is relatively small; fetch_rows will thus be: 250 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0018.781 (0) Table wp_usermeta: Rows added in this batch (next record: 283): 242 (uncompressed bytes in this segment=23359) in 0.01 seconds
+0018.787 (0) Table wp_usermeta: finishing file(s) (2, 5.7 KB)
+0018.797 (0) Table wp_actionscheduler_actions: Total expected rows (via COUNT): 186
+0018.798 (0) Table is relatively small; fetch_rows will thus be: 250 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0018.804 (0) Table wp_actionscheduler_actions: Rows added in this batch (next record: 2130): 186 (uncompressed bytes in this segment=90704) in 0.01 seconds
+0018.811 (0) Table wp_actionscheduler_actions: finishing file(s) (2, 6.2 KB)
+0018.814 (0) Table wp_actionscheduler_claims: Total expected rows (via COUNT): 0
+0018.816 (0) Table wp_actionscheduler_claims: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=625) in 0.00 seconds
+0018.820 (0) Table wp_actionscheduler_claims: finishing file(s) (2, 0.4 KB)
+0018.824 (0) Table wp_actionscheduler_groups: Total expected rows (via COUNT): 5
+0018.825 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0018.827 (0) Table wp_actionscheduler_groups: Rows added in this batch (next record: 5): 5 (uncompressed bytes in this segment=776) in 0.00 seconds
+0018.831 (0) Table wp_actionscheduler_groups: finishing file(s) (2, 0.4 KB)
+0018.835 (0) Table wp_actionscheduler_logs: Total expected rows (approximate): 1008
+0018.853 (0) Table wp_actionscheduler_logs: Rows added in this batch (next record: 3096): 1074 (uncompressed bytes in this segment=98850) in 0.02 seconds
+0018.858 (0) Table wp_actionscheduler_logs: finishing file(s) (2, 10.1 KB)
+0018.865 (0) Table wp_commentmeta: Total expected rows (via COUNT): 2
+0018.866 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0018.868 (0) Table wp_commentmeta: Rows added in this batch (next record: 2): 2 (uncompressed bytes in this segment=823) in 0.01 seconds
+0018.873 (0) Table wp_commentmeta: finishing file(s) (2, 0.5 KB)
+0018.878 (0) Table wp_comments: Total expected rows (via COUNT): 3
+0018.878 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0018.880 (0) Table wp_comments: Rows added in this batch (next record: 3): 3 (uncompressed bytes in this segment=3337) in 0.00 seconds
+0018.885 (0) Table wp_comments: finishing file(s) (2, 1.2 KB)
+0018.891 (0) Table wp_links: Total expected rows (via COUNT): 0
+0018.893 (0) Table wp_links: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1310) in 0.00 seconds
+0018.896 (0) Table wp_links: finishing file(s) (2, 0.5 KB)
+0018.915 (0) Table wp_postmeta: Total expected rows (approximate): 2040
+0018.961 (0) Table wp_postmeta: Rows added in this batch (next record: 113276): 2139 (uncompressed bytes in this segment=1083241) in 0.06 seconds
+0018.965 (0) Table wp_postmeta: finishing file(s) (2, 102.6 KB)
+0019.072 (0) Table wp_posts: Total expected rows (via COUNT): 364
+0019.078 (0) Table is relatively small; fetch_rows will thus be: 500 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.190 (0) Table wp_posts: Rows added in this batch (next record: 1431): 364 (uncompressed bytes in this segment=3244997) in 0.22 seconds
+0019.195 (0) Table wp_posts: finishing file(s) (2, 279 KB)
+0019.201 (0) Table wp_snippets: Total expected rows (via COUNT): 6
+0019.201 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.203 (0) Table wp_snippets: Rows added in this batch (next record: 6): 6 (uncompressed bytes in this segment=6636) in 0.01 seconds
+0019.208 (0) Table wp_snippets: finishing file(s) (2, 2.5 KB)
+0019.212 (0) Table wp_term_relationships: Total expected rows (approximate): 153
+0019.214 (0) Table wp_term_relationships: Rows added in this batch (next record: 100000): 160 (uncompressed bytes in this segment=3104) in 0.00 seconds
+0019.218 (0) Table wp_term_relationships: finishing file(s) (2, 0.9 KB)
+0019.223 (0) Table wp_term_taxonomy: Total expected rows (via COUNT): 52
+0019.235 (0) Table is relatively small; fetch_rows will thus be: 100 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.238 (0) Table wp_term_taxonomy: Rows added in this batch (next record: 57): 52 (uncompressed bytes in this segment=3512) in 0.02 seconds
+0019.243 (0) Table wp_term_taxonomy: finishing file(s) (2, 1 KB)
+0019.250 (0) Table wp_termmeta: Total expected rows (via COUNT): 1
+0019.251 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.254 (0) Table wp_termmeta: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=752) in 0.01 seconds
+0019.261 (0) Table wp_termmeta: finishing file(s) (2, 0.4 KB)
+0019.272 (0) Table wp_terms: Total expected rows (via COUNT): 52
+0019.275 (0) Table is relatively small; fetch_rows will thus be: 100 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.278 (0) Table wp_terms: Rows added in this batch (next record: 57): 52 (uncompressed bytes in this segment=3001) in 0.01 seconds
+0019.281 (0) Table wp_terms: finishing file(s) (2, 1 KB)
+0019.287 (0) Table wp_e_events: Total expected rows (via COUNT): 0
+0019.290 (0) Table wp_e_events: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=529) in 0.01 seconds
+0019.294 (0) Table wp_e_events: finishing file(s) (2, 0.4 KB)
+0019.304 (0) Table wp_frmt_form_entry: Total expected rows (via COUNT): 13
+0019.305 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.307 (0) Table wp_frmt_form_entry: Rows added in this batch (next record: 13): 13 (uncompressed bytes in this segment=2018) in 0.01 seconds
+0019.311 (0) Table wp_frmt_form_entry: finishing file(s) (2, 0.7 KB)
+0019.322 (0) Table wp_frmt_form_entry_meta: Total expected rows (via COUNT): 85
+0019.323 (0) Table is relatively small; fetch_rows will thus be: 100 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.326 (0) Table wp_frmt_form_entry_meta: Rows added in this batch (next record: 85): 85 (uncompressed bytes in this segment=10609) in 0.01 seconds
+0019.331 (0) Table wp_frmt_form_entry_meta: finishing file(s) (2, 2.4 KB)
+0019.336 (0) Table wp_frmt_form_reports: Total expected rows (via COUNT): 1
+0019.336 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.339 (0) Table wp_frmt_form_reports: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=1430) in 0.00 seconds
+0019.343 (0) Table wp_frmt_form_reports: finishing file(s) (2, 0.8 KB)
+0019.350 (0) Table wp_frmt_form_views: Total expected rows (via COUNT): 3
+0019.351 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.353 (0) Table wp_frmt_form_views: Rows added in this batch (next record: 3): 3 (uncompressed bytes in this segment=1226) in 0.01 seconds
+0019.359 (0) Table wp_frmt_form_views: finishing file(s) (2, 0.6 KB)
+0019.367 (0) Table wp_presto_player_audio_presets: Total expected rows (via COUNT): 4
+0019.368 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.372 (0) Table wp_presto_player_audio_presets: Rows added in this batch (next record: 4): 4 (uncompressed bytes in this segment=3322) in 0.01 seconds
+0019.382 (0) Table wp_presto_player_audio_presets: finishing file(s) (2, 0.9 KB)
+0019.388 (0) Table wp_presto_player_email_collection: Total expected rows (via COUNT): 0
+0019.390 (0) Table wp_presto_player_email_collection: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1511) in 0.00 seconds
+0019.393 (0) Table wp_presto_player_email_collection: finishing file(s) (2, 0.5 KB)
+0019.399 (0) Table wp_presto_player_presets: Total expected rows (via COUNT): 5
+0019.400 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.402 (0) Table wp_presto_player_presets: Rows added in this batch (next record: 5): 5 (uncompressed bytes in this segment=4260) in 0.01 seconds
+0019.407 (0) Table wp_presto_player_presets: finishing file(s) (2, 1.1 KB)
+0019.411 (0) Table wp_presto_player_videos: Total expected rows (via COUNT): 0
+0019.413 (0) Table wp_presto_player_videos: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1197) in 0.00 seconds
+0019.415 (0) Table wp_presto_player_videos: finishing file(s) (2, 0.5 KB)
+0019.420 (0) Table wp_presto_player_visits: Total expected rows (via COUNT): 0
+0019.421 (0) Table wp_presto_player_visits: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1011) in 0.00 seconds
+0019.424 (0) Table wp_presto_player_visits: finishing file(s) (2, 0.5 KB)
+0019.427 (0) Table wp_presto_player_webhooks: Total expected rows (via COUNT): 0
+0019.429 (0) Table wp_presto_player_webhooks: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1073) in 0.00 seconds
+0019.432 (0) Table wp_presto_player_webhooks: finishing file(s) (2, 0.5 KB)
+0019.438 (0) Table wp_um_metadata: Total expected rows (via COUNT): 0
+0019.439 (0) Table wp_um_metadata: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=720) in 0.00 seconds
+0019.443 (0) Table wp_um_metadata: finishing file(s) (2, 0.4 KB)
+0019.449 (0) Table wp_wpforms_logs: Total expected rows (via COUNT): 0
+0019.450 (0) Table wp_wpforms_logs: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=752) in 0.00 seconds
+0019.454 (0) Table wp_wpforms_logs: finishing file(s) (2, 0.4 KB)
+0019.460 (0) Table wp_wpforms_payment_meta: Total expected rows (via COUNT): 0
+0019.462 (0) Table wp_wpforms_payment_meta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=739) in 0.00 seconds
+0019.466 (0) Table wp_wpforms_payment_meta: finishing file(s) (2, 0.4 KB)
+0019.472 (0) Table wp_wpforms_payments: Total expected rows (via COUNT): 0
+0019.474 (0) Table wp_wpforms_payments: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1970) in 0.00 seconds
+0019.478 (0) Table wp_wpforms_payments: finishing file(s) (2, 0.6 KB)
+0019.484 (0) Table wp_wpforms_tasks_meta: Total expected rows (via COUNT): 5
+0019.485 (0) Table is relatively small; fetch_rows will thus be: 20 (allow_further_reductions=1, is_first_fetch=1, known_bigger_than_table=1)
+0019.487 (0) Table wp_wpforms_tasks_meta: Rows added in this batch (next record: 6): 5 (uncompressed bytes in this segment=1040) in 0.01 seconds
+0019.492 (0) Table wp_wpforms_tasks_meta: finishing file(s) (2, 0.5 KB)
+0019.493 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_options.table.tmpr60924.gz (1/33/fopen): adding to final database dump
+0019.500 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_options.table.gz (2/33/fopen): adding to final database dump
+0019.504 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_users.table.tmpr11.gz (3/33/fopen): adding to final database dump
+0019.504 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_users.table.gz (4/33/fopen): adding to final database dump
+0019.505 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_usermeta.table.tmpr284.gz (5/33/fopen): adding to final database dump
+0019.506 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_usermeta.table.gz (6/33/fopen): adding to final database dump
+0019.506 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_actionscheduler_actions.table.tmpr2131.gz (7/33/fopen): adding to final database dump
+0019.507 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_actionscheduler_actions.table.gz (8/33/fopen): adding to final database dump
+0019.507 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_actionscheduler_claims.table.tmpr0.gz (9/33/fopen): adding to final database dump
+0019.508 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_actionscheduler_claims.table.gz (10/33/fopen): adding to final database dump
+0019.508 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_actionscheduler_groups.table.tmpr6.gz (11/33/fopen): adding to final database dump
+0019.509 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_actionscheduler_groups.table.gz (12/33/fopen): adding to final database dump
+0019.509 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_actionscheduler_logs.table.tmpr3097.gz (13/33/fopen): adding to final database dump
+0019.510 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_actionscheduler_logs.table.gz (14/33/fopen): adding to final database dump
+0019.511 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_commentmeta.table.tmpr3.gz (15/33/fopen): adding to final database dump
+0019.511 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_commentmeta.table.gz (16/33/fopen): adding to final database dump
+0019.512 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_comments.table.tmpr4.gz (17/33/fopen): adding to final database dump
+0019.513 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_comments.table.gz (18/33/fopen): adding to final database dump
+0019.513 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_links.table.tmpr0.gz (19/33/fopen): adding to final database dump
+0019.514 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_links.table.gz (20/33/fopen): adding to final database dump
+0019.514 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_postmeta.table.tmpr113277.gz (21/33/fopen): adding to final database dump
+0019.516 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_postmeta.table.gz (22/33/fopen): adding to final database dump
+0019.518 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_posts.table.tmpr1432.gz (23/33/fopen): adding to final database dump
+0019.523 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_posts.table.gz (24/33/fopen): adding to final database dump
+0019.523 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_snippets.table.tmpr7.gz (25/33/fopen): adding to final database dump
+0019.524 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_snippets.table.gz (26/33/fopen): adding to final database dump
+0019.525 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_term_relationships.table.tmpr100001.gz (27/33/fopen): adding to final database dump
+0019.526 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_term_relationships.table.gz (28/33/fopen): adding to final database dump
+0019.526 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_term_taxonomy.table.tmpr58.gz (29/33/fopen): adding to final database dump
+0019.527 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_term_taxonomy.table.gz (30/33/fopen): adding to final database dump
+0019.527 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_termmeta.table.tmpr2.gz (31/33/fopen): adding to final database dump
+0019.528 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_termmeta.table.gz (32/33/fopen): adding to final database dump
+0019.529 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_terms.table.tmpr58.gz (33/33/fopen): adding to final database dump
+0019.529 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_terms.table.gz (34/33/fopen): adding to final database dump
+0019.530 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_e_events.table.tmpr0.gz (35/33/fopen): adding to final database dump
+0019.530 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_e_events.table.gz (36/33/fopen): adding to final database dump
+0019.531 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_frmt_form_entry.table.tmpr14.gz (37/33/fopen): adding to final database dump
+0019.532 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_frmt_form_entry.table.gz (38/33/fopen): adding to final database dump
+0019.532 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_frmt_form_entry_meta.table.tmpr86.gz (39/33/fopen): adding to final database dump
+0019.533 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_frmt_form_entry_meta.table.gz (40/33/fopen): adding to final database dump
+0019.533 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_frmt_form_reports.table.tmpr2.gz (41/33/fopen): adding to final database dump
+0019.534 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_frmt_form_reports.table.gz (42/33/fopen): adding to final database dump
+0019.535 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_frmt_form_views.table.tmpr4.gz (43/33/fopen): adding to final database dump
+0019.535 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_frmt_form_views.table.gz (44/33/fopen): adding to final database dump
+0019.536 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_audio_presets.table.tmpr5.gz (45/33/fopen): adding to final database dump
+0019.537 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_audio_presets.table.gz (46/33/fopen): adding to final database dump
+0019.537 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_email_collection.table.tmpr0.gz (47/33/fopen): adding to final database dump
+0019.538 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_email_collection.table.gz (48/33/fopen): adding to final database dump
+0019.538 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_presets.table.tmpr6.gz (49/33/fopen): adding to final database dump
+0019.539 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_presets.table.gz (50/33/fopen): adding to final database dump
+0019.540 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_videos.table.tmpr0.gz (51/33/fopen): adding to final database dump
+0019.540 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_videos.table.gz (52/33/fopen): adding to final database dump
+0019.541 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_visits.table.tmpr0.gz (53/33/fopen): adding to final database dump
+0019.541 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_visits.table.gz (54/33/fopen): adding to final database dump
+0019.542 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_webhooks.table.tmpr0.gz (55/33/fopen): adding to final database dump
+0019.542 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_presto_player_webhooks.table.gz (56/33/fopen): adding to final database dump
+0019.543 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_um_metadata.table.tmpr0.gz (57/33/fopen): adding to final database dump
+0019.544 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_um_metadata.table.gz (58/33/fopen): adding to final database dump
+0019.544 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_wpforms_logs.table.tmpr0.gz (59/33/fopen): adding to final database dump
+0019.545 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_wpforms_logs.table.gz (60/33/fopen): adding to final database dump
+0019.545 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_wpforms_payment_meta.table.tmpr0.gz (61/33/fopen): adding to final database dump
+0019.546 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_wpforms_payment_meta.table.gz (62/33/fopen): adding to final database dump
+0019.547 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_wpforms_payments.table.tmpr0.gz (63/33/fopen): adding to final database dump
+0019.548 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_wpforms_payments.table.gz (64/33/fopen): adding to final database dump
+0019.549 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_wpforms_tasks_meta.table.tmpr7.gz (65/33/fopen): adding to final database dump
+0019.549 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db-table-wp_wpforms_tasks_meta.table.gz (66/33/fopen): adding to final database dump
+0019.555 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db.gz: finished writing out complete database file (755.5 KB)
+0019.571 (0) Total database tables backed up: 33 (backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db.gz, size: 773792, sha1: d2a2bb14eb71209277fa2bce3d0e0fed047058e9, sha256: 376625167cf5e6ccd1459d81a0aa4e410ec32fc6a247bda76f7e57c0f218a38d)
+0019.577 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins.zip: plugins: This file has already been successfully processed
+0019.578 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-plugins2.zip: plugins: This file has already been successfully processed
+0019.578 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-themes.zip: themes: This file has already been successfully processed
+0019.579 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads.zip: uploads: This file has already been successfully processed
+0019.580 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-uploads2.zip: uploads: This file has already been successfully processed
+0019.581 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-mu-plugins.zip: mu-plugins: This file has already been successfully processed
+0019.581 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-others.zip: others: This file has already been successfully processed
+0019.582 (0) backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db.gz: db: This file has not yet been successfully uploaded: will queue
+0019.582 (0) Saving backup history. Total backup size: 98.8 MB
+0019.585 (0) Requesting upload of the files that have not yet been successfully uploaded (1)
+0019.587 (0) Cloud backup selection (1/1): none with instance (1/1) (last)
+0019.588 (0) No remote despatch: user chose no remote backup service
+0019.588 (0) Recording as successfully uploaded: backup_2026-03-12-0156_IT_Dublin_ddfcd9cd7ea8-db.gz
+0019.590 (0) Prune old backups from local store: nothing to do, since the user disabled local deletion and we are using local backups
+0019.590 (0) Resume backup (ddfcd9cd7ea8, 0): finish run
+0019.592 (0) Decremented the semaphore (fd) by 1
+0019.593 (0) Semaphore (fd) unlocked
+0019.593 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0019.596 (0) No email will/can be sent - the user has not configured an email address.
+0019.596 (0) The backup succeeded and is now complete

@@ -1,5 +1,5 @@
 <?php
-// phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped
+// phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped, WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- using the native PHP fclose() function instead of the WP Filesystem API.
 /**
  * Dropbox API base class
  * @author Ben Tadiar <ben@handcraftedbyben.co.uk>

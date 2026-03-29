@@ -30,14 +30,14 @@ $checkout_clone_token_attributes = 'href="'.esc_url($checkout_url).'" target="_b
 			<div class="updraft_migrate_widget_temporary_clone_stage0_container">
 				<div class="updraft_migrate_widget_temporary_clone_stage0_box">
 					<ul style="list-style: disc inside;">
-						<li><strong><?php echo esc_html__('Easy', 'updraftplus'); ?>:</strong> <?php esc_html_e(__('Press the buttons...', 'updraftplus').' '.__('UpdraftClone does the work.', 'updraftplus')); ?></li>
+						<li><strong><?php echo esc_html__('Easy', 'updraftplus'); ?>:</strong> <?php echo esc_html(__('Press the buttons...', 'updraftplus').' '.__('UpdraftClone does the work.', 'updraftplus')); ?></li>
 						<li><strong><?php esc_html_e('Reliable', 'updraftplus'); ?>:</strong> <?php esc_html_e('Runs on capacity from a leading cloud computing provider.', 'updraftplus'); ?></li>
 						<li><strong><?php esc_html_e('Secure', 'updraftplus'); ?>:</strong> <?php esc_html_e('One VPS (Virtual Private Server) per clone, shared with nobody.', 'updraftplus'); ?></li>
 						<li><strong><?php esc_html_e('Fast', 'updraftplus'); ?>:</strong> <?php esc_html_e('Takes just the time needed to create a backup and send it.', 'updraftplus'); ?></li>
 						<li><strong><?php esc_html_e('Flexible', 'updraftplus'); ?>:</strong> <?php esc_html_e('If you want, test upgrading to a different PHP or WP version.', 'updraftplus'); ?></li>
 					</ul>
 					<?php if (is_multisite() && is_subdomain_install()) { ?>
-						<p><?php echo '<a target="_blank" href="https://updraftplus.com/faqs/how-do-i-migrate-to-a-new-site-location/">' . esc_html(__('Temporary clones of WordPress subdomain multisite installations are not yet supported.', 'updraftplus').' '.__('See our documentation on how to carry out a normal migration here', 'updraftplus')) . '.</a>'; ?></p>
+						<p><?php echo '<a target="_blank" href="https://teamupdraft.com/documentation/updraftplus/topics/migration/faqs/how-to-migrate-a-wordpress-site-with-updraftplus/">' . esc_html(__('Temporary clones of WordPress subdomain multisite installations are not yet supported.', 'updraftplus').' '.__('See our documentation on how to carry out a normal migration here', 'updraftplus')) . '.</a>'; ?></p>
 					<?php
 					} else {
 					?>

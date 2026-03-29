@@ -1,0 +1,35 @@
+<?php if ( forminator_array_value_exists( $properties, 'form-padding' ) ) { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?>:not(.select2-dropdown) {
+		<?php if ( forminator_array_value_exists( $properties, 'form-padding-top' ) ) { ?>
+			padding-top: <?php echo $properties['form-padding-top'] ?>px;
+		<?php } else { ?>
+			padding-top: 0;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'form-padding-right' ) ) { ?>
+			padding-right: <?php echo $properties['form-padding-right'] ?>px;
+		<?php } else { ?>
+			padding-right: 0;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'form-padding-bottom' ) ) { ?>
+			padding-bottom: <?php echo $properties['form-padding-bottom'] ?>px;
+		<?php } else { ?>
+			padding-bottom: 0;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'form-padding-left' ) ) { ?>
+			padding-left: <?php echo $properties['form-padding-left'] ?>px;
+		<?php } else { ?>
+			padding-left: 0;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?>:not(.select2-dropdown) {
+		padding-top: 0;
+		padding-right: 0;
+		padding-bottom: 0;
+		padding-left: 0;
+	}
+
+<?php } ?>

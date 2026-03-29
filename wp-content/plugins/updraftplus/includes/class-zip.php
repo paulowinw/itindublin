@@ -1,5 +1,6 @@
 <?php
-
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- false positive; it's actually safe to use native PHP's fwrite()
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- using the native PHP fclose() function instead of the WP Filesystem API.
 if (!defined('ABSPATH')) die('No direct access allowed');
 
 if (class_exists('ZipArchive')) :
@@ -459,7 +460,7 @@ class UpdraftPlus_BinZip extends UpdraftPlus_PclZip {
 		// Loop over each destination directory name
 		foreach ($this->addfiles as $rdirname => $files) {
 
-			$process = function_exists('proc_open') ? proc_open($exec, $descriptorspec, $pipes, $rdirname) : false;
+			$process = function_exists('proc_open') ? proc_open($exec, $descriptorspec, $pipes, $rdirname) : false;// phpcs:ignore Generic.PHP.ForbiddenFunctions.Found -- This function is intentionally used and reviewed for safety.
 
 			if (!is_resource($process)) {
 				$updraftplus->log('BinZip error: proc_open failed');

@@ -25,6 +25,7 @@ const PLUGIN_ICON_MAP = {
 	wpforms: 'wpforms.png',
 	'wpforms-lite': 'wpforms.png',
 	'wp-live-chat-support': '3cx.png',
+	'power-coupons': 'power-coupons.svg',
 };
 
 const RequiredPlugins = ( { pluginsList } ) => {

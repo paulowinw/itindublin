@@ -1,5 +1,6 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 ?>
@@ -11,7 +12,7 @@ if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 		<div class="updraftcentral_cloud_wizard">
 			<h2>UpdraftCentral - <?php esc_attr_e('Backup, update and manage all your WordPress sites from one dashboard', 'updraftplus');?></h2>
 			<p>
-				<?php echo esc_html(__('If you have a few sites, it\'ll save hours.', 'updraftplus').' '.__('It\'s free to use or try up to 5 sites.', 'updraftplus'));?> <a href="https://updraftplus.com/updraftcentral" target="_blank"><?php esc_html_e('Follow this link for more information', 'updraftplus'); ?></a>.
+				<?php echo esc_html(__('If you have a few sites, it\'ll save hours.', 'updraftplus').' '.__('It\'s free to use or try up to 5 sites.', 'updraftplus'));?> <a href="https://teamupdraft.com/updraftcentral/" target="_blank"><?php esc_html_e('Follow this link for more information', 'updraftplus'); ?></a>.
 			</p>
 			<p>
 				<button id="btn_cloud_connect" class="btn btn-primary button-primary"><?php esc_html_e('Connect this site to UpdraftCentral Cloud', 'updraftplus');?></button>

@@ -1,4 +1,5 @@
 <?php
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 
@@ -245,13 +246,17 @@ class UpdraftPlus_Migrator_Lite {
 			'show_return_link' => true,
 			'show_heading' => true,
 		));
+
+		$keyword_to_search = UpdraftPlus_Manipulation_Functions::fetch_superglobal('post', 'search', false, null, null, '');
+		$keyword_replacement_text = UpdraftPlus_Manipulation_Functions::fetch_superglobal('post', 'replace', false, null, null, '');
 	
 		if (!empty($options['show_heading'])) echo '<h2>'.esc_html__('Search / replace database', 'updraftplus').'</h2>';
-		echo '<strong>'.esc_html__('Search for', 'updraftplus').':</strong> '.esc_html(stripslashes($_POST['search']))."<br>";
-		echo '<strong>'.esc_html__('Replace with', 'updraftplus').':</strong> '.esc_html(stripslashes($_POST['replace']))."<br>";
+		echo '<strong>'.esc_html__('Search for', 'updraftplus').':</strong> '.esc_html(stripslashes($keyword_to_search))."<br>";
+		echo '<strong>'.esc_html__('Replace with', 'updraftplus').':</strong> '.esc_html(stripslashes($keyword_replacement_text))."<br>";
 		$this->page_size = (empty($_POST['pagesize']) || !is_numeric($_POST['pagesize'])) ? 5000 : (int) $_POST['pagesize'];
-		$this->which_tables = empty($_POST['whichtables']) ? '' : explode(',', (stripslashes($_POST['whichtables'])));
-		if (empty($_POST['search'])) {
+		$post_which_tables = UpdraftPlus_Manipulation_Functions::fetch_superglobal('post', 'whichtables', false, null, null, '');
+		$this->which_tables = empty($post_which_tables) ? '' : explode(',', (stripslashes($post_which_tables)));
+		if (empty($keyword_to_search)) {
 			echo sprintf(
 				/* translators: %s: Missing parameter name */
 				esc_html__("Failure: No %s was given.", 'updraftplus'),
@@ -274,7 +279,7 @@ class UpdraftPlus_Migrator_Lite {
 		}
 		$this->updraftplus_restore_db_pre();
 		$this->tables_replaced = array();
-		$this->updraftplus_restored_db_dosearchreplace(stripslashes($_POST['search']), stripslashes($_POST['replace']), $this->base_prefix, false);
+		$this->updraftplus_restored_db_dosearchreplace(stripslashes($keyword_to_search), stripslashes($keyword_replacement_text), $this->base_prefix, false);
 		if (!empty($options['show_return_link'])) echo '<a href="'.esc_url(UpdraftPlus_Options::admin_page_url()).'?page=updraftplus">'.esc_html__('Return to UpdraftPlus Configuration', 'updraftplus').'</a>';
 	}
 
@@ -657,10 +662,10 @@ class UpdraftPlus_Migrator_Lite {
 				if ($any_site_changes) {
 					$updraftplus->log_e('Adjusting multisite paths');
 					foreach ($this->restored_sites as $site_id => $osite) {
-						$wpdb->query($wpdb->prepare("UPDATE ".UpdraftPlus_Manipulation_Functions::backquote($this->base_prefix.'site')." SET path='%s' WHERE id=%d", array($osite[1], (int) $site_id)));
+						$wpdb->query($wpdb->prepare("UPDATE ".UpdraftPlus_Manipulation_Functions::backquote($this->base_prefix.'site')." SET path=%s WHERE id=%d", array($osite[1], (int) $site_id)));
 					}
 					foreach ($this->restored_blogs as $blog_id => $blog) {
-						$wpdb->query($wpdb->prepare("UPDATE ".UpdraftPlus_Manipulation_Functions::backquote($this->base_prefix.'blogs')." SET path='%s' WHERE blog_id=%d", array($blog['path'], (int) $blog_id)));
+						$wpdb->query($wpdb->prepare("UPDATE ".UpdraftPlus_Manipulation_Functions::backquote($this->base_prefix.'blogs')." SET path=%s WHERE blog_id=%d", array($blog['path'], (int) $blog_id)));
 					}
 				}
 			}
@@ -950,7 +955,7 @@ class UpdraftPlus_Migrator_Lite {
 			$updraftplus->log_e(sprintf(__('Warning: the database\'s site URL (%1$s) is different to what we expected (%2$s)', 'updraftplus'), $db_siteurl_thissite, $info['expected_oldsiteurl']));
 			// Here, we change only the site URL entry; we don't run a full search/replace based on it. In theory, if someone developed using two different URLs, then this might be needed.
 			if (!empty($this->base_prefix) && !empty($this->siteurl)) {
-				$wpdb->query($wpdb->prepare("UPDATE ".UpdraftPlus_Manipulation_Functions::backquote($this->base_prefix.$options_table)." SET option_value='%s' WHERE option_name='siteurl'", array($this->siteurl)));
+				$wpdb->query($wpdb->prepare("UPDATE ".UpdraftPlus_Manipulation_Functions::backquote($this->base_prefix.$options_table)." SET option_value=%s WHERE option_name='siteurl'", array($this->siteurl)));
 			}
 		}
 		
@@ -958,7 +963,7 @@ class UpdraftPlus_Migrator_Lite {
 			/* translators: 1: Actual database home URL, 2: Expected home URL */
 			$updraftplus->log_e(sprintf(__('Warning: the database\'s home URL (%1$s) is different to what we expected (%2$s)', 'updraftplus'), $db_home_thissite, $info['expected_oldhome']));
 			if (!empty($this->base_prefix) && !empty($this->home)) {
-				$wpdb->query($wpdb->prepare("UPDATE ".UpdraftPlus_Manipulation_Functions::backquote($this->base_prefix.$options_table)." SET option_value='%s' WHERE option_name='home'", array($this->home)));
+				$wpdb->query($wpdb->prepare("UPDATE ".UpdraftPlus_Manipulation_Functions::backquote($this->base_prefix.$options_table)." SET option_value=%s WHERE option_name='home'", array($this->home)));
 			}
 		}
 

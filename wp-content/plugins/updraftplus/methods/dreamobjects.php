@@ -1,6 +1,7 @@
 <?php
 
-if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed.');
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 updraft_try_include_file('methods/s3.php', 'require_once');
 
@@ -204,22 +205,69 @@ class UpdraftPlus_BackupModule_dreamobjects extends UpdraftPlus_BackupModule_s3 
 	 */
 	public function get_template_properties() {
 		global $updraftplus, $updraftplus_admin;
+
+		if (!apply_filters('updraftplus_dreamobjects_simplexmlelement_exists', class_exists('SimpleXMLElement'))) {
+			$simplexmlelement_existence_label = wp_kses(
+				$updraftplus_admin->show_double_warning(
+					'<strong>'.__('Warning', 'updraftplus').':</strong> '.
+					/* translators: %s: missing PHP module */
+					sprintf(__("Your web server's PHP installation does not include a required module (%s).", 'updraftplus'), 'SimpleXMLElement').' '.
+					__("Please contact your web hosting provider's support.", 'updraftplus').' '.
+					/* translators: 1: module description, 2: required module */
+					sprintf(__('UpdraftPlus\'s %1$s module <strong>requires</strong> %2$s.', 'updraftplus'), $updraftplus->backup_methods[$this->get_id()], 'SimpleXMLElement').' '.
+					__('Please do not file any support requests; there is no alternative.', 'updraftplus'),
+					$this->get_id(),
+					false
+				),
+				$this->allowed_html_for_content_sanitisation()
+			);
+		} else {
+			$simplexmlelement_existence_label = '';
+		}
+
+		if (!apply_filters('updraftplus_dreamobjects_xmlwriter_exists', 'UpdraftPlus_S3_Compat' != $this->indicate_s3_class() || !class_exists('XMLWriter'))) {
+			$xmlwriter_existence_label = wp_kses(
+				$updraftplus_admin->show_double_warning(
+					'<strong>'.__('Warning', 'updraftplus').':</strong> '.
+					/* translators: %s: missing PHP module */
+					sprintf(__("Your web server's PHP installation does not included a required module (%s).", 'updraftplus'), 'XMLWriter').' '.
+					__("Please contact your web hosting provider's support and ask for them to enable it.", 'updraftplus'),
+					$this->get_id(),
+					false
+				),
+				$this->allowed_html_for_content_sanitisation()
+			);
+		} else {
+			$xmlwriter_existence_label = '';
+		}
+
 		$properties = array(
 			'storage_image_url' => UPDRAFTPLUS_URL."/images/dreamobjects_logo-horiz-2013.png",
 			'curl_existence_label' => wp_kses($updraftplus_admin->curl_check($updraftplus->backup_methods[$this->get_id()], false, $this->get_id()." hidden-in-updraftcentral", false), $this->allowed_html_for_content_sanitisation()),
-			'simplexmlelement_existence_label' => !apply_filters('updraftplus_dreamobjects_simplexmlelement_exists', class_exists('SimpleXMLElement')) ? wp_kses($updraftplus_admin->show_double_warning('<strong>'.__('Warning', 'updraftplus').':</strong> '.sprintf(__("Your web server's PHP installation does not included a required module (%s).", 'updraftplus'), 'SimpleXMLElement').' '.__("Please contact your web hosting provider's support.", 'updraftplus').' '.sprintf(__("UpdraftPlus's %s module <strong>requires</strong> %s.", 'updraftplus'), $updraftplus->backup_methods[$this->get_id()], 'SimpleXMLElement').' '.__('Please do not file any support requests; there is no alternative.', 'updraftplus'), $this->get_id(), false), $this->allowed_html_for_content_sanitisation()) : '',
-			'xmlwriter_existence_label' => !apply_filters('updraftplus_dreamobjects_xmlwriter_exists', 'UpdraftPlus_S3_Compat' != $this->indicate_s3_class() || !class_exists('XMLWriter')) ? wp_kses($updraftplus_admin->show_double_warning('<strong>'.__('Warning', 'updraftplus').':</strong> '. sprintf(__("Your web server's PHP installation does not included a required module (%s).", 'updraftplus'), 'XMLWriter').' '.__("Please contact your web hosting provider's support and ask for them to enable it.", 'updraftplus'), $this->get_id(), false), $this->allowed_html_for_content_sanitisation()) : '',
-			'console_url_text' => sprintf(__('Get your access key and secret key from your <a href="%s">%s console</a>, then pick a (globally unique - all %s users) bucket name (letters and numbers) (and optionally a path) to use for storage.', 'updraftplus'), 'https://panel.dreamhost.com/index.cgi?tree=storage.dreamhostobjects', $updraftplus->backup_methods[$this->get_id()], $updraftplus->backup_methods[$this->get_id()]).' '.__('This bucket will be created for you if it does not already exist.', 'updraftplus'),
+			'simplexmlelement_existence_label' => $simplexmlelement_existence_label,
+			'xmlwriter_existence_label' => $xmlwriter_existence_label,
+			'console_url_text' => sprintf(
+				/* translators: 1: console URL, 2: service name, 3: service name */
+				__('Get your access key and secret key from your <a href="%1$s">%2$s console</a>, then pick a (globally unique - all %3$s users) bucket name (letters and numbers) (and optionally a path) to use for storage.', 'updraftplus'),
+				'https://panel.dreamhost.com/index.cgi?tree=storage.dreamhostobjects',
+				$updraftplus->backup_methods[$this->get_id()],
+				$updraftplus->backup_methods[$this->get_id()]
+			).' '.__('This bucket will be created for you if it does not already exist.', 'updraftplus'),
 			'updraftplus_com_link' => apply_filters("updraftplus_com_link", "https://teamupdraft.com/documentation/updraftplus/topics/backing-up/troubleshooting/i-get-ssl-certificate-errors-when-backing-up-and-or-restoring/?utm_source=udp-plugin&utm_medium=referral&utm_campaign=paac&utm_content=dreamobjects-ssl-certificates&utm_creative_format=text"),
 			'ssl_error_text' => __('If you see errors about SSL certificates, then please go here for help.', 'updraftplus'),
 			'credentials_creation_link_text' => __('Create Azure credentials in your Azure developer console.', 'updraftplus'),
 			'configuration_helper_link_text' => __('For more detailed instructions, follow this link.', 'updraftplus'),
+			/* translators: %s: service name */
 			'input_accesskey_label' => sprintf(__('%s access key', 'updraftplus'), $updraftplus->backup_methods[$this->get_id()]),
+			/* translators: %s: service name */
 			'input_secretkey_label' => sprintf(__('%s secret key', 'updraftplus'), $updraftplus->backup_methods[$this->get_id()]),
 			'input_secretkey_type' => apply_filters('updraftplus_admin_secret_field_type', 'password'),
+			/* translators: %s: service name */
 			'input_location_label' => sprintf(__('%s location', 'updraftplus'), $updraftplus->backup_methods[$this->get_id()]),
 			'input_location_title' => __('Enter only a bucket name or a bucket and path.', 'updraftplus').' '.__('Examples: mybucket, mybucket/mypath', 'updraftplus'),
+			/* translators: %s: service name */
 			'input_endpoint_label' => sprintf(__('%s end-point', 'updraftplus'), $updraftplus->backup_methods[$this->get_id()]),
+			/* translators: %s: service name */
 			'input_test_label' => sprintf(__('Test %s Settings', 'updraftplus'), $updraftplus->backup_methods[$this->get_id()]),
 			/* translators: %s: Desired endpoint format.*/
 			'invalid_endpoint_error_message' => sprintf(__('Custom endpoint should be in the following format "%s".', 'updraftplus'), 's3.<region>.dream.io'),
@@ -256,8 +304,8 @@ class UpdraftPlus_BackupModule_dreamobjects extends UpdraftPlus_BackupModule_s3 
 	 */
 	public function credentials_test($posted_settings) {
 		if (!empty($posted_settings['endpoint']) && !self::is_valid_endpoint($posted_settings['endpoint'])) {
-			/* translators: %s: Invalid custom endpoint*/
-			echo sprintf(esc_html__('Failure: Custom endpoint "%s" is not in the desired format "%s".', 'updraftplus'), $posted_settings['endpoint'], 's3.<region>.dream.io'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Prevent escaping '<' & '>' in endpoint as this message is shown in alert.
+			/* translators: 1: Invalid custom endpoint, 2: Expected endpoint format */
+			echo sprintf(esc_html__('Failure: Custom endpoint "%1$s" is not in the desired format "%2$s".', 'updraftplus'), $posted_settings['endpoint'], 's3.<region>.dream.io'); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Prevent escaping '<' & '>' in endpoint as this message is shown in alert.
 			return;
 		}
 		parent::credentials_test($posted_settings);

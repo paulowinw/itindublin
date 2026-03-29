@@ -526,7 +526,17 @@ class Plugin {
 				 * */
 				$filesystem   = Helper::instance()->ast_block_templates_get_filesystem();
 				$file_content = $filesystem->get_contents( $file_path['data']['file'] );
-				$forms        = json_decode( $file_content ? $file_content : '', true );
+
+				// Apply the form color for sureforms.
+				$adaptive_mode = $this->get_adaptive_mode();
+				if ( ! $adaptive_mode && $file_content ) {
+					$color_palettes = $this->get_block_palette_colors()['style-1']['colors'];
+					for ( $i = 0; $i < 9; $i++ ) {
+						$target = $color_palettes[ $i ];
+						$file_content = str_replace( 'var(--ast-global-color-' . $i . ')', $target, $file_content );
+					}
+				}
+				$forms = json_decode( $file_content ? $file_content : '', true );
 
 				if ( ! empty( $forms ) && defined( 'SRFM_VER' ) && class_exists( '\SRFM\Inc\Export' ) && is_callable( '\SRFM\Inc\Export::get_instance' ) ) {
 
@@ -608,6 +618,7 @@ class Plugin {
 
 		$style = isset( $_REQUEST['style'] ) ? sanitize_text_field( $_REQUEST['style'] ) : 'style-1';
 		$block_type = isset( $_REQUEST['block_type'] ) ? sanitize_text_field( $_REQUEST['block_type'] ) : 'block';
+		$adaptive_mode = $this->get_adaptive_mode();
 
 		$color_palettes = array();
 		$is_astra_theme = class_exists( 'Astra_Global_Palette' );
@@ -622,23 +633,34 @@ class Plugin {
 				'style-2' => $reorganize ? array( 0, 1, 2, 3, 5, 4, 7, 6, 8 ) : array( 0, 1, 2, 3, 4, 5, 6, 7, 8 ),
 				'style-3' => $reorganize ? array( 3, 2, 4, 5, 0, 1, 7, 0, 8 ) : array( 3, 2, 5, 4, 0, 1, 6, 0, 8 ),
 			);
-
-			$color_palettes = ! $is_astra_theme ? $this->get_block_palette_colors()[ $style ]['colors'] : $color_palettes;
 		} else {
 			$mapping_palette = array(
 				'style-1' => $reorganize ? array( 0, 1, 2, 3, 5, 4, 7, 6, 8 ) : array( 0, 1, 2, 3, 4, 5, 6, 7, 8 ),
 				'style-2' => $reorganize ? array( 0, 1, 4, 5, 3, 2, 7, 6, 8 ) : array( 0, 1, 5, 4, 3, 2, 6, 7, 8 ),
 			);
-
-			$color_palettes = ! $is_astra_theme ? $this->get_page_palette_colors()[ $style ]['colors'] : $color_palettes;
 		}
-
-		if ( ! $is_astra_theme ) {
+		$color_palettes = $this->get_block_palette_colors()[ $style ]['colors'];
+		
+		if ( ! $adaptive_mode ) {
 			for ( $i = 0; $i < 9; $i++ ) {
 				$target = $color_palettes[ $i ];
 				$content = str_replace( 'var(\u002d\u002dast-global-color-' . $i . ')', $target, $content );
 				$content = str_replace( 'var(--ast-global-color-' . $i . ')', $target, $content );
-				$content = str_replace( 'ast-global-color-' . $i . ')', $target, $content );
+				$content = str_replace( 'var:preset|color|ast-global-color-' . $i, $target, $content );
+				$content = str_replace( 'ast-global-color-' . $i, $target, $content );
+			}
+
+			$blocks = parse_blocks( $content );
+			// Recursively update the button colors.
+			$this->walk_blocks_and_update_buttons( $blocks );
+			$content = serialize_blocks( $blocks );
+
+			// Add border radius properties after inheritFromTheme is set to false.
+			if ( $content && is_string( $content ) ) {
+				$border_properties = ',"btnBorderBottomLeftRadius":4,"btnBorderBottomRightRadius":4,"btnBorderTopLeftRadius":4,"btnBorderTopRightRadius":4';
+				$content = preg_replace_callback( '/("inheritFromTheme"\s*:\s*false)/', function( $matches ) use ( $border_properties ) {
+					return $matches[1] . $border_properties;
+				}, $content );
 			}
 		} else {
 			for ( $i = 0; $i < 9; $i++ ) {
@@ -657,18 +679,80 @@ class Plugin {
 		if ( ! $disable_ai && ! empty( Importer_Helper::get_business_details( 'business_description' ) ) ) {
 			$category_content = get_option( 'ast-templates-ai-content', array() );
 			$dynamic_content = ( isset( $category_content[ $category ] ) ) ? $category_content[ $category ] : array();
-			$content = $this->replace( $content, $dynamic_content );
+			$content = $this->replace( $content ?? '', $dynamic_content );
 		} else {
-			$content = $this->maybe_import_images( $content );
+			$content = $this->maybe_import_images( $content ?? '' );
 		}
 
 		// Flush the object when import is successful.
 		delete_option( 'ast-block-templates_data-' . $block_id );
 
+		/**
+		 * Fires after a block is successfully imported.
+		 *
+		 * @since 2.4.21
+		 *
+		 * @param int|string $block_id   The ID of the imported block.
+		 * @param string     $block_type The type of the block (e.g., 'block' or 'site').
+		 * @param int|string $category   The category ID of the imported block.
+		 */
+		do_action( 'ast_block_templates_after_block_import', $block_id, $block_type, $category );
+
 		// Update content.
 		wp_send_json_success( $content );
 
 	}
+
+
+	/**
+	 * Walk blocks and update buttons.
+	 *
+	 * @param array<mixed> $node Block node.
+	 * @return void;
+	 */
+	public function walk_blocks_and_update_buttons( &$node ) {
+		// Skips for normal arrays and non-block nodes.
+		if ( is_array( $node ) && ! isset( $node['blockName'] ) ) {
+			foreach ( $node as &$child ) {
+				$this->walk_blocks_and_update_buttons( $child );
+			}
+			return;
+		}
+
+		// Checks blocks that are not buttons.
+		if ( isset( $node['blockName'] ) && 'spectra/button' != $node['blockName'] ) {
+			$this->walk_blocks_and_update_buttons( $node['innerBlocks'] );
+			return;
+		}
+
+		// Work on buttons.
+		if (
+			isset( $node['blockName'] ) &&
+			'spectra/button' === $node['blockName']
+		) {
+			// Force custom color (no preset remap).
+			if ( isset( $node['attrs']['backgroundColor'] ) && $node['attrs']['backgroundColor'] ) {
+				$node['attrs']['style']['color']['background'] = $node['attrs']['backgroundColor']; // Applying string replaced color.
+			}
+			if ( isset( $node['attrs']['borderColor'] ) && $node['attrs']['borderColor'] ) {
+				$node['attrs']['style']['border']['color'] = $node['attrs']['borderColor']; // Applying string replaced color.
+			}
+
+			// Remove conflicting preset-based attrs.
+			unset(
+				$node['attrs']['backgroundColor'],
+				$node['attrs']['borderColor'],
+				$node['attrs']['borderHover']
+			);
+
+			// Update responsive controls colors.
+			foreach ( $node['attrs']['responsiveControls'] as $key => $res_ctrl ) { 
+				$node['attrs']['responsiveControls'][ $key ]['style']['border']['color'] = $node['attrs']['responsiveControls'][ $key ]['borderColor'];
+				unset( $node['attrs']['responsiveControls'][ $key ]['borderColor'] );
+			}
+		}
+	}
+
 
 	/**
 	 * Import Images if required.
@@ -1510,6 +1594,24 @@ class Plugin {
 	}
 
 	/**
+	 * Get adaptive mode
+	 *
+	 * @since 2.4.21
+	 *
+	 * @return boolean
+	 */
+	public function get_adaptive_mode() {
+		// Checking the nonce already.
+		if ( isset( $_REQUEST['adaptive_mode'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$adaptive_mode = 'true' === sanitize_text_field( $_REQUEST['adaptive_mode'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		} else {
+			$settings = get_option( 'ast_block_templates_ai_settings', array() );
+			$adaptive_mode = isset( $settings['adaptive_mode'] ) ? $settings['adaptive_mode'] : true;
+		}
+		return $adaptive_mode;
+	}
+
+	/**
 	 * Get palette colors
 	 *
 	 * @since 2.0.0
@@ -1520,13 +1622,7 @@ class Plugin {
 
 		$default_palette_color = self::$color_palette;
 
-		// Checking the nonce already.
-		if ( isset( $_REQUEST['adaptive_mode'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$adaptive_mode = 'true' === sanitize_text_field( $_REQUEST['adaptive_mode'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		} else {
-			$settings = get_option( 'ast_block_templates_ai_settings', array() );
-			$adaptive_mode = isset( $settings['adaptive_mode'] ) ? $settings['adaptive_mode'] : true;
-		}
+		$adaptive_mode = $this->get_adaptive_mode();
 
 		if ( class_exists( 'Astra_Global_Palette' ) && $adaptive_mode && function_exists( 'astra_get_palette_colors' ) ) {
 			$astra_palette_colors = astra_get_palette_colors();

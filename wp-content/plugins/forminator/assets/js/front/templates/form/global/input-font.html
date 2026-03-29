@@ -1,0 +1,39 @@
+<?php if ( forminator_array_value_exists( $properties, 'form-font-family' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input input,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-iti-input .iti__selected-dial-code {
+		<?php if ( forminator_array_value_exists( $properties, 'cform-input-font-size' ) ) { ?>
+			font-size: <?php echo $properties['cform-input-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 16px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'cform-input-font-family' ) ) { ?>
+			<?php if ( $properties['cform-input-font-family'] != 'custom' && !empty( $properties['cform-input-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['cform-input-font-family'] ?>;
+			<?php } else if ( $properties['cform-input-font-family'] == 'custom' && !empty( $properties['cform-input-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['cform-input-custom-family'] ?>;
+			<?php } else { ?>
+				font-family: inherit;
+			<?php } ?>
+		<?php } else { ?>
+			font-family: inherit;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'cform-input-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'cform-input-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 400;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input input,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-iti-input .iti__selected-dial-code {
+		font-size: 16px;
+		font-family: inherit;
+		font-weight: 400;
+	}
+
+<?php } ?>

@@ -1,0 +1,105 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-border' ) && !empty( $properties['basic-dropdown-border'] ) ) { ?>
+			border-color: <?php echo $properties['basic-dropdown-border'] ?>;
+		<?php } else { ?>
+			border-color: #097BAA;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-background' ) && !empty( $properties['basic-dropdown-background'] ) ) { ?>
+			background-color: <?php echo $properties['basic-dropdown-background'] ?>;
+		<?php } else { ?>
+			background-color: #E6E6E6;
+		<?php } ?>
+	}
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option,
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option span:not(.forminator-checkbox-box) {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-option-color-static' ) && !empty( $properties['basic-dropdown-option-color-static'] ) ) { ?>
+			color: <?php echo $properties['basic-dropdown-option-color-static'] ?>;
+		<?php } else { ?>
+			color: #777771;
+		<?php } ?>
+	}
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option:not(.select2-results__option--selected).select2-results__option--highlighted,
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option:not(.select2-results__option--selected).select2-results__option--highlighted span:not(.forminator-checkbox-box) {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-option-background-hover' ) && !empty( $properties['basic-dropdown-option-background-hover'] ) ) { ?>
+			background-color: <?php echo $properties['basic-dropdown-option-background-hover'] ?>;
+		<?php } else { ?>
+			background-color: #DDDDDD;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-option-color-hover' ) && !empty( $properties['basic-dropdown-option-color-hover'] ) ) { ?>
+			color: <?php echo $properties['basic-dropdown-option-color-hover'] ?>;
+		<?php } else { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-option-outline-focus' ) && !empty( $properties['basic-dropdown-option-outline-focus'] ) ) { ?>
+		.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option.select2-results__option--highlighted {
+			outline: 2px solid <?php echo $properties['basic-dropdown-option-outline-focus'] ?>;
+			outline-offset: -2px;
+		}
+	<?php } ?>
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option.select2-results__option--selected,
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option.select2-results__option--selected span:not(.forminator-checkbox-box) {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-option-background-active' ) && !empty( $properties['basic-dropdown-option-background-active'] ) ) { ?>
+			background-color: <?php echo $properties['basic-dropdown-option-background-active'] ?>;
+		<?php } else { ?>
+			background-color: #097BAA;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-option-color-active' ) && !empty( $properties['basic-dropdown-option-color-active'] ) ) { ?>
+			color: <?php echo $properties['basic-dropdown-option-color-active'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-search input,
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-search input:focus,
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-search input:hover {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-search-border' ) && !empty( $properties['basic-dropdown-search-border'] ) ) { ?>
+			border-color: <?php echo $properties['basic-dropdown-search-border'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-search-background' ) && !empty( $properties['basic-dropdown-search-background'] ) ) { ?>
+			background-color: <?php echo $properties['basic-dropdown-search-background'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-search-color' ) && !empty( $properties['basic-dropdown-search-color'] ) ) { ?>
+			color: <?php echo $properties['basic-dropdown-search-color'] ?>;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'basic-dropdown-search-outline-focus' ) && !empty( $properties['basic-dropdown-search-outline-focus'] ) ) { ?>
+		.forminator-select.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-search input:focus {
+			outline: 2px solid <?php echo $properties['basic-dropdown-search-outline-focus'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+<?php } else { ?>
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> {
+		border-color: #097BAA;
+		background-color: #E6E6E6;
+	}
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option,
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option span:not(.forminator-checkbox-box) {
+		color: #777771;
+	}
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option:not(.select2-results__option--selected).select2-results__option--highlighted,
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option:not(.select2-results__option--selected).select2-results__option--highlighted span:not(.forminator-checkbox-box) {
+		background-color: #DDDDDD;
+		color: #000000;
+	}
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option.select2-results__option--selected,
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option.select2-results__option--selected span:not(.forminator-checkbox-box) {
+		background-color: #097BAA;
+		color: #FFFFFF;
+	}
+
+<?php } ?>

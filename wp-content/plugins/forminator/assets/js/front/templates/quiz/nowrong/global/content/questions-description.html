@@ -1,0 +1,37 @@
+/* ELEMENT: Quiz Question Description */
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-question--description,
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-question--description p {
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-toggle-palette' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'nowrong-question-description-color' ) ) { ?>
+			color: <?php echo $properties['nowrong-question-description-color'] ?>;
+		<?php } else { ?>
+			color: #8C8C8C;
+		<?php } ?>
+	<?php } else { ?>
+		color: #8C8C8C;
+	<?php } ?>
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-toggle-typography' ) ) { ?>
+		<?php if ( forminator_array_value_exists( $properties, 'question-description-font-size' ) ) { ?>
+			font-size: <?php echo $properties['question-description-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 20px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'question-description-font-family' ) ) { ?>
+			<?php if ( $properties['question-description-font-family'] != 'custom' ) { ?>
+				font-family: <?php echo $properties['question-description-font-family'] ?>;
+			<?php } else { ?>
+				<?php if ( ! empty( $properties['question-description-custom-family'] ) ) { ?>
+					font-family: <?php echo $properties['question-description-custom-family'] ?>;
+				<?php } ?>
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'question-description-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'question-description-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 400;
+		<?php } ?>
+	<?php } else { ?>
+		font-size: 20px;
+		font-weight: 400;
+	<?php } ?>
+}

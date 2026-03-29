@@ -1,0 +1,55 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect .forminator-option {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-multiselect-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-multiselect-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-multiselect-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-multiselect-font-family'] != 'custom' && !empty( $properties['basic-cform-multiselect-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-multiselect-font-family'] ?>;
+			<?php } else if ( $properties['basic-cform-multiselect-font-family'] == 'custom' && !empty( $properties['basic-cform-multiselect-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-multiselect-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-multiselect-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-multiselect-font-weight' ); ?>
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2-selections > li {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-multiselect-tag-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-multiselect-tag-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-multiselect-tag-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-multiselect-tag-font-family'] != 'custom' && !empty( $properties['basic-cform-multiselect-tag-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-multiselect-tag-font-family'] ?>;
+			<?php } else if ( $properties['basic-cform-multiselect-tag-font-family'] == 'custom' && !empty( $properties['basic-cform-multiselect-tag-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-multiselect-tag-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-multiselect-tag-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-multiselect-tag-font-weight' ); ?>
+		<?php } ?>
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> select.forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"] .select2-selection__placeholder {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-select-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-select-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-select-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-select-font-family'] != 'custom' && !empty( $properties['basic-cform-select-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-select-font-family'] ?>;
+			<?php } else if ( $properties['basic-cform-select-font-family'] == 'custom' && !empty( $properties['basic-cform-select-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-select-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-select-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-select-font-weight' ); ?>
+		<?php } ?>
+	}
+
+<?php } ?>

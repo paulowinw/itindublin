@@ -1,4 +1,6 @@
 <?php
+
+if (!defined('ABSPATH')) exit;
 // @codingStandardsIgnoreStart
 /*
 To dump the decrypted file using the given key on stdout, call:

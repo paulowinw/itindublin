@@ -1,0 +1,26 @@
+<?php if ( forminator_array_value_exists( $properties, 'field-border' ) ) { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> div.StripeElement:not(.forminator-stripe-payment-element),
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--single[role="combobox"],
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-radio .forminator-radio-bullet,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-checkbox .forminator-checkbox-box,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-textarea,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-signature {
+
+		<?php if ( forminator_array_value_exists( $properties, 'field-border-width' ) && !empty( $properties['field-border-width'] ) ) { ?>
+			border-width: <?php echo $properties['field-border-width'] ?>px;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-input,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> div.StripeElement:not(.forminator-stripe-payment-element),
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--single[role="combobox"],
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-textarea,
+	#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-signature {
+		<?php if ( forminator_array_value_exists( $properties, 'field-border-radius' ) && !empty( $properties['field-border-radius'] ) ) { ?>
+			border-radius: <?php echo $properties['field-border-radius'] ?>px;
+		<?php } ?>
+	}
+
+<?php } ?>

@@ -238,6 +238,50 @@ class ST_Importer_Helper {
 	}
 
 	/**
+	 * Safely unserialize data without allowing PHP object instantiation.
+	 *
+	 * Prevents object injection (CWE-502) by blocking class instantiation
+	 * during deserialization. Objects are converted to __PHP_Incomplete_Class.
+	 *
+	 * @since 1.1.27
+	 * @param mixed $data Data to unserialize.
+	 * @return mixed Unserialized data with no objects, or original data if not serialized.
+	 */
+	public static function safe_unserialize( $data ) {
+		if ( ! is_string( $data ) || ! is_serialized( $data, true ) ) {
+			return $data;
+		}
+		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize, PHPCompatibility.FunctionUse.NewFunctionParameters.unserialize_optionsFound -- Plugin requires PHP 7.4+.
+		$result = unserialize( $data, array( 'allowed_classes' => false ) );
+		return self::convert_incomplete_class( $result );
+	}
+
+	/**
+	 * Recursively convert __PHP_Incomplete_Class instances to arrays.
+	 *
+	 * When unserialize() is called with allowed_classes => false, any serialized
+	 * objects become __PHP_Incomplete_Class. These break map_deep() and similar
+	 * WordPress internals, so we convert them to plain arrays.
+	 *
+	 * @since 1.1.28
+	 * @param mixed $data Data to convert.
+	 * @return mixed Converted data with no incomplete class instances.
+	 */
+	private static function convert_incomplete_class( $data ) {
+		if ( $data instanceof \__PHP_Incomplete_Class ) {
+			$array = (array) $data;
+			unset( $array['__PHP_Incomplete_Class_Name'] );
+			return array_map( array( __CLASS__, 'convert_incomplete_class' ), $array );
+		}
+
+		if ( is_array( $data ) ) {
+			return array_map( array( __CLASS__, 'convert_incomplete_class' ), $data );
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Get Business details.
 	 *
 	 * @since 4.0.0

@@ -1,0 +1,15 @@
+<?php if ( forminator_array_value_exists( $properties, 'field-image-size' ) && 'auto' !== $properties['field-image-size'] ) { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?> .forminator-answer .forminator-answer--design .forminator-answer--image {
+		<?php if ( forminator_array_value_exists( $properties, 'field-image-width' ) && !empty( $properties['field-image-width'] ) ) { ?>
+			width: <?php echo $properties['field-image-width'] ?>px;
+		<?php } else { ?>
+			width: 80px;
+		<?php } if ( forminator_array_value_exists( $properties, 'field-image-height' ) && !empty( $properties['field-image-height'] ) ) { ?>
+			height: <?php echo $properties['field-image-height'] ?>px;
+		<?php } else { ?>
+			height: 80px;
+		<?php } ?>
+	}
+
+<?php } ?>

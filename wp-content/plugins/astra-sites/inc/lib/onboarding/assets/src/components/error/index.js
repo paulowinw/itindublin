@@ -38,6 +38,9 @@ const ErrorScreen = () => {
 			notInstalledList: [],
 			notActivatedList: [],
 
+			// Flag to prevent premature requiredPluginsDone while checking plugins.
+			awaitingPluginCheck: true,
+
 			// Go to previous step.
 			currentIndex: currentIndex - 1,
 		} );

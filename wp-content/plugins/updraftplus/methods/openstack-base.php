@@ -1,5 +1,5 @@
 <?php
-
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- Using the default PHP fopen() function instead of the WP Filesystem API.
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed.');
 
 if (!class_exists('UpdraftPlus_BackupModule')) updraft_try_include_file('methods/backup-module.php', 'require_once');

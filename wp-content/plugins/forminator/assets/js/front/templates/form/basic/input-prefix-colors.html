@@ -1,0 +1,9 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-prefix {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-prefix-color' ) && !empty( $properties['basic-prefix-color'] ) ) { ?>
+			color: <?php echo $properties['basic-prefix-color'] ?>;
+		<?php } ?>
+	}
+
+<?php } ?>

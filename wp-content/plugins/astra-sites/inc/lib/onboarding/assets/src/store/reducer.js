@@ -182,6 +182,8 @@ export const initialState = {
 	requiredPluginsDone: false,
 	notInstalledList: [],
 	notActivatedList: [],
+	skippedPlugins: [],
+	awaitingPluginCheck: false,
 	resetData: [],
 	importStart: false,
 	importEnd: false,
@@ -253,6 +255,54 @@ const reducer = ( state = initialState, { type, ...rest } ) => {
 	switch ( type ) {
 		case 'set':
 			return { ...state, ...rest };
+
+		// Plugin installed: move from notInstalledList to notActivatedList
+		// Uses current state to avoid closure issues
+		case 'plugin_installed':
+			return {
+				...state,
+				notActivatedList: [ ...state.notActivatedList, rest.plugin ],
+				notInstalledList: state.notInstalledList.filter(
+					( p ) => p.slug !== rest.plugin.slug
+				),
+				importStatus: rest.importStatus || state.importStatus,
+			};
+
+		// Plugin activated: remove from notActivatedList
+		// Uses current state to avoid closure issues
+		case 'plugin_activated':
+			return {
+				...state,
+				notActivatedList: state.notActivatedList.filter(
+					( p ) => p.slug !== rest.plugin.slug
+				),
+				importStatus: rest.importStatus || state.importStatus,
+				importPercent: rest.importPercent ?? state.importPercent,
+			};
+
+		// Plugin deferred: remove from notActivatedList (will be retried later)
+		case 'plugin_deferred':
+			return {
+				...state,
+				notActivatedList: state.notActivatedList.filter(
+					( p ) => p.slug !== rest.plugin.slug
+				),
+				importStatus: rest.importStatus || state.importStatus,
+				importPercent: rest.importPercent ?? state.importPercent,
+			};
+
+		// Deferred plugins re-queued for activation: merge into current notActivatedList.
+		// Uses state.notActivatedList (not closure) to avoid overwriting activations
+		// that completed between when retryDeferredPlugins() read the list and dispatch.
+		case 'plugin_retry_deferred':
+			return {
+				...state,
+				notActivatedList: [
+					...state.notActivatedList,
+					...rest.plugins,
+				],
+			};
+
 		default:
 			return state;
 	}

@@ -1,6 +1,7 @@
 <?php
 
-if (!defined('UPDRAFTCENTRAL_CLIENT_DIR')) die('No access.');
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 /**
  * Handles Posts Commands

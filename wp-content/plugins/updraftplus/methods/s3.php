@@ -1,6 +1,7 @@
 <?php
 
-if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed.');
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 // Converted to multi-options (Feb 2017-) and previous options conversion removed: Yes
 

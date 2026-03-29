@@ -1,4 +1,5 @@
 <?php
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 global $updraftcentral_host_plugin;

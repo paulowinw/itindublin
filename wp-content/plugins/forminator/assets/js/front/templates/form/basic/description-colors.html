@@ -1,0 +1,10 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-description,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-description p {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-label-helper-color' ) && !empty( $properties['basic-label-helper-color'] ) ) { ?>
+			color: <?php echo $properties['basic-label-helper-color'] ?>;
+		<?php } ?>
+	}
+
+<?php } ?>

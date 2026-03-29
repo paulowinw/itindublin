@@ -1,0 +1,61 @@
+<?php if ( forminator_array_value_exists( $properties, 'poll-colors' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back {
+		<?php if ( forminator_array_value_exists( $properties, 'buttonbg' ) ) { ?>
+			background-color: <?php echo $properties['buttonbg'] ?>;
+		<?php } else { ?>
+			background-color: #097BAA;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'buttontxt' ) ) { ?>
+			color: <?php echo $properties['buttontxt'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:hover {
+		<?php if ( forminator_array_value_exists( $properties, 'buttonbg_hover' ) ) { ?>
+			background-color: <?php echo $properties['buttonbg_hover'] ?>;
+		<?php } else { ?>
+			background-color: #086A91;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'buttontxt_hover' ) ) { ?>
+			color: <?php echo $properties['buttontxt_hover'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:active {
+		<?php if ( forminator_array_value_exists( $properties, 'buttonbg_active' ) ) { ?>
+			background-color: <?php echo $properties['buttonbg_active'] ?>;
+		<?php } else { ?>
+			background-color: #086A91;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'buttontxt_active' ) ) { ?>
+			color: <?php echo $properties['buttontxt_active'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back {
+		background-color: #097BAA;
+		color: #FFFFFF;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:hover {
+		background-color: #086A91;
+		color: #FFFFFF;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:active {
+		background-color: #086A91;
+		color: #FFFFFF;
+	}
+
+<?php } ?>

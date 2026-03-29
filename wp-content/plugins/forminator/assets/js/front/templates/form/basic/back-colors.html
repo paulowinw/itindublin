@@ -1,0 +1,38 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-prev-background-static' ) && !empty( $properties['basic-prev-background-static'] ) ) { ?>
+			background-color: <?php echo $properties['basic-prev-background-static'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-prev-color-static' ) && !empty( $properties['basic-prev-color-static'] ) ) { ?>
+			color: <?php echo $properties['basic-prev-color-static'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:hover {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-prev-background-hover' ) && !empty( $properties['basic-prev-background-hover'] ) ) { ?>
+			background-color: <?php echo $properties['basic-prev-background-hover'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-prev-color-hover' ) && !empty( $properties['basic-prev-color-hover'] ) ) { ?>
+			color: <?php echo $properties['basic-prev-color-hover'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:active {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-prev-background-active' ) && !empty( $properties['basic-prev-background-active'] ) ) { ?>
+			background-color: <?php echo $properties['basic-prev-background-active'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-prev-color-active' ) && !empty( $properties['basic-prev-color-active'] ) ) { ?>
+			color: <?php echo $properties['basic-prev-color-active'] ?>;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'basic-prev-focus-outline-color' ) && !empty( $properties['basic-prev-focus-outline-color'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-back:focus {
+			outline: 2px solid <?php echo $properties['basic-prev-focus-outline-color'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+<?php } ?>

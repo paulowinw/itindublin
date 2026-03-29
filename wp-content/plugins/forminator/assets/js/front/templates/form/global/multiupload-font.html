@@ -1,0 +1,134 @@
+<?php if ( forminator_array_value_exists( $properties, 'form-font-family' ) ) { ?>
+
+	/*
+	====================
+	MU Panel Font Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p {
+		<?php if ( forminator_array_value_exists( $properties, 'upload-multiple-panel-font-size' ) ) { ?>
+			font-size: <?php echo $properties['upload-multiple-panel-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 14px;
+		<?php } ?>
+		line-height: 1.7;
+		<?php if ( forminator_array_value_exists( $properties, 'upload-multiple-panel-font-family' ) ) { ?>
+			<?php if ( $properties['upload-multiple-panel-font-family'] != 'custom' && !empty( $properties['upload-multiple-panel-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['upload-multiple-panel-font-family'] ?>;
+			<?php } else if ( $properties['upload-multiple-panel-font-family'] == 'custom' && !empty( $properties['upload-multiple-panel-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['upload-multiple-panel-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'upload-multiple-panel-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'upload-multiple-panel-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 400;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a:visited,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a:hover,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a:focus {
+		font-weight: 700;
+		text-decoration: underline;
+	}
+
+	/*
+	====================
+	MU File Font Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--title {
+		<?php if ( forminator_array_value_exists( $properties, 'upload-multiple-file-name-font-size' ) ) { ?>
+			font-size: <?php echo $properties['upload-multiple-file-name-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 13px;
+		<?php } ?>
+		line-height: 1.3;
+		<?php if ( forminator_array_value_exists( $properties, 'upload-multiple-file-name-font-family' ) ) { ?>
+			<?php if ( $properties['upload-multiple-file-name-font-family'] != 'custom' && !empty( $properties['upload-multiple-file-name-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['upload-multiple-file-name-font-family'] ?>;
+			<?php } else if ( $properties['upload-multiple-file-name-font-family'] == 'custom' && !empty( $properties['upload-multiple-file-name-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['upload-multiple-file-name-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'upload-multiple-file-name-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'upload-multiple-file-name-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 700;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--size {
+		<?php if ( forminator_array_value_exists( $properties, 'upload-multiple-file-size-font-size' ) ) { ?>
+			font-size: <?php echo $properties['upload-multiple-file-size-font-size'] ?>px;
+		<?php } else { ?>
+			font-size: 13px;
+		<?php } ?>
+		line-height: 1.4em;
+		<?php if ( forminator_array_value_exists( $properties, 'upload-multiple-file-size-font-family' ) ) { ?>
+			<?php if ( $properties['upload-multiple-file-size-font-family'] != 'custom' && !empty( $properties['upload-multiple-file-size-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['upload-multiple-file-size-font-family'] ?>;
+			<?php } else if ( $properties['upload-multiple-file-size-font-family'] == 'custom' && !empty( $properties['upload-multiple-file-size-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['upload-multiple-file-size-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'upload-multiple-file-size-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'upload-multiple-file-size-font-weight' ); ?>
+		<?php } else { ?>
+			font-weight: 700;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	/*
+	====================
+	MU Panel Font Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p {
+		font-size: 13px;
+		line-height: 1.7;
+		font-weight: 400;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a:visited,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a:hover,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multi-upload .forminator-multi-upload-message p a:focus {
+		font-weight: 700;
+		text-decoration: underline;
+	}
+
+	/*
+	====================
+	MU File Font Styles
+	====================
+	*/
+
+	/* STATE: Default */
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--title {
+		font-size: 13px;
+		line-height: 1.3;
+		font-weight: 700;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-uploaded-file .forminator-uploaded-file--size {
+		font-size: 12px;
+		line-height: 1.4em;
+		font-weight: 700;
+	}
+
+<?php } ?>

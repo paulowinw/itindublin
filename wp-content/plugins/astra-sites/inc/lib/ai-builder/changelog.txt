@@ -1,3 +1,9 @@
+v1.2.72 - 18th March 2026
+- Security: Hardened deserialization to prevent object injection (CWE-502).
+
+v1.2.71 - 3rd March 2026
+- Improvement: Introduced filter option to templates listing to list premium, most used and newest templates.
+
 v1.2.70 - 3rd February 2026
 - Improvement: Improved import process logging for better traceability.
 - Improvement: Added automatic image selection when skipping image selection to import business relevent images.

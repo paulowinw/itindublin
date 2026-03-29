@@ -1,5 +1,6 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 // $options is passed in
@@ -85,8 +86,8 @@ if (!empty($options['include_header'])) echo '<h2>'.esc_html(__('Existing backup
 				<div id="drag-drop-area">
 					<div class="drag-drop-inside">
 					<p class="drag-drop-info"><?php esc_html_e('Drop your backup files', 'updraftplus'); ?></p>
-					<p><?php echo esc_html_x('or', 'Uploader: Drop your backup files - or - Select Files'); ?></p>
-					<p class="drag-drop-buttons"><input id="plupload-browse-button" type="button" value="<?php esc_attr_e('Select Files'); ?>" class="button" /></p>
+					<p><?php echo esc_html_x('or', 'Uploader: Drop your backup files - or - Select Files'); // phpcs:ignore WordPress.WP.I18n.MissingArgDomain -- The string exists within the WordPress core. ?></p>
+					<p class="drag-drop-buttons"><input id="plupload-browse-button" type="button" value="<?php esc_attr_e('Select Files'); // phpcs:ignore WordPress.WP.I18n.MissingArgDomain -- The string exists within the WordPress core. ?>" class="button" /></p>
 					</div>
 				</div>
 				<div id="filelist">

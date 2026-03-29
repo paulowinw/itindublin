@@ -1,5 +1,8 @@
 <?php
-// phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen, WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- Using the default PHP fopen() function instead of the WP Filesystem API., false positive; it's actually safe to use native PHP's fwrite()
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
+// phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped, WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- using the native PHP fclose() function instead of the WP Filesystem API.
 /**
  * This is the PHP Cloud Files API.
  *

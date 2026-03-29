@@ -1,5 +1,5 @@
 <?php
-
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- using the native PHP fclose() function instead of the WP Filesystem API.
 // https://stackoverflow.com/questions/157318/resumable-downloads-when-using-php-to-send-the-file
 // User: DaveRandom
 

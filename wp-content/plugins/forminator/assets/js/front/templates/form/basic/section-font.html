@@ -1,0 +1,42 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-title {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-title-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-title-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-title-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-title-font-family'] != 'custom' && !empty( $properties['basic-cform-title-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-title-font-family'] ?>;
+			<?php } ?>
+			<?php if ( $properties['basic-cform-title-font-family'] == 'custom' && !empty( $properties['basic-cform-title-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-title-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-title-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-title-font-weight' ); ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-title-text-align' ) ) { ?>
+			text-align: <?php echo $properties['basic-cform-title-text-align'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-subtitle {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-subtitle-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-subtitle-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-subtitle-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-subtitle-font-family'] != 'custom' && !empty( $properties['basic-cform-subtitle-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-subtitle-font-family'] ?>;
+			<?php } else if ( $properties['basic-cform-subtitle-font-family'] == 'custom' && !empty( $properties['basic-cform-subtitle-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-subtitle-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-subtitle-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-subtitle-font-weight' ); ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-subtitle-text-align' ) ) { ?>
+			text-align: <?php echo $properties['basic-cform-subtitle-text-align'] ?>;
+		<?php } ?>
+	}
+
+<?php } ?>

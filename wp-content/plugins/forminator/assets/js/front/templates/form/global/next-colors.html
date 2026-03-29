@@ -1,0 +1,75 @@
+<?php if ( forminator_array_value_exists( $properties, 'cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-next {
+		<?php if ( forminator_array_value_exists( $properties, 'next-background-static' ) && !empty( $properties['next-background-static'] ) ) { ?>
+			background-color: <?php echo $properties['next-background-static'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			background-color: #067963;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'next-color-static' ) && !empty( $properties['next-color-static'] ) ) { ?>
+			color: <?php echo $properties['next-color-static'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-next:hover {
+		<?php if ( forminator_array_value_exists( $properties, 'next-background-hover' ) && !empty( $properties['next-background-hover'] ) ) { ?>
+			background-color: <?php echo $properties['next-background-hover'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			background-color: #05614F;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'next-color-hover' ) && !empty( $properties['next-color-hover'] ) ) { ?>
+			color: <?php echo $properties['next-color-hover'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-next:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-next:active {
+		<?php if ( forminator_array_value_exists( $properties, 'next-background-active' ) && !empty( $properties['next-background-active'] ) ) { ?>
+			background-color: <?php echo $properties['next-background-active'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			background-color: #05614F;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'next-color-active' ) && !empty( $properties['next-color-active'] ) ) { ?>
+			color: <?php echo $properties['next-color-active'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'next-focus-outline-color' ) && !empty( $properties['next-focus-outline-color'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-next:focus {
+			outline: 2px solid <?php echo $properties['next-focus-outline-color'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-next {
+		background-color: #067963;
+		color: #FFFFFF;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-next:hover {
+		background-color: #05614F;
+		color: #FFFFFF;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-next:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-next:active {
+		background-color: #05614F;
+		color: #FFFFFF;
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'next-focus-outline-color' ) && !empty( $properties['next-focus-outline-color'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-button-next:focus {
+			outline: 2px solid #254DEB;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+<?php } ?>

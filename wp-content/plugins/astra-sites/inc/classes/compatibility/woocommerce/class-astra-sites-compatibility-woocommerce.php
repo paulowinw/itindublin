@@ -79,7 +79,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_WooCommerce' ) ) :
 			}
 
 			// Safely unserialize data.
-			$unserialized_data = maybe_unserialize( $meta['value'] );
+			$unserialized_data = astra_sites_safe_unserialize( $meta['value'] );
 			if ( false === $unserialized_data || ! is_array( $unserialized_data ) ) {
 				return $meta;
 			}

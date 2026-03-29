@@ -310,6 +310,10 @@ const Survey = () => {
 
 	const handlePluginFormSubmit = ( e ) => {
 		e.preventDefault();
+		dispatch( {
+			type: 'set',
+			skippedPlugins: thirtPartyPlugins,
+		} );
 		setSkipPlugins( false );
 	};
 

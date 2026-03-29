@@ -1,0 +1,30 @@
+<?php if ( forminator_array_value_exists( $properties, 'cform-color-settings' ) ) { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?> {
+		<?php if ( forminator_array_value_exists( $properties, 'cform-form-border' ) && !empty( $properties['cform-form-border'] ) ) { ?>
+			border-color: <?php echo $properties['cform-form-border'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			border-color: rgba(0,0,0,0);
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'cform-form-background' ) && !empty( $properties['cform-form-background'] ) ) { ?>
+			background-color: <?php echo $properties['cform-form-background'] ?>;
+		<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+			background-color: rgba(0,0,0,0);
+		<?php } ?>
+	}
+
+<?php } else if ( forminator_array_value_exists( $properties, 'form-border' ) ) { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?> {
+		border-color: #777771;
+		background-color: rgba(0,0,0,0);
+	}
+
+<?php } elseif ( forminator_can_apply_default_color( $properties ) ) { ?>
+
+	#forminator-module-<?php echo $properties['form_id'] ?> {
+		border-color: rgba(0,0,0,0);
+		background-color: rgba(0,0,0,0);
+	}
+
+<?php } ?>

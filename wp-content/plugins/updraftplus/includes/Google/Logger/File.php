@@ -1,4 +1,6 @@
 <?php
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fwrite -- false positive; it's actually safe to use native PHP's fwrite()
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- using the native PHP fclose() function instead of the WP Filesystem API.
 /*
  * Copyright 2014 Google Inc.
  *

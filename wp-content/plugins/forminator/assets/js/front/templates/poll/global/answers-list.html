@@ -1,0 +1,57 @@
+<?php if ( ( ! isset( $properties['enable_images'] ) || $properties['enable_images'] != '1' ) || ( forminator_array_value_exists( $properties, 'visual_style' ) && ( $properties['visual_style'] != 'grid' ) ) ) { ?>
+	#forminator-module-<?php echo $properties['form_id'] ?> .forminator-radio:not(.forminator-radio-inline) {
+		<?php if ( isset( $properties['answers-spacing'] ) && $properties['answers-spacing'] == 'open' ) { ?>
+			margin: 20px 0 10px;
+		<?php } else if ( isset( $properties['answers-spacing'] ) && $properties['answers-spacing'] == 'enclosed' ) { ?>
+			margin: 10px 0 5px;
+		<?php } else if ( isset( $properties['answers-spacing'] ) && $properties['answers-spacing'] == 'custom' ) { ?>
+			<?php if ( $properties['spacing'] != '' ) { ?>
+				margin: <?php echo $properties['spacing'] ?>px 0 <?php echo ($properties['spacing'] / 2) ?>px;
+			<?php } else { ?>
+				margin: 0;
+			<?php } ?>
+		<?php } else { ?>
+			margin: 20px 0 10px;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?> .forminator-radio:not(.forminator-radio-inline):first-of-type {
+		<?php if ( isset( $properties['answers-spacing'] ) && $properties['answers-spacing'] == 'open' ) { ?>
+			margin-top: 20px;
+		<?php } else if ( isset( $properties['answers-spacing'] ) && $properties['answers-spacing'] == 'enclosed' ) { ?>
+			margin-top: 10px;
+		<?php } else if ( isset( $properties['answers-spacing'] ) && $properties['answers-spacing'] == 'custom' ) { ?>
+			<?php if ( $properties['spacing'] != '' ) { ?>
+				margin-top: <?php echo $properties['spacing'] ?>px;
+			<?php } else { ?>
+				margin-top: 0;
+			<?php } ?>
+		<?php } else { ?>
+			margin-top: 20px;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?> .forminator-radio:not(.forminator-radio-inline):first-child {
+		margin-top: 0;
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?> .forminator-radio:not(.forminator-radio-inline):last-of-type {
+		<?php if ( isset( $properties['answers-spacing'] ) && $properties['answers-spacing'] == 'open' ) { ?>
+			margin-bottom: 10px;
+		<?php } else if ( isset( $properties['answers-spacing'] ) && $properties['answers-spacing'] == 'enclosed' ) { ?>
+			margin-bottom: 5px;
+		<?php } else if ( isset( $properties['answers-spacing'] ) && $properties['answers-spacing'] == 'custom' ) { ?>
+			<?php if ( $properties['spacing'] != '' ) { ?>
+				margin-bottom: <?php echo ($properties['spacing'] / 2) ?>px;
+			<?php } else { ?>
+				margin-bottom: 0;
+			<?php } ?>
+		<?php } else { ?>
+			margin-bottom: 10px;
+		<?php } ?>
+	}
+
+	#forminator-module-<?php echo $properties['form_id'] ?> .forminator-radio:not(.forminator-radio-inline):last-child {
+		margin-bottom: 0;
+	}
+<?php } ?>

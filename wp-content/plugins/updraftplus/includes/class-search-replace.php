@@ -1,5 +1,6 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 class UpdraftPlus_Search_Replace {

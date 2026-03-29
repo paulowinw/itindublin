@@ -1,4 +1,5 @@
 <?php
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 ?>
 <div class="updraft_exclude_entity_container" data-include-backup-file="<?php echo esc_attr($key);?>">

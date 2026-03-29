@@ -1,0 +1,37 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-form-font-family' ) ) { ?>
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-search input,
+	.forminator-select-dropdown-container--open .forminator-dropdown--multiple.forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-search input {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-input-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-input-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-input-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-input-font-family'] != 'custom' && !empty( $properties['basic-cform-input-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-input-font-family'] ?>;
+			<?php } else if ( $properties['basic-cform-input-font-family'] == 'custom' && !empty( $properties['basic-cform-input-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-input-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-input-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-input-font-weight' ); ?>
+		<?php } ?>
+	}
+
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option,
+	.forminator-select-dropdown-container--open .forminator-dropdown--multiple.forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .select2-results .select2-results__options .select2-results__option span {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-dropdown-font-size' ) ) { ?>
+			font-size: <?php echo $properties['basic-cform-dropdown-font-size'] ?>px;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-dropdown-font-family' ) ) { ?>
+			<?php if ( $properties['basic-cform-dropdown-font-family'] != 'custom' && !empty( $properties['basic-cform-dropdown-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-dropdown-font-family'] ?>;
+			<?php } else if ( $properties['basic-cform-dropdown-font-family'] == 'custom' && !empty( $properties['basic-cform-dropdown-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['basic-cform-dropdown-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-cform-dropdown-font-weight' ) ) { ?>
+			<?php forminator_echo_font_weight( $properties, 'basic-cform-dropdown-font-weight' ); ?>
+		<?php } ?>
+	}
+
+<?php } ?>

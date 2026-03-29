@@ -1,4 +1,5 @@
 <?php
+	if (!defined('ABSPATH')) exit;
 	if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 ?>
 <?php if (!class_exists('UpdraftPlus_Addons_Migrator')) : ?>

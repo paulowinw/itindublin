@@ -43,6 +43,7 @@ if ( ! class_exists( 'BSF_UTM_Analytics' ) ) {
 			'header-footer-elementor',
 			'latepoint',
 			'modern-cart',
+			'power-coupons',
 			'presto-player',
 			'surecart',
 			'surecontact',

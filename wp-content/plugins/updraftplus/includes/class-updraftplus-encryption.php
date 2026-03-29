@@ -1,5 +1,6 @@
 <?php
-
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fwrite, WordPress.WP.AlternativeFunctions.rename_rename -- false positive; it's actually safe to use native PHP's fwrite(), rename() usage is intentional and safe within this context.
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- using the native PHP fclose() function instead of the WP Filesystem API.
 if (!defined('ABSPATH')) die('No direct access.');
 
 class UpdraftPlus_Encryption {

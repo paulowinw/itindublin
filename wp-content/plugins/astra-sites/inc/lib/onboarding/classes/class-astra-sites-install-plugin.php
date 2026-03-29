@@ -208,11 +208,10 @@ if ( ! class_exists( 'Astra_Sites_Install_Plugin' ) ) :
 				return false;
 			}
 
-			// Try multiple nonce actions that might be used in Astra Sites.
+			// Only accept nonce actions specific to this plugin.
 			$nonce_actions = array(
-				'astra-sites',      // Primary nonce action used in other Astra Sites AJAX calls.
+				'astra-sites',      // Primary nonce action used in Astra Sites AJAX calls.
 				'astra_sites_ajax', // Alternative nonce action.
-				'wp_rest',          // WordPress REST API nonce.
 			);
 
 			foreach ( $nonce_actions as $action ) {

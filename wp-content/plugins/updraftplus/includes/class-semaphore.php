@@ -105,7 +105,7 @@ class UpdraftPlus_Semaphore {
 				INSERT INTO $wpdb->options (option_name, option_value, autoload)
 				VALUES
 				('updraftplus_unlocked_$semaphore', '1', 'no'),
-				('updraftplus_last_lock_time_$semaphore', '%s', 'no'),
+				('updraftplus_last_lock_time_$semaphore', %s, 'no'),
 				('updraftplus_semaphore_$semaphore', '0', 'no')
 			", current_time('mysql', 1)));
 		}

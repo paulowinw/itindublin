@@ -1,4 +1,5 @@
 <?php
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 $backupable_entities = $updraftplus->get_backupable_file_entities(true, true);
 ?>

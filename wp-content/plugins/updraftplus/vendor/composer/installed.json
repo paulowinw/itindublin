@@ -642,17 +642,17 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.50",
-            "version_normalized": "2.0.50.0",
+            "version": "2.0.51",
+            "version_normalized": "2.0.51.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "1815ddd00195487cc922577751c175f339f4e20f"
+                "reference": "ed661e7cdaeb8c419e609e2f3203551a13c2ed48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/1815ddd00195487cc922577751c175f339f4e20f",
-                "reference": "1815ddd00195487cc922577751c175f339f4e20f",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/ed661e7cdaeb8c419e609e2f3203551a13c2ed48",
+                "reference": "ed661e7cdaeb8c419e609e2f3203551a13c2ed48",
                 "shasum": ""
             },
             "require": {
@@ -670,7 +670,7 @@
                 "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations.",
                 "ext-xml": "Install the XML extension to load XML formatted public keys."
             },
-            "time": "2025-12-15T11:48:50+00:00",
+            "time": "2026-01-27T09:11:52+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -735,7 +735,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.50"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.51"
             },
             "funding": [
                 {

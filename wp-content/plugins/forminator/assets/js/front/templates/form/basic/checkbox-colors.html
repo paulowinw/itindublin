@@ -1,0 +1,12 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-checkbox,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-checkbox__label,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-checkbox__label p,
+	.forminator-select-dropdown-container--open .forminator-custom-form-<?php echo $properties['form_id'] ?>.forminator-dropdown--<?php echo $theme; ?> .forminator-checkbox {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-radio-label' ) && !empty( $properties['basic-radio-label'] ) ) { ?>
+			color: <?php echo $properties['basic-radio-label'] ?>;
+		<?php } ?>
+	}
+
+<?php } ?>

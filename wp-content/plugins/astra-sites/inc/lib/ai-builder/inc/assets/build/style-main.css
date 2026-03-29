@@ -884,6 +884,8 @@ select {
   grid-column: span 6 / span 6;
 }.col-span-8 {
   grid-column: span 8 / span 8;
+}.col-span-full {
+  grid-column: 1 / -1;
 }.\!m-0 {
   margin: 0px !important;
 }.m-0 {
@@ -1288,6 +1290,8 @@ select {
   width: 106px;
 }.w-\[11\.5rem\] {
   width: 11.5rem;
+}.w-\[130px\] {
+  width: 130px;
 }.w-\[1440px\] {
   width: 1440px;
 }.w-\[14px\] {
@@ -1910,6 +1914,9 @@ select {
   background-color: rgb(39 49 63 / var(--tw-bg-opacity));
 }.bg-\[\#6B7280\]\/50 {
   background-color: rgb(107 114 128 / 0.5);
+}.bg-\[\#F4F7FB\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 247 251 / var(--tw-bg-opacity));
 }.bg-\[\#F6FAFE\] {
   --tw-bg-opacity: 1;
   background-color: rgb(246 250 254 / var(--tw-bg-opacity));
@@ -2201,6 +2208,9 @@ select {
 }.py-1\.5 {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
+}.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }.py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -3094,10 +3104,6 @@ select {
     width: 0.5rem;
   }
 }@media (min-width: 512px) {
-
-  .xs\:block {
-    display: block;
-  }
 
   .xs\:w-auto {
     width: auto;

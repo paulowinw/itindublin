@@ -1,0 +1,35 @@
+/* Page indicator */
+.forminator-ui.forminator-quiz#forminator-module-<?php echo $properties['form_id'] ?> .forminator-page-indicator {
+	display: flex;
+    justify-content: flex-end;
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-toggle-palette' )
+			&& forminator_array_value_exists( $properties, 'page-indicator-color' ) ) { ?>
+		color: <?php echo $properties['page-indicator-color'] ?>;
+	<?php } else { ?>
+		color: #888888;
+	<?php } ?>
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-toggle-typography' )
+			&& forminator_array_value_exists( $properties, 'page-indicator-font-size' ) ) { ?>
+		font-size: <?php echo $properties['page-indicator-font-size'] ?>px;
+	<?php } else { ?>
+		font-size: 13px;
+	<?php } ?>
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-toggle-typography' )
+			&& forminator_array_value_exists( $properties, 'page-indicator-font-family' ) ) { ?>
+		<?php if ( $properties['page-indicator-font-family'] != 'custom' ) { ?>
+			font-family: <?php echo $properties['page-indicator-font-family'] ?>;
+		<?php } else { ?>
+			<?php if ( ! empty( $properties['page-indicator-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['page-indicator-custom-family'] ?>;
+			<?php } ?>
+		<?php } ?>
+	<?php } else { ?>
+			font-family: Roboto;
+	<?php } ?>
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-toggle-typography' )
+			&& forminator_array_value_exists( $properties, 'page-indicator-font-weight' ) ) { ?>
+		<?php forminator_echo_font_weight( $properties, 'page-indicator-font-weight' ); ?>
+	<?php } else { ?>
+		font-weight: 400;
+	<?php } ?>
+}

@@ -1,0 +1,270 @@
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-border' ) && !empty( $properties['basic-multiselect-border'] ) ) { ?>
+			border-color: <?php echo $properties['basic-multiselect-border'] ?>;
+		<?php } else { ?>
+			border-color: #777771;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-background' ) && !empty( $properties['basic-multiselect-background'] ) ) { ?>
+			background-color: <?php echo $properties['basic-multiselect-background'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-has_error .forminator-multiselect {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-border-error' ) && !empty( $properties['basic-multiselect-border-error'] ) ) { ?>
+			border-color: <?php echo $properties['basic-multiselect-border-error'] ?>;
+		<?php } else { ?>
+			border-color: #E51919;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect .forminator-option {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-item-color-static' ) && !empty( $properties['basic-multiselect-item-color-static'] ) ) { ?>
+			color: <?php echo $properties['basic-multiselect-item-color-static'] ?>;
+		<?php } else { ?>
+			color: #777771;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect .forminator-option:hover,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect .forminator-option:focus-within {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-item-bg-hover' ) && !empty( $properties['basic-multiselect-item-bg-hover'] ) ) { ?>
+			background-color: <?php echo $properties['basic-multiselect-item-bg-hover'] ?>;
+		<?php } else { ?>
+			background-color: #DDDDDD;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-item-color-hover' ) && !empty( $properties['basic-multiselect-item-color-hover'] ) ) { ?>
+			color: <?php echo $properties['basic-multiselect-item-color-hover'] ?>;
+		<?php } else { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-item-outline-focus' ) && !empty( $properties['basic-multiselect-item-outline-focus'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect .forminator-option:focus-within {
+			outline: 2px solid <?php echo $properties['basic-multiselect-item-outline-focus'] ?>;
+			outline-offset: -2px;
+		}
+	<?php } ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect .forminator-option.forminator-is_checked {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-item-bg-active' ) && !empty( $properties['basic-multiselect-item-bg-active'] ) ) { ?>
+			background-color: <?php echo $properties['basic-multiselect-item-bg-active'] ?>;
+		<?php } else { ?>
+			background-color: #097BAA;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-item-color-active' ) && !empty( $properties['basic-multiselect-item-color-active'] ) ) { ?>
+			color: <?php echo $properties['basic-multiselect-item-color-active'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2-selections > li {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-tag-background-static' ) && !empty( $properties['basic-multiselect-tag-background-static'] ) ) { ?>
+			background-color: <?php echo $properties['basic-multiselect-tag-background-static'] ?>;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-tag-color-static' ) && !empty( $properties['basic-multiselect-tag-color-static'] ) ) { ?>
+			color: <?php echo $properties['basic-multiselect-tag-color-static'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2-selections > li > button {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-multiselect-tag-remove-color-static' ) && !empty( $properties['basic-multiselect-tag-remove-color-static'] ) ) { ?>
+			color: <?php echo $properties['basic-multiselect-tag-remove-color-static'] ?>;
+		<?php } else { ?>
+			color: #FFFFFF;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect {
+		border-color: #777771;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-has_error .forminator-multiselect {
+		border-color: #E51919;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect .forminator-option {
+		color: #777771;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect .forminator-option:hover,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect .forminator-option:focus-within {
+		background-color: #DDDDDD;
+		color: #000000;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-multiselect .forminator-option.forminator-is_checked {
+		background-color: #097BAA;
+		color: #FFFFFF;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2-selections > li {
+		background-color: #888888;
+		color: #FFFFFF;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2-selections > li > button {
+		color: #FFFFFF;
+	}
+
+<?php } ?>
+
+<!-- Multiselect alt colors -->
+<?php if ( forminator_array_value_exists( $properties, 'basic-cform-color-settings' ) ) { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"] {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-border-static' ) && !empty( $properties['basic-select-border-static'] ) ) { ?>
+			border-color: <?php echo $properties['basic-select-border-static'] ?>;
+		<?php } else { ?>
+			border-color: #777771;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-background-static' ) && !empty( $properties['basic-select-background-static'] ) ) { ?>
+			background-color: <?php echo $properties['basic-select-background-static'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"] .select2-selection__rendered {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-value-static' ) && !empty( $properties['basic-select-value-static'] ) ) { ?>
+			color: <?php echo $properties['basic-select-value-static'] ?>;
+		<?php } else { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"] .select2-selection__arrow {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-icon-static' ) && !empty( $properties['basic-select-icon-static'] ) ) { ?>
+			color: <?php echo $properties['basic-select-icon-static'] ?>;
+		<?php } else { ?>
+			color: #777771;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:hover {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-border-hover' ) && !empty( $properties['basic-select-border-hover'] ) ) { ?>
+			border-color: <?php echo $properties['basic-select-border-hover'] ?>;
+		<?php } else { ?>
+			border-color: #097BAA;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-background-hover' ) && !empty( $properties['basic-select-background-hover'] ) ) { ?>
+			background-color: <?php echo $properties['basic-select-background-hover'] ?>;
+		<?php } else { ?>
+			background-color: #E6E6E6;
+		<?php } ?>
+	}
+
+	<?php if ( forminator_array_value_exists( $properties, 'basic-select-focus-outline-color' ) && !empty( $properties['basic-select-focus-outline-color'] ) ) { ?>
+		.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:focus {
+			outline: 2px solid <?php echo $properties['basic-select-focus-outline-color'] ?>;
+			outline-offset: 1px;
+		}
+	<?php } ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:hover .select2-selection__rendered {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-value-hover' ) && !empty( $properties['basic-select-value-hover'] ) ) { ?>
+			color: <?php echo $properties['basic-select-value-hover'] ?>;
+		<?php } else { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:hover .select2-selection__arrow {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-icon-hover' ) && !empty( $properties['basic-select-icon-hover'] ) ) { ?>
+			color: <?php echo $properties['basic-select-icon-hover'] ?>;
+		<?php } else { ?>
+			color: #097BAA;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select.select2-container--open .selection .select2-selection--multiple[role="combobox"] {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-border-active' ) && !empty( $properties['basic-select-border-active'] ) ) { ?>
+			border-color: <?php echo $properties['basic-select-border-active'] ?>;
+		<?php } else { ?>
+			border-color: #097BAA;
+		<?php } ?>
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-background-active' ) && !empty( $properties['basic-select-background-active'] ) ) { ?>
+			background-color: <?php echo $properties['basic-select-background-active'] ?>;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:focus .select2-selection__rendered,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select.select2-container--open .selection .select2-selection--multiple[role="combobox"] .select2-selection__rendered {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-value-active' ) && !empty( $properties['basic-select-value-active'] ) ) { ?>
+			color: <?php echo $properties['basic-select-value-active'] ?>;
+		<?php } else { ?>
+			color: #000000;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:focus .select2-selection__arrow,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select.select2-container--open .selection .select2-selection--multiple[role="combobox"] .select2-selection__arrow {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-icon-active' ) && !empty( $properties['basic-select-icon-active'] ) ) { ?>
+			color: <?php echo $properties['basic-select-icon-active'] ?>;
+		<?php } else { ?>
+			color: #097BAA;
+		<?php } ?>
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field.forminator-has_error .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"] {
+		<?php if ( forminator_array_value_exists( $properties, 'basic-select-border-error' ) && !empty( $properties['basic-select-border-error'] ) ) { ?>
+			border-color: <?php echo $properties['basic-select-border-error'] ?>;
+		<?php } else { ?>
+			border-color: #E51919;
+		<?php } ?>
+	}
+
+<?php } else { ?>
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"] {
+		border-color: #777771;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"] .select2-selection__rendered {
+		color: #000000;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"] .select2-selection__arrow {
+		color: #777771;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:hover {
+		border-color: #097BAA;
+		background-color: #E6E6E6;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:hover .select2-selection__rendered {
+		color: #000000;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:hover .select2-selection__arrow {
+		color: #097BAA;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:focus,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select.select2-container--open .selection .select2-selection--multiple[role="combobox"] {
+		border-color: #097BAA;
+		background-color: #E6E6E6;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:focus .select2-selection__rendered,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select.select2-container--open .selection .select2-selection--multiple[role="combobox"] .select2-selection__rendered {
+		color: #000000;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"]:focus .select2-selection__arrow,
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-select2 + .forminator-select.select2-container--open .selection .select2-selection--multiple[role="combobox"] .select2-selection__arrow {
+		color: #097BAA;
+	}
+
+	.forminator-ui#forminator-module-<?php echo $properties['form_id'] ?>.forminator-design--<?php echo $theme; ?> .forminator-field.forminator-has_error .forminator-select2 + .forminator-select .selection .select2-selection--multiple[role="combobox"] {
+		border-color: #E51919;
+	}
+
+<?php } ?>

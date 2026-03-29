@@ -1,4 +1,7 @@
-<?php if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed'); ?>
+<?php
+if (!defined('ABSPATH')) exit;
+if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
+?>
 
 <?php if (!empty($button_meta) && 'review' == $button_meta) : ?>
 

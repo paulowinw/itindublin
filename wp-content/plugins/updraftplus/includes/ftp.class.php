@@ -1,4 +1,6 @@
 <?php
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- Using the default PHP fopen() function instead of the WP Filesystem API.
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- using the native PHP fclose() function instead of the WP Filesystem API.
 
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed.');
 

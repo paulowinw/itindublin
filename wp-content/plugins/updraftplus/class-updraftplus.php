@@ -1,5 +1,6 @@
 <?php
-
+// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen,WordPress.WP.AlternativeFunctions.file_system_operations_fread,WordPress.WP.AlternativeFunctions.file_system_operations_fclose,WordPress.WP.AlternativeFunctions.file_system_operations_readfile,WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents,WordPress.WP.AlternativeFunctions.file_system_operations_fwrite,WordPress.WP.AlternativeFunctions.file_system_operations_mkdir,WordPress.WP.AlternativeFunctions.file_system_operations_rmdir,WordPress.WP.AlternativeFunctions.file_system_operations_touch,WordPress.WP.AlternativeFunctions.curl_curl_setopt -- The native PHP functions are intentionally used and reviewed to ensure its safety.
+if (!defined('ABSPATH')) exit;
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
 class UpdraftPlus {
@@ -93,8 +94,6 @@ class UpdraftPlus {
 	public function __construct() {
 		global $pagenow;
 		// Initialisation actions - takes place on plugin load
-
-		// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen,WordPress.WP.AlternativeFunctions.file_system_operations_fread,WordPress.WP.AlternativeFunctions.file_system_operations_fclose,WordPress.WP.AlternativeFunctions.file_system_operations_readfile,WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents,WordPress.WP.AlternativeFunctions.file_system_operations_fwrite   -- suggesting using the interactive WP Filesystem API (or any other API) for read-access to files is absurd; and all write operations in this file are non-interactive, to known-writable directories
 		if ($fp = fopen(UPDRAFTPLUS_DIR.'/updraftplus.php', 'r')) {
 			$file_data = fread($fp, 1024);
 			if (preg_match("/Version: ([\d\.]+)(\r|\n)/", $file_data, $matches)) {
@@ -194,7 +193,6 @@ class UpdraftPlus {
 		if (!wp_next_scheduled('updraftplus_clean_temporary_files')) {
 			wp_schedule_event(time(), 'twicedaily', 'updraftplus_clean_temporary_files');
 		}
-		// phpcs:enable
 	}
 
 	/**
@@ -295,7 +293,7 @@ class UpdraftPlus {
 				if (!empty($storage_options['token']) && $storage_options['token']) {
 					$site_id = $this->siteid();
 					$hash = hash('sha256', $site_id.':::'.$storage_options['token']);
-					if ($hash == $_POST['reset_hash']) {
+					if (isset($_POST['reset_hash']) && $hash == $_POST['reset_hash']) {
 						$this->log('This site has been remotely disconnected from UpdraftVault');
 						updraft_try_include_file('methods/updraftvault.php', 'include_once');
 						$vault = new UpdraftPlus_BackupModule_updraftvault();
@@ -345,7 +343,7 @@ class UpdraftPlus {
 		// From phpseclib/phpseclib/phpseclib/bootstrap.php - we nullify it there, but log here instead
 		if (extension_loaded('mbstring')) {
 			// 2 - MB_OVERLOAD_STRING
-			// @codingStandardsIgnoreLine
+			// phpcs:ignore PHPCompatibility.IniDirectives.RemovedIniDirectives.mbstring_func_overloadDeprecated -- Ignore the removed ini directives compatibility
 			if (ini_get('mbstring.func_overload') & 2) {
 				// We go on to try anyway, in case the caller wasn't using an affected part of phpseclib
 				// @codingStandardsIgnoreLine
@@ -384,11 +382,10 @@ class UpdraftPlus {
 	private function no_deprecation_warnings_on_php7() {
 		// PHP_MAJOR_VERSION is defined in PHP 5.2.7+
 		// We don't test for PHP > 7 because the specific deprecated element will be removed in PHP 8 - and so no warning should come anyway (and we shouldn't suppress other stuff until we know we need to).
-		// @codingStandardsIgnoreLine
+		// phpcs:ignore PHPCompatibility.Constants.NewConstants.php_major_versionFound -- PHP_MAJOR_VERSION constant does not exist in PHP 5.2.6 and lower
 		if (defined('PHP_MAJOR_VERSION') && PHP_MAJOR_VERSION == 7) {
 			$old_level = error_reporting();
-			// @codingStandardsIgnoreLine
-			$new_level = $old_level & ~E_DEPRECATED;
+			$new_level = $old_level & ~E_DEPRECATED; // phpcs:ignore PHPCompatibility.Constants.NewConstants.e_deprecatedFound -- E_DEPRECATED constant does not exist in PHP 5.2 and lower
 			if ($old_level != $new_level) error_reporting($new_level);
 			$this->no_deprecation_warnings = true;
 		}
@@ -626,7 +623,8 @@ class UpdraftPlus {
 						call_user_func(array($backup_obj, $call_method));
 					}
 				} catch (Exception $e) {
-					$this->log(sprintf(__("%s error: %s", 'updraftplus'), $method, $e->getMessage().' ('.$e->getCode().')', 'error'));
+					/* translators: 1: Method name, 2: Error message */
+					$this->log(sprintf(__('%1$s error: %2$s', 'updraftplus'), $method, $e->getMessage().' ('.$e->getCode().')', 'error'));
 				}
 				$this->register_wp_http_option_hooks(false);
 			} elseif (isset($_GET['page']) && 'updraftplus' === $_GET['page'] && 'downloadlog' === $_GET['action'] && isset($_GET['updraftplus_backup_nonce']) && is_string($_GET['updraftplus_backup_nonce']) && preg_match("/^[0-9a-f]{12}$/", $_GET['updraftplus_backup_nonce']) && UpdraftPlus_Options::user_can_manage()) {
@@ -742,7 +740,7 @@ class UpdraftPlus {
 	public function siteid() {
 		$sid = get_site_option('updraftplus-addons_siteid');
 		if (!is_string($sid) || empty($sid)) {
-			$sid = md5(rand().microtime(true).home_url());
+			$sid = md5(wp_rand().microtime(true).home_url());
 			update_site_option('updraftplus-addons_siteid', $sid);
 		}
 		return $sid;
@@ -889,7 +887,7 @@ class UpdraftPlus {
 	public function backup_time_nonce($nonce = false, $timestamp = false) {
 		$this->job_time_ms = microtime(true);
 		if (false === $timestamp) $timestamp = time();
-		if (false === $nonce) $nonce = substr(md5(time().rand()), 20);
+		if (false === $nonce) $nonce = substr(md5(time().wp_rand()), 20);
 		$this->backup_time = $timestamp;
 		$this->file_nonce = apply_filters('updraftplus_incremental_backup_file_nonce', $nonce);
 		$this->nonce = $nonce;
@@ -1029,7 +1027,8 @@ class UpdraftPlus {
 
 		$proxy = new WP_HTTP_Proxy();
 
-		$logline = "UpdraftPlus WordPress backup plugin (https://updraftplus.com): ".$this->version." WP: ".$wp_version." PHP: ".phpversion()." (".PHP_SAPI.", ".(function_exists('php_uname') ? @php_uname() : PHP_OS).") MySQL: $mysql_version (max packet size=$mp) WPLANG: ".get_locale()." Server: ".$_SERVER["SERVER_SOFTWARE"]." safe_mode: $safe_mode max_execution_time: $max_execution_time memory_limit: $memory_limit (used: {$memory_usage}M | {$memory_usage2}M) multisite: ".(is_multisite() ? (is_subdomain_install() ? 'Y (sub-domain)' : 'Y (sub-folder)') : 'N')." openssl: ".(defined('OPENSSL_VERSION_TEXT') ? OPENSSL_VERSION_TEXT : 'N')." mcrypt: ".(function_exists('mcrypt_encrypt') ? 'Y' : 'N')." LANG: ".getenv('LANG')." WP Proxy: ".($proxy->is_enabled() ? 'enabled' : 'disabled')." ZipArchive::addFile: ";// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Silenced to suppress errors that may arise because of the function.
+		$server_software = isset($_SERVER["SERVER_SOFTWARE"]) ? $_SERVER["SERVER_SOFTWARE"] : '';
+		$logline = "UpdraftPlus WordPress backup plugin (https://updraftplus.com): ".$this->version." WP: ".$wp_version." PHP: ".phpversion()." (".PHP_SAPI.", ".(function_exists('php_uname') ? @php_uname() : PHP_OS).") MySQL: $mysql_version (max packet size=$mp) WPLANG: ".get_locale()." Server: ".$server_software." safe_mode: $safe_mode max_execution_time: $max_execution_time memory_limit: $memory_limit (used: {$memory_usage}M | {$memory_usage2}M) multisite: ".(is_multisite() ? (is_subdomain_install() ? 'Y (sub-domain)' : 'Y (sub-folder)') : 'N')." openssl: ".(defined('OPENSSL_VERSION_TEXT') ? OPENSSL_VERSION_TEXT : 'N')." mcrypt: ".(function_exists('mcrypt_encrypt') ? 'Y' : 'N')." LANG: ".getenv('LANG')." WP Proxy: ".($proxy->is_enabled() ? 'enabled' : 'disabled')." ZipArchive::addFile: ";// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Silenced to suppress errors that may arise because of the function.
 
 		// method_exists causes some faulty PHP installations to segfault, leading to support requests
 		if (version_compare(phpversion(), '5.2.0', '>=') && extension_loaded('zip')) {
@@ -1041,10 +1040,12 @@ class UpdraftPlus {
 		if (0 === $this->current_resumption) {
 			$memlim = $this->memory_check_current();
 			if ($memlim<65 && $memlim>0) {
+				/* translators: %s: Memory limit in MB */
 				$this->log(sprintf(__('The amount of memory (RAM) allowed for PHP is very low (%s Mb) - you should increase it to avoid failures due to insufficient memory (consult your web hosting company for more help)', 'updraftplus'), round($memlim, 1)), 'warning', 'lowram');
 			}
 			if ($max_execution_time>0 && $max_execution_time<20) {
-				call_user_func($logging_function, sprintf(__('The amount of time allowed for WordPress plugins to run is very low (%s seconds) - you should increase it to avoid backup failures due to time-outs (consult your web hosting company for more help - it is the max_execution_time PHP setting; the recommended value is %s seconds or more)', 'updraftplus'), $max_execution_time, 90), 'warning', 'lowmaxexecutiontime');
+				/* translators: 1: Execution time in seconds, 2: Recommended execution time in seconds */
+				call_user_func($logging_function, sprintf(__('The amount of time allowed for WordPress plugins to run is very low (%1$s seconds) - you should increase it to avoid backup failures due to time-outs (consult your web hosting company for more help - it is the max_execution_time PHP setting; the recommended value is %2$s seconds or more)', 'updraftplus'), $max_execution_time, 90), 'warning', 'lowmaxexecutiontime');
 			}
 
 		}
@@ -1057,6 +1058,7 @@ class UpdraftPlus {
 			$quota_free = ' / '.sprintf('Free disk space in account: %s (%s used)', round($hosting_bytes_free[3]/1048576, 1)." MB", "$perc %");
 			if ($hosting_bytes_free[3] < 1048576*50) {
 				$quota_free_mb = round($hosting_bytes_free[3]/1048576, 1);
+				/* translators: %s: Available disk space in MB */
 				call_user_func($logging_function, sprintf(__('Your free space in your hosting account is very low - only %s Mb remain', 'updraftplus'), $quota_free_mb), 'warning', 'lowaccountspace'.$quota_free_mb);
 			}
 		} else {
@@ -1070,6 +1072,7 @@ class UpdraftPlus {
 		} else {
 			call_user_func($logging_function, "Free space on disk containing Updraft's temporary directory: ".round($disk_free_space/1048576, 1)." MB".$quota_free);
 			$disk_free_mb = round($disk_free_space/1048576, 1);
+			/* translators: %s: Available disk space in MB */
 			if ($disk_free_space < 50*1048576) call_user_func($logging_function, sprintf(__('Your free disk space is very low - only %s Mb remain', 'updraftplus'), round($disk_free_space/1048576, 1)), 'warning', 'lowdiskspace'.$disk_free_mb);
 		}
 
@@ -1244,12 +1247,14 @@ class UpdraftPlus {
 		if (false === $err) return false;
 		if (is_string($err)) {
 			$this->log("Error message: $err");
+			/* translators: %s: Error message */
 			if ($echo) $this->log(sprintf(__('Error: %s', 'updraftplus'), $err), 'notice-warning');
 			if ($logerror) $this->log($err, 'error');
 			return false;
 		}
 		foreach ($err->get_error_messages() as $msg) {
 			$this->log("Error message: $msg");
+			/* translators: %s: Error message */
 			if ($echo) $this->log(sprintf(__('Error: %s', 'updraftplus'), $msg), 'notice-warning');
 			if ($logerror) $this->log($msg, 'error');
 		}
@@ -1288,7 +1293,8 @@ class UpdraftPlus {
 	 */
 	public function output_to_browser($line) {
 		echo wp_kses_post($line);
-		if (false === stripos($_SERVER['SERVER_SOFTWARE'], 'nginx')) return;
+		$server_software = isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : '';
+		if (false === stripos($server_software, 'nginx')) return;
 		// Change it to what was actually output
 		$line = wp_kses_post($line);
 		static $strcount = 0;
@@ -1429,6 +1435,7 @@ class UpdraftPlus {
 			
 			if (false == ($fp = @fopen($fullpath, 'rb'))) {// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Silenced to suppress errors that may arise because of the function.
 				$this->log("$logname: failed to open file: $fullpath");
+				/* translators: %s: Log name */
 				$this->log("$file: ".sprintf(__('%s Error: Failed to open local file', 'updraftplus'), $logname), 'error');
 				return false;
 			}
@@ -1544,6 +1551,7 @@ class UpdraftPlus {
 			$ret = $caller->chunked_upload_finish($file);
 			if (!$ret) {
 				$this->log("$logname - failed to re-assemble chunks");
+				/* translators: %s: Log name */
 				$this->log(sprintf(__('%s error - failed to re-assemble chunks', 'updraftplus'), $logname), 'error');
 			}
 			do_action('updraftplus_post_chunked_upload_finish', $file, $caller, $ret);
@@ -1679,8 +1687,7 @@ class UpdraftPlus {
 	 * @return Integer - 1 or 0
 	 */
 	public function detect_safe_mode() {
-		// @codingStandardsIgnoreLine
-		return (@ini_get('safe_mode') && 'off' != strtolower(@ini_get('safe_mode'))) ? 1 : 0;
+		return (@ini_get('safe_mode') && 'off' != strtolower(@ini_get('safe_mode'))) ? 1 : 0; // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged, PHPCompatibility.IniDirectives.RemovedIniDirectives.safe_modeDeprecatedRemoved -- Silenced to suppress errors that may arise because of the function, ignore the removed ini directives compatibility.
 	}
 	
 	/**
@@ -1705,7 +1712,7 @@ class UpdraftPlus {
 		$updraft_dir = $this->backups_dir_location();
 		global $wpdb;
 		$table_name = $wpdb->get_blog_prefix().'options';
-		$pfile = md5(time().rand()).'.tmp';
+		$pfile = md5(time().wp_rand()).'.tmp';
 		file_put_contents($updraft_dir.'/'.$pfile, "[mysqldump]\npassword=\"".addslashes(DB_PASSWORD)."\"\n");
 
 		$result = false;
@@ -1880,7 +1887,7 @@ class UpdraftPlus {
 						1 => array('pipe', 'w'),
 						2 => array('pipe', 'w')
 					);
-					$handle = proc_open($exec, $descriptorspec, $pipes, $updraft_dir);
+					$handle = proc_open($exec, $descriptorspec, $pipes, $updraft_dir);// phpcs:ignore Generic.PHP.ForbiddenFunctions.Found -- This function is intentionally used and reviewed for safety.
 					if (is_resource($handle)) {
 						if (!fwrite($pipes[0], "binziptest/subdir1/subdir2/test2.html\n")) {
 							@fclose($pipes[0]);// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- Silenced to suppress errors that may arise because of the function.
@@ -2003,8 +2010,10 @@ class UpdraftPlus {
 		$how_many = is_string($history[$entity]) ? 1 : count($history[$entity]);
 
 		if ($smaller) {
+			/* translators: %s: Number of files */
 			$pfiles = "<strong>".$description." (".sprintf(__('files: %s', 'updraftplus'), $how_many).")</strong><br>\n";
 		} else {
+			/* translators: %s: Number of files */
 			$pfiles = "<h3>".$description." (".sprintf(__('files: %s', 'updraftplus'), $how_many).")</h3>\n\n";
 		}
 
@@ -2063,20 +2072,24 @@ class UpdraftPlus {
 			$dind = substr($entity, 2);
 			if (is_array($jobdata) && !empty($jobdata['backup_database']) && is_array($jobdata['backup_database']) && !empty($jobdata['backup_database'][$dind]) && is_array($jobdata['backup_database'][$dind]['dbinfo']) && !empty($jobdata['backup_database'][$dind]['dbinfo']['host'])) {
 				$dbinfo = $jobdata['backup_database'][$dind]['dbinfo'];
+				/* translators: %s: Database connection details */
 				$meta .= sprintf(__('External database (%s)', 'updraftplus'), $dbinfo['user'].'@'.$dbinfo['host'].'/'.$dbinfo['name'])."<br>";
 			}
 		}
+		/* translators: %s: Database size in MB */
 		if (isset($history[$skey])) $meta .= sprintf(__('Size: %s MB', 'updraftplus'), round($history[$skey]/1048576, 1));
 		$ckey = $entity.$ind;
 		foreach ($checksums as $ck) {
 			$ck_plain = false;
 			if (isset($history['checksums'][$ck][$ckey])) {
-				$meta .= (($meta) ? ', ' : '').sprintf(__('%s checksum: %s', 'updraftplus'), strtoupper($ck), $history['checksums'][$ck][$ckey]);
+				/* translators: 1: Checksum type, 2: Checksum value */
+				$meta .= (($meta) ? ', ' : '').sprintf(__('%1$s checksum: %2$s', 'updraftplus'), strtoupper($ck), $history['checksums'][$ck][$ckey]);
 				$ck_plain = true;
 			}
 			if (isset($history['checksums'][$ck][$ckey.'.crypt'])) {
-				if ($ck_plain) $meta .= ' '.__('(when decrypted)');
-				$meta .= (($meta) ? ', ' : '').sprintf(__('%s checksum: %s', 'updraftplus'), strtoupper($ck), $history['checksums'][$ck][$ckey.'.crypt']);
+				if ($ck_plain) $meta .= ' '.__('(when decrypted)', 'updraftplus');
+				/* translators: 1: Checksum type, 2: Checksum value */
+				$meta .= (($meta) ? ', ' : '').sprintf(__('%1$s checksum: %2$s', 'updraftplus'), strtoupper($ck), $history['checksums'][$ck][$ckey.'.crypt']);
 			}
 		}
 
@@ -2245,8 +2258,22 @@ class UpdraftPlus {
 
 	}
 
+	/**
+	 * Custom PHP error handler. This will print the error to the log file.
+	 *
+	 * @param integer $errno   - The level of the error raised
+	 * @param string  $errstr  - The error message
+	 * @param string  $errfile - The filename that the error was raised in
+	 * @param integer $errline - The line number the error was raised at
+	 *
+	 * @return bool If the function returns false, the standard PHP error handler will continue to process the error
+	 */
 	public function php_error($errno, $errstr, $errfile, $errline) {
-		if (0 == error_reporting()) return true;
+		// Unlike in PHP 7.4 and lower, the 'error_reporting()' function in PHP 8.0+ will return the value of this bitwise expression: 'E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR | E_RECOVERABLE_ERROR | E_PARSE' instead of '0' when we suppress the error using the '@' operator.
+		$error_level = error_reporting();
+		$fatal_mask = E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_USER_ERROR | E_RECOVERABLE_ERROR | E_PARSE;
+		if (0 === $error_level || 0 === ($error_level & ~$fatal_mask)) return true;
+		
 		$logline = $this->php_error_to_logline($errno, $errstr, $errfile, $errline);
 		if (false !== $logline) $this->log($logline, 'notice', 'php_event');
 		// Pass it up the chain
@@ -2574,16 +2601,17 @@ class UpdraftPlus {
 				// @codingStandardsIgnoreLine
 				$log_message .= ' Backtrace: '.str_replace(array(ABSPATH, "\n"), array('', ', '), $e->getTraceAsString());
 				$this->log($log_message);
-				$this->log(sprintf(__('A PHP exception (%s) has occurred: %s', 'updraftplus'), get_class($e), $e->getMessage()), 'error');
+				/* translators: 1: Exception class, 2: Error message */
+				$this->log(sprintf(__('A PHP exception (%1$s) has occurred: %2$s', 'updraftplus'), get_class($e), $e->getMessage()), 'error');
 				die();
-			// @codingStandardsIgnoreLine
-			} catch (Error $e) {
+			} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
 				$log_message = 'PHP Fatal error ('.get_class($e).') has occurred. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
 				error_log($log_message);
 				// @codingStandardsIgnoreLine
 				$log_message .= ' Backtrace: '.str_replace(array(ABSPATH, "\n"), array('', ', '), $e->getTraceAsString());
 				$this->log($log_message);
-				$this->log(sprintf(__('A PHP fatal error (%s) has occurred: %s', 'updraftplus'), get_class($e), $e->getMessage()), 'error');
+				/* translators: 1: Exception class, 2: Error message */
+				$this->log(sprintf(__('A PHP fatal error (%1$s) has occurred: %2$s', 'updraftplus'), get_class($e), $e->getMessage()), 'error');
 				die();
 			}
 
@@ -2643,14 +2671,15 @@ class UpdraftPlus {
 					$log_message = 'Exception ('.get_class($e).') occurred during files backup: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
 					$this->log($log_message);
 					error_log($log_message);
-					$this->log(sprintf(__('A PHP exception (%s) has occurred: %s', 'updraftplus'), get_class($e), $e->getMessage()), 'error');
+					/* translators: 1: Exception class, 2: Error message */
+					$this->log(sprintf(__('A PHP exception (%1$s) has occurred: %2$s', 'updraftplus'), get_class($e), $e->getMessage()), 'error');
 					die();
-				// @codingStandardsIgnoreLine
-				} catch (Error $e) {
+				} catch (Error $e) { // phpcs:ignore PHPCompatibility.Classes.NewClasses.errorFound -- The Error class does not exist in PHP below 5.6.
 					$log_message = 'PHP Fatal error ('.get_class($e).') has occurred. Error Message: '.$e->getMessage().' (Code: '.$e->getCode().', line '.$e->getLine().' in '.$e->getFile().')';
 					$this->log($log_message);
 					error_log($log_message);
-					$this->log(sprintf(__('A PHP fatal error (%s) has occurred: %s', 'updraftplus'), get_class($e), $e->getMessage()), 'error');
+					/* translators: 1: Exception class, 2: Error message */
+					$this->log(sprintf(__('A PHP fatal error (%1$s) has occurred: %2$s', 'updraftplus'), get_class($e), $e->getMessage()), 'error');
 					die();
 				}
 
@@ -3320,10 +3349,24 @@ class UpdraftPlus {
 
 		$hosting_company = $this->get_hosting_info();
 		if (!empty($options['incremental']) && in_array('only_one_incremental_per_day', $this->is_hosting_backup_limit_reached())) {
-			$this->log(__("You have reached the daily limit for the number of incremental backups you can create at this time.", 'updraftplus').' '.__(' Your hosting provider only allows you to take one incremental backup per day.', 'updraftplus').' '.sprintf(__('Please contact your hosting company (%s) if you require further support.', 'updraftplus'), $hosting_company['name']));
+			$this->log(
+				__("You have reached the daily limit for the number of incremental backups you can create at this time.", 'updraftplus').' '.
+				__(' Your hosting provider only allows you to take one incremental backup per day.', 'updraftplus').' '.
+				sprintf(
+					/* translators: %s: Hosting provider name */
+					__('Please contact your hosting company (%s) if you require further support.', 'updraftplus'),
+				$hosting_company['name'])
+			);
 			return false;
 		} elseif (empty($options['incremental']) && in_array('only_one_backup_per_month', $this->is_hosting_backup_limit_reached())) {
-			$this->log(__('You have reached the monthly limit for the number of backups you can create at this time.', 'updraftplus').' '.__('Your hosting provider only allows you to take one backup per month.', 'updraftplus').' '.sprintf(__('Please contact your hosting company (%s) if you require further support.', 'updraftplus'), $hosting_company['name']));
+			$this->log(
+				__('You have reached the monthly limit for the number of backups you can create at this time.', 'updraftplus').' '.
+				__('Your hosting provider only allows you to take one backup per month.', 'updraftplus').' '.
+				sprintf(
+					/* translators: %s: Hosting provider name */
+					__('Please contact your hosting company (%s) if you require further support.', 'updraftplus'),
+				$hosting_company['name'])
+			);
 			return false;
 		}
 
@@ -3868,6 +3911,7 @@ class UpdraftPlus {
 
 		// We have to use the action in order to set the MIME type on the attachment - by default, WordPress just puts application/octet-stream
 
+		/* translators: %s: Blog name */
 		$subject = apply_filters('updraft_report_subject', sprintf(__('Backed up: %s', 'updraftplus'), wp_specialchars_decode(get_option('blogname'), ENT_QUOTES)).' (UpdraftPlus '.$this->version.') '.get_date_from_gmt(gmdate('Y-m-d H:i:s', time()), 'Y-m-d H:i').' - '.esc_html($backup_status), $error_count, count($warnings));
 
 		// The class_exists() check here is a micro-optimization to prevent a possible HTTP call whose results may be disregarded by the filter
@@ -4034,6 +4078,7 @@ class UpdraftPlus {
 	 * @return String The sender name
 	 */
 	public function get_email_from_name_header() {
+		/* translators: %s: Site name */
 		return sprintf(__('UpdraftPlus on %s', 'updraftplus'), $this->get_site_name());
 	}
 	
@@ -5097,9 +5142,17 @@ class UpdraftPlus {
 
 			if (!$encryption) {
 				if (class_exists('UpdraftPlus_Addon_MoreDatabase')) {
-					$err[] = sprintf(__('Error: %s', 'updraftplus'), __('Decryption failed.', 'updraftplus').' '.__('The database file is encrypted, but you have no encryption key entered.', 'updraftplus'));
+					$err[] = sprintf(
+						/* translators: %s: Error message */
+						__('Error: %s', 'updraftplus'),
+						__('Decryption failed.', 'updraftplus').' '.__('The database file is encrypted, but you have no encryption key entered.', 'updraftplus')
+					);
 				} else {
-					$err[] = sprintf(__('Error: %s', 'updraftplus'), __('Decryption failed.', 'updraftplus').' '.__('The database file is encrypted.', 'updraftplus'));
+					$err[] = sprintf(
+						/* translators: %s: Error message */
+						__('Error: %s', 'updraftplus'),
+						__('Decryption failed.', 'updraftplus').' '.__('The database file is encrypted.', 'updraftplus')
+					);
 				}
 				return array($mess, $warn, $err, $info);
 			}
@@ -5116,6 +5169,7 @@ class UpdraftPlus {
 
 		// Even the empty schema when gzipped comes to 1565 bytes; a blank WP 3.6 install at 5158. But we go low, in case someone wants to share single tables.
 		if (filesize($db_file) < 1000) {
+			/* translators: %s: Database size in KB */
 			$err[] = sprintf(__('The database is too small to be a valid WordPress database (size: %s Kb).', 'updraftplus'), round(filesize($db_file)/1024, 1));
 			return array($mess, $warn, $err, $info);
 		}
@@ -5188,7 +5242,9 @@ class UpdraftPlus {
 				$processing_routine = false;
 				if ('' == $old_siteurl && preg_match('/^\# Backup of: (http(.*))$/', $buffer, $matches)) {
 					$old_siteurl = untrailingslashit($matches[1]);
-					$mess[] = __('Backup of:', 'updraftplus').' '.htmlspecialchars($old_siteurl).((!empty($old_wp_version)) ? ' '.sprintf(__('(version: %s)', 'updraftplus'), $old_wp_version) : '');
+					$mess[] = __('Backup of:', 'updraftplus').' '.htmlspecialchars($old_siteurl).
+								/* translators: %s: Old WP versions */
+								((!empty($old_wp_version)) ? ' '.sprintf(__('(version: %s)', 'updraftplus'), $old_wp_version) : '');
 					// Check for should-be migration
 					if (untrailingslashit(site_url()) != $old_siteurl) {
 						if (!$migration_warning) {
@@ -5202,12 +5258,15 @@ class UpdraftPlus {
 								$old_siteurl_parsed = parse_url($old_siteurl);
 								$actual_siteurl_parsed = parse_url(site_url());
 								if ((stripos($old_siteurl_parsed['host'], 'www.') === 0 && stripos($actual_siteurl_parsed['host'], 'www.') !== 0) || (stripos($old_siteurl_parsed['host'], 'www.') !== 0 && stripos($actual_siteurl_parsed['host'], 'www.') === 0)) {
-									$powarn = sprintf(__('The website address in the backup set (%s) is slightly different from that of the site now (%s).', 'updraftplus'), $old_siteurl, site_url()).' '.__('This is not expected to be a problem for restoring the site, as long as visits to the former address still reach the site.', 'updraftplus').' ';
+									/* translators: 1: Old site URL, 2: Current site URL */
+									$powarn = sprintf(__('The website address in the backup set (%1$s) is slightly different from that of the site now (%2$s).', 'updraftplus'), $old_siteurl, site_url()).' '.
+											__('This is not expected to be a problem for restoring the site, as long as visits to the former address still reach the site.', 'updraftplus').' ';
 								} else {
 									$powarn = '';
 								}
 								if (('https' == $old_siteurl_parsed['scheme'] && 'http' == $actual_siteurl_parsed['scheme']) || ('http' == $old_siteurl_parsed['scheme'] && 'https' == $actual_siteurl_parsed['scheme'])) {
-									$powarn .= sprintf(__('This backup set is of this site, but at the time of the backup you were using %s, whereas the site now uses %s.', 'updraftplus'), $old_siteurl_parsed['scheme'], $actual_siteurl_parsed['scheme']);
+									/* translators: 1: Old scheme, 2: Current scheme */
+									$powarn .= sprintf(__('This backup set is of this site, but at the time of the backup you were using %1$s, whereas the site now uses %2$s.', 'updraftplus'), $old_siteurl_parsed['scheme'], $actual_siteurl_parsed['scheme']);
 									if ('https' == $old_siteurl_parsed['scheme']) {
 										$powarn .= ' '.apply_filters('updraftplus_https_to_http_additional_warning', '');
 									} else {
@@ -5221,12 +5280,25 @@ class UpdraftPlus {
 								// For completely different site migration
 								$info['same_url'] = false;
 								$info['url_scheme_change'] = false;
-								$warn[] = apply_filters('updraftplus_dbscan_urlchange', '<a href="https://updraftplus.com/shop/migrator/" target="_blank">'.sprintf(__('This backup set is from a different site (%s) - this is not a restoration, but a migration.', 'updraftplus'), htmlspecialchars($old_siteurl.' / '.untrailingslashit(site_url()))).' '.__('You need the Migrator add-on in order to make this work.', 'updraftplus').'</a>', $old_siteurl, $res);
+								$warn[] = apply_filters(
+									'updraftplus_dbscan_urlchange',
+									'<a href="https://updraftplus.com/shop/migrator/" target="_blank">'.
+									sprintf(
+										/* translators: %s: Old site URL */
+										__('This backup set is from a different site (%s) - this is not a restoration, but a migration.', 'updraftplus'),
+										htmlspecialchars($old_siteurl.' / '.untrailingslashit(site_url()))
+									).' '.__('You need the Migrator add-on in order to make this work.', 'updraftplus').'</a>',
+									$old_siteurl,
+									$res
+								);
 							}
 						}
 
 						if ($this->mod_rewrite_unavailable(false)) {
-							$warn[] = sprintf(__('You are using the %s webserver, but do not seem to have the %s module loaded.', 'updraftplus'), 'Apache', 'mod_rewrite').' '.sprintf(__('You should enable %s to make any pretty permalinks (e.g. %s) work', 'updraftplus'), 'mod_rewrite', 'http://example.com/my-page/');
+							/* translators: 1: Webserver type, 2: Missing module */
+							$warn[] = sprintf(__('You are using the %1$s webserver, but do not seem to have the %2$s module loaded.', 'updraftplus'), 'Apache', 'mod_rewrite').' '.
+									/* translators: 1: Module name, 2: Sample url */
+									sprintf(__('You should enable %1$s to make any pretty permalinks (e.g. %2$s) work', 'updraftplus'), 'mod_rewrite', 'http://example.com/my-page/');
 						}
 
 					} else {
@@ -5239,7 +5311,11 @@ class UpdraftPlus {
 					// Check for should-be migration
 					if (!$migration_warning && UpdraftPlus_Manipulation_Functions::normalise_url(home_url()) != UpdraftPlus_Manipulation_Functions::normalise_url($old_home)) {
 						$migration_warning = true;
-						$powarn = apply_filters('updraftplus_dbscan_urlchange', '<a href="https://updraftplus.com/shop/migrator/" target="_blank">'.sprintf(__('This backup set is from a different site (%s) - this is not a restoration, but a migration.', 'updraftplus'), htmlspecialchars($old_home.' / '.home_url())).' '.__('You need the Migrator add-on in order to make this work.', 'updraftplus').'</a>', $old_home, $res);
+						$powarn = apply_filters('updraftplus_dbscan_urlchange', '<a href="https://updraftplus.com/shop/migrator/" target="_blank">'.sprintf(
+							/* translators: %s: Old home URL */
+							__('This backup set is from a different site (%s) - this is not a restoration, but a migration.', 'updraftplus'),
+							htmlspecialchars($old_home.' / '.home_url())
+						).' '.__('You need the Migrator add-on in order to make this work.', 'updraftplus').'</a>', $old_home, $res);
 						if (!empty($powarn)) $warn[] = $powarn;
 					}
 				} elseif (!isset($info['created_by_version']) && preg_match('/^\# Created by UpdraftPlus version ([\d\.]+)/', $buffer, $matches)) {
@@ -5249,15 +5325,34 @@ class UpdraftPlus {
 					if (!empty($matches[3])) $old_wp_version .= substr($matches[3], 0, strlen($matches[3])-1);
 					if (version_compare($old_wp_version, $wp_version, '>')) {
 						// $mess[] = sprintf(__('%s version: %s', 'updraftplus'), 'WordPress', $old_wp_version);
-						$warn[] = sprintf(__('You are importing from a newer version of WordPress (%s) into an older one (%s).', 'updraftplus'), $old_wp_version, $wp_version).' '.__('There are no guarantees that WordPress can handle this.', 'updraftplus');
+						$warn[] = sprintf(
+							/* translators: 1: Old WP version, 2: Current WP version */
+							__('You are importing from a newer version of WordPress (%1$s) into an older one (%2$s).', 'updraftplus'),
+							$old_wp_version,
+							$wp_version
+						).' '.__('There are no guarantees that WordPress can handle this.', 'updraftplus');
 					}
 					if (preg_match('/running on PHP ([0-9]+\.[0-9]+)(\s|\.)/', $matches[4], $nmatches) && preg_match('/^([0-9]+\.[0-9]+)(\s|\.)/', PHP_VERSION, $cmatches)) {
 						$old_php_version = $nmatches[1];
 						$current_php_version = $cmatches[1];
 						if (version_compare($old_php_version, $current_php_version, '>')) {
-							$warn[] = sprintf(__('The site in this backup was running on a webserver with version %s of %s.', 'updraftplus'), $old_php_version, 'PHP').' '.sprintf(__('This is significantly newer than the server which you are now restoring onto (version %s).', 'updraftplus'), PHP_VERSION).' '.sprintf(__('You should only proceed if you cannot update the current server and are confident (or willing to risk) that your plugins/themes/etc are compatible with the older %s version.', 'updraftplus'), 'PHP').' '.sprintf(__('Any support requests to do with %s should be raised with your web hosting company.', 'updraftplus'), 'PHP');
+							/* translators: 1: Old PHP version, 2: PHP */
+							$warn[] = sprintf(__('The site in this backup was running on a webserver with version %1$s of %2$s.', 'updraftplus'), $old_php_version, 'PHP').' '.
+									/* translators: %s: Current PHP version */
+									sprintf(__('This is significantly newer than the server which you are now restoring onto (version %s).', 'updraftplus'), PHP_VERSION).' '.
+									/* translators: %s: PHP */
+									sprintf(__('You should only proceed if you cannot update the current server and are confident (or willing to risk) that your plugins/themes/etc are compatible with the older %s version.', 'updraftplus'), 'PHP').' '.
+									/* translators: %s: PHP */
+									sprintf(__('Any support requests to do with %s should be raised with your web hosting company.', 'updraftplus'), 'PHP');
 						} elseif (version_compare($old_php_version, $current_php_version, '<')) {
-							$warn[] = sprintf(__('The site in this backup was running on a webserver with version %s of %s.', 'updraftplus'), $old_php_version, 'PHP').' '.sprintf(__('This is older than the server which you are now restoring onto (version %s).', 'updraftplus'), PHP_VERSION).' '.sprintf(__('You should only proceed if you have checked and are confident (or willing to risk) that your plugins/themes/etc are compatible with the new %s version.', 'updraftplus'), 'PHP').' '.sprintf(__('Any support requests to do with %s should be raised with your web hosting company.', 'updraftplus'), 'PHP');
+							/* translators: 1: PHP version, 2: PHP */
+							$warn[] = sprintf(__('The site in this backup was running on a webserver with version %1$s of %2$s.', 'updraftplus'), $old_php_version, 'PHP').' '.
+									/* translators: %s: Current PHP version */
+									sprintf(__('This is older than the server which you are now restoring onto (version %s).', 'updraftplus'), PHP_VERSION).' '.
+									/* translators: %s: PHP */
+									sprintf(__('You should only proceed if you have checked and are confident (or willing to risk) that your plugins/themes/etc are compatible with the new %s version.', 'updraftplus'), 'PHP').' '.
+									/* translators: %s: PHP */
+									sprintf(__('Any support requests to do with %s should be raised with your web hosting company.', 'updraftplus'), 'PHP');
 						}
 					}
 				} elseif (null === $old_table_prefix && (preg_match('/^\# Table prefix: ?(\S*)$/', $buffer, $matches) || preg_match('/^-- Table prefix: ?(\S*)$/i', $buffer, $matches))) {
@@ -5280,7 +5375,12 @@ class UpdraftPlus {
 							// }
 							// Got the needed code?
 							if (!class_exists('UpdraftPlusAddOn_MultiSite') || !class_exists('UpdraftPlus_Addons_Migrator')) {
-								$err[] = sprintf(__('Error: %s', 'updraftplus'), sprintf(__('To import an ordinary WordPress site into a multisite installation requires %s.', 'updraftplus'), 'UpdraftPlus Premium'));
+								$err[] = sprintf(
+									/* translators: %s: Error message */
+									__('Error: %s', 'updraftplus'),
+									/* translators: %s: UpdraftPlus Premium */
+									sprintf(__('To import an ordinary WordPress site into a multisite installation requires %s.', 'updraftplus'), 'UpdraftPlus Premium')
+								);
 								return array($mess, $warn, $err, $info);
 							}
 						} elseif (isset($old_siteinfo['multisite']) && $old_siteinfo['multisite'] && !is_multisite()) {
@@ -5357,7 +5457,13 @@ class UpdraftPlus {
 				static $mysql_version_warned = false;
 				if (!$mysql_version_warned && version_compare($db_version, '5.2.0', '<') && preg_match('/(CHARSET|COLLATE)[= ]utf8mb4/', $buffer)) {
 					$mysql_version_warned = true;
-					$err[] = sprintf(__('Error: %s', 'updraftplus'), sprintf(__('The database backup uses MySQL features not available in the old MySQL version (%s) that this site is running on.', 'updraftplus'), $db_version).' '.__('You must upgrade MySQL to be able to use this database.', 'updraftplus'));
+					$err[] = sprintf(
+						/* translators: %s: Error message */
+						__('Error: %s', 'updraftplus'),
+						/* translators: %s: MySQL version */
+						sprintf(__('The database backup uses MySQL features not available in the old MySQL version (%s) that this site is running on.', 'updraftplus'), $db_version).' '.
+						__('You must upgrade MySQL to be able to use this database.', 'updraftplus')
+					);
 				}
 			} elseif ($processing_routine) {
 				if ((preg_match('/END\s*(?:\*\/)?;;\s*$/is', $buffer) || preg_match('/\;\s*;;\s*$/is', $buffer) || preg_match('/\s*(?:\*\/)?;;\s*$/is', $buffer)) && !preg_match('/(?:--|#).+?;;\s*$/i', $buffer)) $processing_routine = false;
@@ -5382,7 +5488,12 @@ class UpdraftPlus {
 			}
 			if ($db_charset_forbidden) {
 				$db_unsupported_charset_unique = array_unique($db_unsupported_charset);
-				$warn[] = sprintf(_n("The database server that this WordPress site is running on doesn't support the character set (%s) which you are trying to import.", "The database server that this WordPress site is running on doesn't support the character sets (%s) which you are trying to import.", count($db_unsupported_charset_unique), 'updraftplus'), implode(', ', $db_unsupported_charset_unique)).' '.__('You can choose another suitable character set instead and continue with the restoration at your own risk.', 'updraftplus').' <a target="_blank" href="https://updraftplus.com/faqs/implications-changing-tables-character-set/" target="_blank">'.__('Go here for more information.', 'updraftplus').'</a>'.' <a target="_blank" href="https://updraftplus.com/faqs/implications-changing-tables-character-set/" target="_blank">'.__('Go here for more information.', 'updraftplus').'</a>';
+				$warn[] = sprintf(
+					/* translators: %s: Character sets */
+					_n("The database server that this WordPress site is running on doesn't support the character set (%s) which you are trying to import.", "The database server that this WordPress site is running on doesn't support the character sets (%s) which you are trying to import.", count($db_unsupported_charset_unique), 'updraftplus'),
+					implode(', ', $db_unsupported_charset_unique)
+				).' '.
+				__('You can choose another suitable character set instead and continue with the restoration at your own risk.', 'updraftplus').' <a target="_blank" href="https://updraftplus.com/faqs/implications-changing-tables-character-set/" target="_blank">'.__('Go here for more information.', 'updraftplus').'</a>';
 				$db_supported_character_sets = array_keys($db_supported_character_sets);
 				$similar_type_charset = UpdraftPlus_Manipulation_Functions::get_matching_str_from_array_elems($db_unsupported_charset_unique, $db_supported_character_sets, true);
 				if (empty($similar_type_charset)) {
@@ -5417,7 +5528,12 @@ class UpdraftPlus {
 			}
 			if ($db_collate_forbidden) {
 				$db_unsupported_collate_unique = array_unique($db_unsupported_collate);
-				$warn[] = sprintf(_n("The database server that this WordPress site is running on doesn't support the collation (%s) used in the database which you are trying to import.", "The database server that this WordPress site is running on doesn't support multiple collations (%s) used in the database which you are trying to import.", count($db_unsupported_collate_unique), 'updraftplus'), implode(', ', $db_unsupported_collate_unique)).' '.__('You can choose another suitable collation instead and continue with the restoration (at your own risk).', 'updraftplus');
+				$warn[] = sprintf(
+					/* translators: %s: Collations */
+					_n("The database server that this WordPress site is running on doesn't support the collation (%s) used in the database which you are trying to import.", "The database server that this WordPress site is running on doesn't support multiple collations (%s) used in the database which you are trying to import.", count($db_unsupported_collate_unique), 'updraftplus'),
+					implode(', ', $db_unsupported_collate_unique)
+				).' '.
+				__('You can choose another suitable collation instead and continue with the restoration (at your own risk).', 'updraftplus');
 				$similar_type_collate = '';
 				if ($db_charset_forbidden && !empty($similar_type_charset)) {
 					$similar_type_collate = $this->get_similar_collate_related_to_charset($db_supported_collations, $db_unsupported_collate_unique, $similar_type_charset);
@@ -5521,9 +5637,11 @@ class UpdraftPlus {
 				}
 
 				if (count($missing_tables)>0) {
+					/* translators: %s: Missing WordPress tables */
 					$warn[] = sprintf(__('This database backup is missing core WordPress tables: %s', 'updraftplus'), implode(', ', $missing_tables));
 				}
 				if (count($skipped_tables)>0) {
+					/* translators: %s: Excluded database tables */
 					$warn[] = sprintf(__('This database backup has the following non-core WordPress database tables excluded: %s', 'updraftplus'), implode(', ', $skipped_tables));
 				}
 			}
@@ -5552,9 +5670,19 @@ class UpdraftPlus {
 		if ($skip_composite_tables) {
 			if (!empty($info['migration'])) {
 				$skip_composite_tables = false;
-				$warn[] = sprintf(__('This backup was created on a previous UpdraftPlus version (%s) which did not correctly backup tables with composite primary keys (such as the term_relationships table, which records tags and product attributes).', 'updraftplus').' '.__('Therefore it is advised that you take a fresh backup on the source site, using a later version.', 'updraftplus'), $info['created_by_version']);
+				$warn[] = sprintf(
+					/* translators: %s: UpdraftPlus version */
+					__('This backup was created on a previous UpdraftPlus version (%s) which did not correctly backup tables with composite primary keys (such as the term_relationships table, which records tags and product attributes).', 'updraftplus').' '.
+					__('Therefore it is advised that you take a fresh backup on the source site, using a later version.', 'updraftplus'),
+					$info['created_by_version']
+				);
 			} else {
-				$warn[] = sprintf(__('This backup was created on a previous UpdraftPlus version (%s) which did not correctly backup tables with composite primary keys (such as the term_relationships table, which records tags and product attributes).', 'updraftplus').' '.__('Therefore, affected tables on the current site which already exist will not be replaced by default, to avoid corrupting them (you can review this in the list of tables below).', 'updraftplus'), $info['created_by_version']);
+				$warn[] = sprintf(
+					/* translators: %s: UpdraftPlus version */
+					__('This backup was created on a previous UpdraftPlus version (%s) which did not correctly backup tables with composite primary keys (such as the term_relationships table, which records tags and product attributes).', 'updraftplus').' '.
+					__('Therefore, affected tables on the current site which already exist will not be replaced by default, to avoid corrupting them (you can review this in the list of tables below).', 'updraftplus'),
+					$info['created_by_version']
+				);
 			}
 		}
 
@@ -5698,7 +5826,8 @@ class UpdraftPlus {
 		} else {
 			$url_prefix = is_ssl() ? 'https' : 'http';
 			$host = empty($_SERVER['HTTP_HOST']) ? parse_url(network_site_url(),  PHP_URL_HOST) : $_SERVER['HTTP_HOST'];
-			$current_url = $url_prefix."://".$host.$_SERVER['REQUEST_URI'];
+			$request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+			$current_url = $url_prefix."://".$host.$request_uri;
 		}
 		$remove_query_args = array('state', 'action', 'oauth_verifier', 'nonce', 'updraftplus_instance', 'access_token', 'user_id', 'updraftplus_googledriveauth');
 		
@@ -6209,7 +6338,6 @@ class UpdraftPlus {
 		if ($include_locks) {
 			$wpdb->query($wpdb->prepare("DELETE FROM $table WHERE ($field LIKE %s OR $field LIKE %s OR $field LIKE %s OR $field LIKE %s OR $field LIKE %s OR $field LIKE %s)", UpdraftPlus_Database_Utility::esc_like('updraftplus_unlocked_').'%', UpdraftPlus_Database_Utility::esc_like('updraftplus_locked_').'%', UpdraftPlus_Database_Utility::esc_like('updraftplus_last_lock_time_').'%', UpdraftPlus_Database_Utility::esc_like('updraftplus_semaphore_').'%', UpdraftPlus_Database_Utility::esc_like('updraft_jobdata_').'%', UpdraftPlus_Database_Utility::esc_like('updraft_last_scheduled_').'%'));
 		} else {
-			$sql = '';
 			if (!empty($this->nonce)) {
 				$sql = $wpdb->prepare("DELETE FROM $table WHERE $field LIKE %s AND $field != %s", UpdraftPlus_Database_Utility::esc_like('updraft_jobdata_').'%', "updraft_jobdata_{$this->nonce}");
 			} else {
@@ -6490,7 +6618,14 @@ class UpdraftPlus {
 			'updraftcentral' => 'UpdraftCentral',
 		);
 		$active_phpseclib_related_features = array_intersect_key($phpseclib_related_features, array_flip($this->list_active_features_requiring_phpseclib()));
-		return sprintf(__('Your site is running on PHP version %s and has feature(s) currently enabled (%s) which are deprecated upon this PHP version.', 'updraftplus'), PHP_VERSION, implode(', ', $active_phpseclib_related_features)).' '.sprintf(__('Future releases of UpdraftPlus will require a more recent PHP version to use these features; we recommend that you speak to your web hosting company about updating to version %s or higher.', 'updraftplus'), '5.3');
+		return sprintf(
+			/* translators: 1: PHP version, 2: Deprecated features */
+			__('Your site is running on PHP version %1$s and has feature(s) currently enabled (%2$s) which are deprecated upon this PHP version.', 'updraftplus'),
+			PHP_VERSION,
+			implode(', ', $active_phpseclib_related_features)
+		).' '.
+		/* translators: %s: Recommended PHP version */
+		sprintf(__('Future releases of UpdraftPlus will require a more recent PHP version to use these features; we recommend that you speak to your web hosting company about updating to version %s or higher.', 'updraftplus'), '5.3');
 	}
 
 	/**
