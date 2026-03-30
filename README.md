@@ -88,7 +88,7 @@ Dublin é um dos maiores centros de tecnologia da Europa, mas as informações c
 2. Faça o **Commit** de suas alterações explicando o que foi feito (`git commit -m 'Adicionando nova funcionalidade'`).
 3. Ao dar o **Push** para o **Repo Principal** (`git push origin adminPanel/NovaAlteracao`), abrir um **Pull Request** explicando o que foi alterado.
 
-**Como gerar a nova release?** 
+### **Como gerar a nova release?** 
 
 1. Ao entrar no painel administrativo, acessar o plugin **Updraft Plus**.
 2. Clicar no botão "**Backup Now**".
@@ -98,7 +98,21 @@ Dublin é um dos maiores centros de tecnologia da Europa, mas as informações c
 6. Esse ato gerará uma nova linha em "**Existing Backups**".
 7. Clique em todos os itens do backup.
 8. Ao baixar, faça um arquivo .zip com o nome contendo *data, hora, minuto* de todos os arquivos baixados (Exemplo: updraftplus_2026-03-29-1636.zip).
-9. Suba uma nova **Release** com o arquivo .zip, explicando as modificações.
+9. Suba uma **Pré Release** com o arquivo .zip dentro da pasta `updraft` > `pre-release` através do Git LFS.
+
+**Como utilizar Git LFS**
+
+1. Instale a ferramenta do Git LFS (https://git-lfs.com/) no seu computador.
+2. Utilize os comandos abaixo para configurar a ferramenta:
+  ```
+  git lfs track "*.zip"
+  git add .gitattributes
+  git add updraft 2026-03-29 1907.zip
+  git commit -m "add zip via lfs"
+  git push
+  ```
+3. O arquivo será enviado para o diretório indicado.
+4. Abra um **Pull Request** para validação da versão enviada.
 
 > "Se você quer ir rápido, vá sozinho. Se você quer ir longe, vá acompanhado." 🇮🇪
 
@@ -133,6 +147,19 @@ Dublin is one of the biggest tech hubs in Europe, but the information is often s
 6. This will generate a new entry under **"Existing Backups"**.
 7. Download all items from the backup.
 8. After downloading, create a .zip file containing all the downloaded files, and name it with the date, hour, and minute (Example: updraftplus_2026-03-29-1636.zip).
-9. Upload a new **Release** with the `.zip` file, describing the changes made.
+9. Upload a Pre-Release with the .zip file inside the folder `updraft` > `pre-release` using Git LFS.
+
+**How to use Git LFS**
+1. Install the Git LFS tool on your computer: https://git-lfs.com/
+2. Run the following commands to configure it:
+```
+git lfs track "*.zip"
+git add .gitattributes
+git add updraft 2026-03-29 1907.zip
+git commit -m "add zip via lfs"
+git push
+```
+3. The file will be uploaded to the specified directory.
+4. Open a Pull Request to validate the submitted version.
 
 > "If you want to go fast, go alone. If you want to go far, go together." 🇮🇪
